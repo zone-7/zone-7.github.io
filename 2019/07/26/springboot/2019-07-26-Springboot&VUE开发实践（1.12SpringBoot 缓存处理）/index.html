@@ -167,65 +167,7 @@
 
     </div>
     <p class="post-meta">
-        <div class="entry">
-               <!--02-->
-                <div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-缓存处理"><span class="toc-text">1.12    缓存处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-1-缓存配置"><span class="toc-text">1.12.1    缓存配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-2-注解说明"><span class="toc-text">1.12.2    注解说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-3-缓存使用"><span class="toc-text">1.12.3    缓存使用</span></a></li></ol></li></ol>
-</div>
-            
-                <h2 id="1-12-缓存处理"><a href="#1-12-缓存处理" class="headerlink" title="1.12    缓存处理"></a>1.12    缓存处理</h2><h3 id="1-12-1-缓存配置"><a href="#1-12-1-缓存配置" class="headerlink" title="1.12.1    缓存配置"></a>1.12.1    缓存配置</h3><p>SpringBoot2.0 的缓存可以使用注解方式实现。</p>
-<ul>
-<li><p>（1）    修改pom文件添加依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>（2）    修改application-dev.properties配置文件<br>添加配置“spring.cache.type=redis”  </p>
-</li>
-<li><p>（3）    添加@EnableCaching开启缓存注解</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span>(scanBasePackages = &#123;<span class="string">"com.zone7.demo.helloworld"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloworldApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  SpringApplication.run(HelloworldApplication.class, args);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="1-12-2-注解说明"><a href="#1-12-2-注解说明" class="headerlink" title="1.12.2    注解说明"></a>1.12.2    注解说明</h3><p>在需要使用缓存的方法上面添加以下注解：<br>    - @Cacheable  将方法的运行结果进行缓存；第二次再要相同的数据，直接从缓存中获取，不再调用方法；<br>    - @CacheEvict 移除缓存<br>    - @CachePut  修改了数据库的某个数据，同时更新缓存</p>
-<p>以下对这三个注解的属性展开介绍：</p>
-<ul>
-<li>(1)    @Cacheable<br>Cacheable中的几个属性：<ul>
-<li>1)cacheNames/value:指定缓存组件的名字， 数组的方式，可以指定多个缓存组件名称。</li>
-<li>2)key: 缓存数据使用的key，默认使用方法参数的值作为key。也可以自己指定，通过编写SpEL指定key的值；如：#root.methodName 、#id等。</li>
-<li>3)keyGenerator: key的生成器，可以自己编写key的生成器组件。注意：在使用时key和keyGenerator二选一。</li>
-<li>4)cacheManager: 指定缓存管理器。</li>
-<li>5)condition： 指定符合条件的情况下才缓存；如： condition = “#id&gt;0” “#a0&gt;1”才进行缓存。</li>
-<li>6)unless: 否定缓存； 当unless指定的条件为true,方法的返回值就不会缓存；如：可以获取到结果进行判断unless = “#result == null “  当方法结果为null时，不缓存。</li>
-<li>7)sync: 是否使用异步模式</li>
-</ul>
-</li>
-<li>(2)    @CacheEvit<ul>
-<li>@CacheEvit：缓存清除</li>
-<li>@CacheEvit和@Cacheable的相同属性就不再赘述。<ul>
-<li>1)allEntries = true 每次删除，将指定缓存中的所有数据全都删除。</li>
-<li>2)beforeInvocation=false ,缓存的清除是否是在方法之前执行，默认false, 即在方法之后清除，当方法执行出现异常时，缓存不会清除。</li>
-<li>3)beforeInvocation=true ,方法之前清除，无论方法执行是否出现异常，缓存都会清除。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>(3)    @CachePut<br>运行时机：先调用目标方法，将目标方法的结果缓存起来，属性与@Cacheable相同。<br>此外还有@CacheConfig：可以标注在类上，抽取出相同的属性，简化代码。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CacheConfig &#123;</span><br><span class="line">    String[] cacheNames() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    <span class="function">String <span class="title">keyGenerator</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; </span><br><span class="line">    <span class="function">String <span class="title">cacheManager</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; </span><br><span class="line">    <span class="function">String <span class="title">cacheResolver</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="1-12-3-缓存使用"><a href="#1-12-3-缓存使用" class="headerlink" title="1.12.3    缓存使用"></a>1.12.3    缓存使用</h3><p>我们在服务层实现类中增加缓存注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.exception.AddOPException;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.exception.DeleteOPException;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.exception.UpdateOPException;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.dao.SysUserMapper;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.pojo.SysUser;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.SysUserService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.vo.SysUserVo;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.utils.MD5Util;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.BeanUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CacheConfig;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CacheEvict;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachePut;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.Cacheable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SysUserServiceImpl</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span>: 2019.02.17</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@CacheConfig</span>(cacheNames = <span class="string">"users"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysUserServiceImpl</span> <span class="keyword">implements</span> <span class="title">SysUserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;system.default.password&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String defaultPassword;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SysUserMapper sysUserMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span>(rollbackFor = AddOPException.class)</span><br><span class="line">    <span class="meta">@CachePut</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SysUserVo <span class="title">save</span><span class="params">(SysUserVo userVo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String password = defaultPassword;</span><br><span class="line">            String md5Password = MD5Util.encode(password);</span><br><span class="line">            SysUser sysUser =  SysUser.builder()</span><br><span class="line">                    .name(userVo.getName()).password(md5Password)</span><br><span class="line">                    .phone(userVo.getPhone())</span><br><span class="line">                    .department(userVo.getDepartment())</span><br><span class="line">                    .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 存储用户信息</span></span><br><span class="line">            sysUserMapper.insertSelective(sysUser);</span><br><span class="line"></span><br><span class="line">            SysUserVo vo=<span class="keyword">new</span> SysUserVo();</span><br><span class="line">            BeanUtils.copyProperties(sysUser,vo);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> vo;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AddOPException(<span class="string">"新增用户操作出错，错误原因: "</span> + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span>(rollbackFor = UpdateOPException.class)</span><br><span class="line">    <span class="meta">@CachePut</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(SysUserVo userVo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            SysUser after = SysUser.builder()</span><br><span class="line">                    .id(userVo.getId())</span><br><span class="line">                    .name(userVo.getName())</span><br><span class="line">                    .phone(userVo.getPhone())</span><br><span class="line">                    .department(userVo.getDepartment()).build();</span><br><span class="line"></span><br><span class="line">            sysUserMapper.updateByPrimaryKeySelective(after);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UpdateOPException(<span class="string">"更新用户操作出错，错误原因: "</span> + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Cacheable</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SysUserVo <span class="title">findById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">          SysUser user = sysUserMapper.selectByPrimaryKey(id);</span><br><span class="line">          SysUserVo vo=<span class="keyword">new</span> SysUserVo();</span><br><span class="line">          BeanUtils.copyProperties(user,vo);</span><br><span class="line">          <span class="keyword">return</span> vo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;SysUserVo&gt; <span class="title">findByName</span><span class="params">( String name)</span> </span>&#123;</span><br><span class="line">        List&lt;SysUser&gt; users = sysUserMapper.findByName(name);</span><br><span class="line"></span><br><span class="line">        List&lt;SysUserVo&gt; userList = <span class="keyword">new</span> ArrayList&lt;SysUserVo&gt;();</span><br><span class="line">        users.forEach(sysUser -&gt; &#123;</span><br><span class="line">            <span class="comment">// 查询角色信息</span></span><br><span class="line">            SysUserVo vo=<span class="keyword">new</span> SysUserVo();</span><br><span class="line">            BeanUtils.copyProperties(sysUser,vo);</span><br><span class="line">            userList.add(vo);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> userList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span>(rollbackFor = DeleteOPException.class)</span><br><span class="line">    <span class="meta">@CacheEvict</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            sysUserMapper.deleteByPrimaryKey(id);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> DeleteOPException(<span class="string">"删除用户操作出错，错误原因: "</span> + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过Postman测试执行两次findById操作只有第一次进入方法内部执行，后续的执行都直接返回缓存中的数据。</p>
-<p><img src="https://zone-7.github.io/img/springboot/1.12.3.png" alt="测试缓存"></p>
-
-            
-        </div>
-               
+        
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
         </span>
@@ -239,6 +181,7 @@
     
 
         </span>
+        
     </p>
 </article>
 <!-- 分享按钮 -->
@@ -261,9 +204,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.9SpringBoot 整合Oauth2.0）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.11SpringBoot 日志处理）/">
             
-                1.9 Springboot&amp;VUE开发实践（SpringBoot整合Oauth2.0）
+                1.11 Springboot&amp;VUE开发实践（SpringBoot日志处理）
             
         </a>
     </span>
@@ -365,15 +308,21 @@
         </section>
         <!-- 侧栏部分 -->
 <aside class="sidebar">
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-缓存处理"><span class="toc-text">1.12    缓存处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-1-缓存配置"><span class="toc-text">1.12.1    缓存配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-2-注解说明"><span class="toc-text">1.12.2    注解说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-3-缓存使用"><span class="toc-text">1.12.3    缓存使用</span></a></li></ol></li></ol>
+ 
+         
+    </section>
+    
+    
     <section class="widget">
         <h3 class="widget-hd"><strong>文章分类</strong></h3>
         <!-- 文章分类 -->
 <ul class="widget-bd">
-    
-    <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
-    </li>
     
     <li>
         <a href="/categories/开发模式/">开发模式</a>
@@ -383,6 +332,11 @@
     <li>
         <a href="/categories/其他/">其他</a>
         <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
 </ul>
@@ -398,27 +352,9 @@
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
   
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
     <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
     <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
@@ -426,9 +362,27 @@
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
-    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

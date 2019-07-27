@@ -133,31 +133,7 @@
 
     </div>
     <p class="post-meta">
-        <div class="entry">
-               <!--02-->
-                <div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-前端用户权限"><span class="toc-text">1.13    前端用户权限</span></a></li></ol>
-</div>
-            
-                <h2 id="1-13-前端用户权限"><a href="#1-13-前端用户权限" class="headerlink" title="1.13    前端用户权限"></a>1.13    前端用户权限</h2><p>在用户登陆成功后将用户信息保存到session中，并在后续的访问过程中进行验证以及有针对用户和功能的权限过滤。</p>
-<ul>
-<li><p>(1)    用户授权</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"登录接口"</span>, notes = <span class="string">"用户登录接口，登录之后才可访问其他接口"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/login"</span>,method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseData <span class="title">login</span><span class="params">(UserLoginVo userLoginVo, HttpSession session)</span> </span>&#123;</span><br><span class="line">    String username = userLoginVo.getUsername();</span><br><span class="line">    String password = userLoginVo.getPassword();</span><br><span class="line">    SysUser sysUser = sysUserService.findByKeyword(username);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isBlank(username)) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseData.errorMessage(<span class="string">"用户名不能为空"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (StringUtils.isBlank(password)) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseData.errorMessage(<span class="string">"登陆密码不能为空"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sysUser == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseData.errorMessage(<span class="string">"查询不到指定用户"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!sysUser.getPassword().equals(MD5Util.encode(password))) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseData.errorMessage(<span class="string">"用户名或密码错误"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sysUser.getState() != <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseData.errorMessage(<span class="string">"用户已被冻结，请联系管理员"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;    <span class="comment">// LOGIN SUCCESS</span></span><br><span class="line">        List&lt;SysRole&gt; roles = sysRoleUserService.getRoleListByUserId(sysUser.getId());</span><br><span class="line">        List&lt;SysAcl&gt; acls = sysCoreService.getAclListByUserId(sysUser.getId());</span><br><span class="line">        List&lt;SysAcl&gt; deniedAcls = sysCoreService.getDeniedAclListByUserId(sysUser.getId());</span><br><span class="line">        UserVo userVo = <span class="keyword">new</span> UserVo();</span><br><span class="line">        BeanUtils.copyProperties(sysUser, userVo);</span><br><span class="line"></span><br><span class="line">        userVo.setRoles(roles);</span><br><span class="line">        userVo.setAcls(acls);</span><br><span class="line">        userVo.setDeniedAcls(deniedAcls);</span><br><span class="line"></span><br><span class="line">        session.setAttribute(<span class="string">"user"</span>, userVo);</span><br><span class="line">    &#125;</span><br><span class="line">    Map&lt;String, String&gt; tokenMap = <span class="keyword">new</span> HashMap&lt;String,String&gt;();</span><br><span class="line">    tokenMap.put(<span class="string">"token"</span>, session.getId());</span><br><span class="line">    tokenMap.put(<span class="string">"userId"</span>, sysUser.getId());</span><br><span class="line">    <span class="keyword">return</span> ResponseData.success(tokenMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>(2)    安全过滤<br>SpringBoot使用过滤器验证当前会话是否已经登陆过，并针对要访问的路径进行权限验证。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.admin.config.filter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.google.common.collect.Sets;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.commons.response.ResponseCode;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.commons.response.ResponseData;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.sys.common.RequestHolder;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.sys.pojo.SysAcl;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.sys.vo.UserVo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RequestFilter</span></span><br><span class="line"><span class="comment"> * 请求过滤器</span></span><br><span class="line"><span class="comment"> * 安全认证</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span>: 2019.02.19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter</span>(filterName = <span class="string">"RequestFilter"</span>, urlPatterns = <span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Set&lt;String&gt; URL_WHITE_LIST = Sets.newHashSet();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="comment">//忽略不过旅的路径</span></span><br><span class="line">        URL_WHITE_LIST.add(<span class="string">"/unauth"</span>);</span><br><span class="line">        URL_WHITE_LIST.add(<span class="string">"/login"</span>);</span><br><span class="line">        URL_WHITE_LIST.add(<span class="string">"/static"</span>);</span><br><span class="line">        URL_WHITE_LIST.add(<span class="string">"/actuator"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isWhiteUrl</span><span class="params">(String requestUrl)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (URL_WHITE_LIST.contains(requestUrl))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(String str:URL_WHITE_LIST)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(requestUrl.startsWith(str))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        String requestUrl = request.getRequestURI();</span><br><span class="line">        <span class="keyword">if</span> (isWhiteUrl(requestUrl)) &#123;</span><br><span class="line">            filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        UserVo userVo = (UserVo) request.getSession().getAttribute(<span class="string">"user"</span>);</span><br><span class="line">        <span class="keyword">if</span> (userVo == <span class="keyword">null</span>) &#123;</span><br><span class="line">            request.getRequestDispatcher(<span class="string">"/unauth"</span>).forward(request, response);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        RequestHolder.add(userVo);</span><br><span class="line">        RequestHolder.add(request);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果有配置按钮权限，就验证，没有配置表示可以使用</span></span><br><span class="line">        <span class="comment">//DeniedAcls为禁用的权限列表</span></span><br><span class="line">        List&lt;SysAcl&gt; acls = userVo.getDeniedAcls();</span><br><span class="line">        <span class="keyword">boolean</span> hasPower=<span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(SysAcl acl:acls)&#123;</span><br><span class="line">            <span class="keyword">if</span>(acl.getUrl().equals(requestUrl) || (<span class="string">"/"</span>+acl.getUrl()).equals(requestUrl))&#123;</span><br><span class="line">                hasPower = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!hasPower)&#123;</span><br><span class="line">            ResponseData res = ResponseData.error(ResponseCode.ERROR_LOGIN_NOAUTH_ACL);</span><br><span class="line">            String json = JSON.toJSONString(res);</span><br><span class="line">            response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">            response.setHeader(<span class="string">"Content-type"</span>,<span class="string">"application/json"</span>);</span><br><span class="line">            response.getWriter().println(json);</span><br><span class="line">            response.getWriter().flush();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-</li>
-</ul>
-
-            
-        </div>
-               
+        
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
         </span>
@@ -171,6 +147,7 @@
     
 
         </span>
+        
     </p>
 </article>
 <!-- 分享按钮 -->
@@ -204,9 +181,9 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.15SpringBoot 应用部署）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）/">
             
-                1.15 Springboot&amp;VUE开发实践（SpringBoot应用部署）
+                1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程）
             
         </a>
     </span>
@@ -297,15 +274,21 @@
         </section>
         <!-- 侧栏部分 -->
 <aside class="sidebar">
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-前端用户权限"><span class="toc-text">1.13    前端用户权限</span></a></li></ol>
+ 
+         
+    </section>
+    
+    
     <section class="widget">
         <h3 class="widget-hd"><strong>文章分类</strong></h3>
         <!-- 文章分类 -->
 <ul class="widget-bd">
-    
-    <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
-    </li>
     
     <li>
         <a href="/categories/开发模式/">开发模式</a>
@@ -315,6 +298,11 @@
     <li>
         <a href="/categories/其他/">其他</a>
         <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
 </ul>
@@ -330,27 +318,9 @@
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
   
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
     <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
     <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
@@ -358,9 +328,27 @@
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
-    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

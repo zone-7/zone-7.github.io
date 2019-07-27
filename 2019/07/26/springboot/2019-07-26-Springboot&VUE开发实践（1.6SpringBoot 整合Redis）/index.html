@@ -142,40 +142,7 @@
 
     </div>
     <p class="post-meta">
-        <div class="entry">
-               <!--02-->
-                <div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-整合Redis"><span class="toc-text">1.6    整合Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-1-Redis简介"><span class="toc-text">1.6.1    Redis简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-2-配置工程"><span class="toc-text">1.6.2    配置工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-3-案例开发"><span class="toc-text">1.6.3    案例开发</span></a></li></ol></li></ol>
-</div>
-            
-                <h2 id="1-6-整合Redis"><a href="#1-6-整合Redis" class="headerlink" title="1.6    整合Redis"></a>1.6    整合Redis</h2><h3 id="1-6-1-Redis简介"><a href="#1-6-1-Redis简介" class="headerlink" title="1.6.1    Redis简介"></a>1.6.1    Redis简介</h3><p>Redis 是一个完全开源免费的，遵守BSD协议的，具备高性能的key-value数据库。<br>Redis缓存产品有以下三个特点：</p>
-<ul>
-<li>Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</li>
-<li>Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。</li>
-<li>Redis支持数据的备份，即master-slave模式的数据备份。</li>
-</ul>
-<h3 id="1-6-2-配置工程"><a href="#1-6-2-配置工程" class="headerlink" title="1.6.2    配置工程"></a>1.6.2    配置工程</h3><p>在Spring支持的Redis操作中提供有一个RedisTemplate处理类，利用这个类可以非常方便的实现Redis的各种基本操作。<br>首先需要修改Pom 文件增加redis依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!--redis--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--redis--&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>其次修改application-dev.properties配置文件（springboot的主要配置文件为application.yml或application.properties，这里我们以第一个工程的例子为基础进行介绍）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#==================  redis  ===================#</span><br><span class="line"># redis 单节点地址</span><br><span class="line">spring.redis.host=localhost</span><br><span class="line"># redis 集群</span><br><span class="line">#spring.redis.cluster.nodes=192.168.177.128:7001,192.168.177.128:7002,192.168.177.128:7003</span><br><span class="line">#spring.redis.cluster.max-redirects=3</span><br><span class="line"># Redis 数据库</span><br><span class="line">spring.redis.database=0</span><br><span class="line"># Redis 端口</span><br><span class="line">spring.redis.port=6379</span><br><span class="line"># Redis 密码</span><br><span class="line">spring.redis.password=</span><br><span class="line"># 连接池最大连接数（使用负值表示没有限制）</span><br><span class="line">spring.redis.jedis.pool.max-active=8 </span><br><span class="line"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span><br><span class="line">spring.redis.jedis.pool.max-wait=-1</span><br><span class="line"># 连接池中的最大空闲连接</span><br><span class="line">spring.redis.jedis.pool.max-idle=8</span><br><span class="line"># 连接池中的最小空闲连接</span><br><span class="line">spring.redis.jedis.pool.min-idle=0</span><br><span class="line"># 连接超时时间（毫秒）</span><br><span class="line">spring.redis.timeout=3000</span><br><span class="line"></span><br><span class="line"># 其他redis配置可参考网络资源</span><br></pre></td></tr></table></figure>
-
-<p>添加注解配置类，主要用于配置RedisTemplate和CacheManager两个组件。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.admin.config.redis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonAutoDetect;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.PropertyAccessor;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> com.zone7.admin.utils.RedisUtil;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.RedisSerializationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.RedisSerializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RedisConfig</span></span><br><span class="line"><span class="comment"> * Redis配置类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span>: 2018.08.20</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        RedisSerializer&lt;String&gt; redisSerializer = <span class="keyword">new</span> StringRedisSerializer();</span><br><span class="line"></span><br><span class="line">        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object.class);</span><br><span class="line">        ObjectMapper om = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        <span class="comment">//key序列化方式</span></span><br><span class="line">        template.setKeySerializer(redisSerializer);</span><br><span class="line">        <span class="comment">//value序列化</span></span><br><span class="line">        template.setValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line">        <span class="comment">//value hashmap序列化</span></span><br><span class="line">        template.setHashValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisConnectionFactory factory)</span> </span>&#123;</span><br><span class="line">        RedisSerializer&lt;String&gt; redisSerializer = <span class="keyword">new</span> StringRedisSerializer();</span><br><span class="line">        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解决查询缓存转换异常的问题</span></span><br><span class="line">        ObjectMapper om = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 配置序列化（解决乱码的问题）,过期时间30秒</span></span><br><span class="line">        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()</span><br><span class="line">                .entryTtl(Duration.ofSeconds(<span class="number">30</span>))</span><br><span class="line">                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))</span><br><span class="line">                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))</span><br><span class="line">                .disableCachingNullValues();</span><br><span class="line"></span><br><span class="line">        RedisCacheManager cacheManager = RedisCacheManager.builder(factory)</span><br><span class="line">                .cacheDefaults(config)</span><br><span class="line">                .build();</span><br><span class="line">        <span class="keyword">return</span> cacheManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-6-3-案例开发"><a href="#1-6-3-案例开发" class="headerlink" title="1.6.3    案例开发"></a>1.6.3    案例开发</h3><p>下面以RedisTemplate和StringRedisTemaplate的使用为例，介绍redis缓存的应用。RedisTemplate在使用时之需要使用@Autowired引入即可，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-
-<p>这里我们通过开发一个服务层和控制层进行查看redis整合后的效果：<br>服务层RedisServiceImpl.java 代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.RedisService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span>: RedisServiceImpl</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: redis 案例测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: zgq</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2019/6/19 09:16</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span>: 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisServiceImpl</span> <span class="keyword">implements</span> <span class="title">RedisService</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 写入</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//redisTemplate.opsForList().leftPush(key, value);</span></span><br><span class="line">    stringRedisTemplate.opsForValue().set(key,value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 读取</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">控制层RedisController.java代码：</span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.response.ResponseData;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.RedisService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.SysUserService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.vo.SysUserVo;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2019/06/17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/redis"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisService redisService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/put/&#123;key&#125;/&#123;value&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">put</span><span class="params">(@PathVariable String key,@PathVariable String value)</span></span>&#123;</span><br><span class="line">        redisService.put(key,value);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseData.successMessage(<span class="string">"put "</span>+key+<span class="string">"成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get/&#123;key&#125;"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">findByName</span><span class="params">(@PathVariable String key)</span> </span>&#123;</span><br><span class="line">        String value = redisService.get(key);</span><br><span class="line">        <span class="keyword">return</span> ResponseData.success(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用浏览器测试redis服务 的put：<br> <img src="https://zone-7.github.io/img/springboot/1.6.3a.png" alt="maven"></p>
-<p>使用浏览器测试redis服务的get：<br> <img src="https://zone-7.github.io/img/springboot/1.6.3b.png" alt="maven"><br>通过redis-cli查看redis存储的内容：<br> <img src="https://zone-7.github.io/img/springboot/1.6.3c.png" alt="maven"></p>
-
-            
-        </div>
-               
+        
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
         </span>
@@ -191,6 +158,7 @@
     
 
         </span>
+        
     </p>
 </article>
 <!-- 分享按钮 -->
@@ -213,9 +181,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.11SpringBoot 日志处理）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.7SpringBoot 整合RabbitMQ）/">
             
-                1.11 Springboot&amp;VUE开发实践（SpringBoot日志处理）
+                1.7 Springboot&amp;VUE开发实践（SpringBoot 整合RabbitMQ）
             
         </a>
     </span>
@@ -224,9 +192,9 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.3SpringBoot 注解 ）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.5SpringBoot 整合Mybatis ）/">
             
-                1.3 Springboot&amp;VUE开发实践（SpringBoot注解）
+                1.5 Springboot&amp;VUE开发实践（SpringBoot 整合Mybatis）
             
         </a>
     </span>
@@ -317,15 +285,21 @@
         </section>
         <!-- 侧栏部分 -->
 <aside class="sidebar">
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-整合Redis"><span class="toc-text">1.6    整合Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-1-Redis简介"><span class="toc-text">1.6.1    Redis简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-2-配置工程"><span class="toc-text">1.6.2    配置工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-3-案例开发"><span class="toc-text">1.6.3    案例开发</span></a></li></ol></li></ol>
+ 
+         
+    </section>
+    
+    
     <section class="widget">
         <h3 class="widget-hd"><strong>文章分类</strong></h3>
         <!-- 文章分类 -->
 <ul class="widget-bd">
-    
-    <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
-    </li>
     
     <li>
         <a href="/categories/开发模式/">开发模式</a>
@@ -335,6 +309,11 @@
     <li>
         <a href="/categories/其他/">其他</a>
         <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
 </ul>
@@ -350,27 +329,9 @@
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
   
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
     <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
     <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
@@ -378,9 +339,27 @@
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
-    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

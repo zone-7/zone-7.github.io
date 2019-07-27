@@ -151,49 +151,7 @@
 
     </div>
     <p class="post-meta">
-        <div class="entry">
-               <!--02-->
-                <div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-SpringBoot-基础"><span class="toc-text">1.1    SpringBoot 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Spring框架介绍"><span class="toc-text">1.1.1    Spring框架介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-SpringBoot框架介绍"><span class="toc-text">1.1.2    SpringBoot框架介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-1-SpringBoot的核心功能"><span class="toc-text">1.1.2.1    SpringBoot的核心功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-2-SpringBoot的优点"><span class="toc-text">1.1.2.2    SpringBoot的优点</span></a></li></ol></li></ol></li></ol>
-</div>
-            
-                <h2 id="1-1-SpringBoot-基础"><a href="#1-1-SpringBoot-基础" class="headerlink" title="1.1    SpringBoot 基础"></a>1.1    SpringBoot 基础</h2><h3 id="1-1-1-Spring框架介绍"><a href="#1-1-1-Spring框架介绍" class="headerlink" title="1.1.1    Spring框架介绍"></a>1.1.1    Spring框架介绍</h3><p> Spring是一个开源Java轻量级框架。Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但是Spring不仅仅局限于服务器端开发，也为 Java应用提高了简单性、可测试性和松耦合性等。Spring已经集成了20多个模块，这些模块主要被分如下图所示的核心容器、数据访问/集成,、Web、AOP、工具、消息和测试等模块。Spring 框架如下图所示：<br> <img src="https://zone-7.github.io/img/springboot/arc.png" alt="总体架构"></p>
-<ul>
-<li><p>(1)    Core Container 核心容器<br>核心部分分为4大块，spring-core, spring-beans, spring-context, spring-expression. 其中core和bean是整个框架的核心，提供了基础的DI（依赖注入）和IOC（控制反转）功能。 Context建立在core和beans模块之上，提供一种类似JNDI且以框架的方式来操作对象的方式。Context模块从beans模块继承它的功能同时增加了国际化支持，如资源绑定等，同时，Context模块也支持JavaEE功能，如EJB，JMX和基本的远程调用。ApplicationContext接口是context模块的焦点。expression是一种很强大的expression language，支持在运行时查询和操作对象的属性，我们会在后面的文章中举些例子来说明spring expression language的用法。</p>
-</li>
-<li><p>(2)    AOP and instrumentation<br>Aop模块提供了面向切面编程的实现，和AspectJ集成。</p>
-</li>
-<li><p>(3)    Messaging<br>Messaging是spring4新增加的模块，包含了一部分主要的基于message的应用的实现。</p>
-</li>
-<li><p>(4)    Data Access/Integration<br>Data access顾名思义，是spring对数据层提供的支持，是功能比较丰富的模块。提供了包括JDBC，事物，ORM，JMS等一系列实现。</p>
-</li>
-<li><p>(5)    Web<br>Web模块主要提供面向web的一些实现，例如多文件上传，servlet监听器以及spring mvc方面的支持。</p>
-<p>(6)    Test<br>Test模块主要是针对spring的各个模块做各种各样的测试，包括单元测试、集成测试等等。</p>
-</li>
-</ul>
-<h3 id="1-1-2-SpringBoot框架介绍"><a href="#1-1-2-SpringBoot框架介绍" class="headerlink" title="1.1.2    SpringBoot框架介绍"></a>1.1.2    SpringBoot框架介绍</h3><pre><code>SpringBoot并非Spring官方的框架，而是由Pivotal 团队（这里就不介绍这个团队了）在Spring上二次开发并开源公布出来的一个比 Spring更为简化的开发的框架。简而言之，SpringBoot就是一个轻量级，简化配置和开发流程的web整合框架。我们在使用SpringBoot时只需要做相应的配置就可以用所有的Spring组件，不需要像SpringMVC那样手动写一堆xml配置。从本质上来说，Spring Boot就是Spring,它简化了很多开发者利用Spring框架进行开发时，都需要进行的配置。那么它到底有什么功能呢？与Spring相比又有什么优势呢？ </code></pre><h4 id="1-1-2-1-SpringBoot的核心功能"><a href="#1-1-2-1-SpringBoot的核心功能" class="headerlink" title="1.1.2.1    SpringBoot的核心功能"></a>1.1.2.1    SpringBoot的核心功能</h4><ul>
-<li>(1)    可独立运行Spring项目<br>  SpringBoot 可以以jar包形式独立运行，运行一个Spring Boot项目只需要通过java -jar xx.jar来运行。</li>
-<li>(2)    内嵌servlet容器<br>  SpringBoot可以选择内嵌Tomcat、jetty或者Undertow,这样我们无须以war包形式部署项目。</li>
-<li>(3)    提供starter简化Maven配置<br>  Spring提供了一系列的start pom来简化Maven的依赖加载，例如，当你使用了spring-boot-starter-web，会自动加入如图5-1所示的依赖包。</li>
-<li>(4)    自动装配Spring<br>  SpringBoot会根据在类路径中的jar包，类、为jar包里面的类自动配置Bean，这样会极大地减少我们要使用的配置。当然，SpringBoot只考虑大多数的开发场景，并不是所有的场景，若在实际开发中我们需要配置Bean，而SpringBoot灭有提供支持，则可以自定义自动配置。</li>
-<li>(5)    准生产的应用监控<br>  SpringBoot提供基于http ssh telnet对运行时的项目进行监控。</li>
-<li>(6)    无代码生产和xml配置　　<br>  SpringBoot不是借助与代码生成来实现的，而是通过条件注解来实现的，这是Spring4.x提供的新特性。</li>
-</ul>
-<h4 id="1-1-2-2-SpringBoot的优点"><a href="#1-1-2-2-SpringBoot的优点" class="headerlink" title="1.1.2.2    SpringBoot的优点"></a>1.1.2.2    SpringBoot的优点</h4><ul>
-<li><p>编码更简单<br>SpringBoot采用 JavaConfig的方式，对Spring进行配置，并且提供了大量的注解，极大的提高了工作效率。</p>
-</li>
-<li><p>配置更简单<br>SpringBoot提供许多默认配置，同时也支持自定义配置， SpringBoot项目只需一个配置文件：application.properties或者application.yml。不必担心查找配置错误的定位。<br><img src="https://zone-7.github.io/img/springboot/1.1.2.png" alt="优势"></p>
-</li>
-<li><p>部署更简单<br>SpringBoot内置了三种Servlet容器，Tomcat，Jetty,undertow.我们只需要一个Java的运行环境就可以跑SpringBoot的项目了，SpringBoot的项目可以打成一个jar包，然后通过Java -jar xxx.jar来运行（SpringBoot项目的入口是一个main方法，运行该方法即可）。</p>
-</li>
-<li><p>监控更简单<br>SpringBoot提供了actuator包，可以使用它来对应用进行监控。主要提供功能有如下截图</p>
-</li>
-</ul>
-
-            
-        </div>
-               
+        
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
         </span>
@@ -207,6 +165,7 @@
     
 
         </span>
+        
     </p>
 </article>
 <!-- 分享按钮 -->
@@ -229,9 +188,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.5SpringBoot 整合Mybatis ）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.2SpringBoot 开发规范 ）/">
             
-                1.5 Springboot&amp;VUE开发实践（SpringBoot 整合Mybatis）
+                1.2 Springboot&amp;VUE开发实践（SpringBoot开发规范）
             
         </a>
     </span>
@@ -333,15 +292,21 @@
         </section>
         <!-- 侧栏部分 -->
 <aside class="sidebar">
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-SpringBoot-基础"><span class="toc-text">1.1    SpringBoot 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Spring框架介绍"><span class="toc-text">1.1.1    Spring框架介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-SpringBoot框架介绍"><span class="toc-text">1.1.2    SpringBoot框架介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-1-SpringBoot的核心功能"><span class="toc-text">1.1.2.1    SpringBoot的核心功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-2-SpringBoot的优点"><span class="toc-text">1.1.2.2    SpringBoot的优点</span></a></li></ol></li></ol></li></ol>
+ 
+         
+    </section>
+    
+    
     <section class="widget">
         <h3 class="widget-hd"><strong>文章分类</strong></h3>
         <!-- 文章分类 -->
 <ul class="widget-bd">
-    
-    <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
-    </li>
     
     <li>
         <a href="/categories/开发模式/">开发模式</a>
@@ -351,6 +316,11 @@
     <li>
         <a href="/categories/其他/">其他</a>
         <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
 </ul>
@@ -366,27 +336,9 @@
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
   
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
     <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
     <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
@@ -394,9 +346,27 @@
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
-    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>
