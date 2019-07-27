@@ -251,6 +251,9 @@
 .icon-github:before {
   content: "\eab1";
 }
+.icon-coffe:before {
+  content: "\e911";
+}
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
