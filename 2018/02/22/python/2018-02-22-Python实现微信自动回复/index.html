@@ -131,6 +131,29 @@
 
     </div>
     <p class="post-meta">
+        <div class="entry">
+               <!--02-->
+                <div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#入门尝试"><span class="toc-text">入门尝试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消息响应"><span class="toc-text">消息响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他消息处理"><span class="toc-text">其他消息处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本型消息转发"><span class="toc-text">文本型消息转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多媒体信息转发"><span class="toc-text">多媒体信息转发</span></a></li></ol>
+</div>
+            
+                <p>春节期间接收到无数新年问候，总想一一答复，不想群发，难免有遗漏，抽空学习了Python自动回复的itchat。以下是学习摘要</p>
+<h3 id="入门尝试"><a href="#入门尝试" class="headerlink" title="入门尝试"></a>入门尝试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载包</span></span><br><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># 登陆</span></span><br><span class="line">itchat.auto_login()</span><br><span class="line"><span class="comment"># 发送文本消息，发送目标是“文件传输助手”</span></span><br><span class="line">itchat.send(<span class="string">'Hello, filehelper'</span>, toUserName=<span class="string">'filehelper'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息响应"><a href="#消息响应" class="headerlink" title="消息响应"></a>消息响应</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># 注册消息响应事件，消息类型为itchat.content.TEXT，即文本消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register(itchat.content.TEXT)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 返回同样的文本消息</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'Text'</span>]</span><br><span class="line"></span><br><span class="line">itchat.auto_login()</span><br><span class="line"><span class="comment"># 绑定消息响应事件后，让itchat运行起来，监听消息</span></span><br><span class="line">itchat.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他消息处理"><a href="#其他消息处理" class="headerlink" title="其他消息处理"></a>其他消息处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># import全部消息类型</span></span><br><span class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理文本类消息</span></span><br><span class="line"><span class="comment"># 包括文本、位置、名片、通知、分享</span></span><br><span class="line"><span class="meta">@itchat.msg_register([TEXT, MAP, CARD, NOTE, SHARING])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 微信里，每个用户和群聊，都使用很长的ID来区分</span></span><br><span class="line">    <span class="comment"># msg['FromUserName']就是发送者的ID</span></span><br><span class="line">    <span class="comment"># 将消息的类型和文本内容返回给发送者</span></span><br><span class="line">    itchat.send(<span class="string">'%s: %s'</span> % (msg[<span class="string">'Type'</span>], msg[<span class="string">'Text'</span>]), msg[<span class="string">'FromUserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理多媒体类消息</span></span><br><span class="line"><span class="comment"># 包括图片、录音、文件、视频</span></span><br><span class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_files</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># msg['Text']是一个文件下载函数</span></span><br><span class="line">    <span class="comment"># 传入文件名，将文件下载下来</span></span><br><span class="line">    msg[<span class="string">'Text'</span>](msg[<span class="string">'FileName'</span>])</span><br><span class="line">    <span class="comment"># 把下载好的文件再发回给发送者</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'@%s@%s'</span> % (&#123;<span class="string">'Picture'</span>: <span class="string">'img'</span>, <span class="string">'Video'</span>: <span class="string">'vid'</span>&#125;.get(msg[<span class="string">'Type'</span>], <span class="string">'fil'</span>), msg[<span class="string">'FileName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理好友添加请求</span></span><br><span class="line"><span class="meta">@itchat.msg_register(FRIENDS)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_friend</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 该操作会自动将新好友的消息录入，不需要重载通讯录</span></span><br><span class="line">    itchat.add_friend(**msg[<span class="string">'Text'</span>]) </span><br><span class="line">    <span class="comment"># 加完好友后，给好友打个招呼</span></span><br><span class="line">    itchat.send_msg(<span class="string">'Nice to meet you!'</span>, msg[<span class="string">'RecommendInfo'</span>][<span class="string">'UserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理群聊消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register(TEXT, isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'isAt'</span>]:</span><br><span class="line">        itchat.send(<span class="string">u'@%s\u2005I received: %s'</span> % (msg[<span class="string">'ActualNickName'</span>], msg[<span class="string">'Content'</span>]), msg[<span class="string">'FromUserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在auto_login()里面提供一个True，即hotReload=True</span></span><br><span class="line"><span class="comment"># 即可保留登陆状态</span></span><br><span class="line"><span class="comment"># 即使程序关闭，一定时间内重新开启也可以不用重新扫码</span></span><br><span class="line">itchat.auto_login(<span class="literal">True</span>)</span><br><span class="line">itchat.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本型消息转发"><a href="#文本型消息转发" class="headerlink" title="文本型消息转发"></a>文本型消息转发</h3><p>isGroupChat=True 表示群聊消息,默认False<br>[TEXT, SHARING] 表示文本型和分享内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动回复文本等类别的群聊消息</span></span><br><span class="line"><span class="comment"># isGroupChat=True表示为群聊消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register([TEXT, SHARING], isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">group_reply_text</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 消息来自于哪个群聊</span></span><br><span class="line">    chatroom_id = msg[<span class="string">'FromUserName'</span>]</span><br><span class="line">    <span class="comment"># 发送者的昵称</span></span><br><span class="line">    username = msg[<span class="string">'ActualNickName'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 消息并不是来自于需要同步的群</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> chatroom_id <span class="keyword">in</span> chatroom_ids:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'Type'</span>] == TEXT:</span><br><span class="line">        content = msg[<span class="string">'Content'</span>]</span><br><span class="line">    <span class="keyword">elif</span> msg[<span class="string">'Type'</span>] == SHARING:</span><br><span class="line">        content = msg[<span class="string">'Text'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据消息类型转发至其他群</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'Type'</span>] == TEXT:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">                itchat.send(<span class="string">'%s\n%s'</span> % (username, msg[<span class="string">'Content'</span>]), item[<span class="string">'UserName'</span>])</span><br><span class="line">    <span class="keyword">elif</span> msg[<span class="string">'Type'</span>] == SHARING:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">                itchat.send(<span class="string">'%s\n%s\n%s'</span> % (username, msg[<span class="string">'Text'</span>], msg[<span class="string">'Url'</span>]), item[<span class="string">'UserName'</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="多媒体信息转发"><a href="#多媒体信息转发" class="headerlink" title="多媒体信息转发"></a>多媒体信息转发</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动回复图片等类别的群聊消息</span></span><br><span class="line"><span class="comment"># isGroupChat=True表示为群聊消息          </span></span><br><span class="line"><span class="meta">@itchat.msg_register([PICTURE, ATTACHMENT, VIDEO], isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">group_reply_media</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 消息来自于哪个群聊</span></span><br><span class="line">    chatroom_id = msg[<span class="string">'FromUserName'</span>]</span><br><span class="line">    <span class="comment"># 发送者的昵称</span></span><br><span class="line">    username = msg[<span class="string">'ActualNickName'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 消息并不是来自于需要同步的群</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> chatroom_id <span class="keyword">in</span> chatroom_ids:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 如果为gif图片则不转发</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'FileName'</span>][<span class="number">-4</span>:] == <span class="string">'.gif'</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 下载图片等文件</span></span><br><span class="line">    msg[<span class="string">'Text'</span>](msg[<span class="string">'FileName'</span>])</span><br><span class="line">    <span class="comment"># 转发至其他需要同步消息的群聊</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">            itchat.send(<span class="string">'@%s@%s'</span> % (&#123;<span class="string">'Picture'</span>: <span class="string">'img'</span>, <span class="string">'Video'</span>: <span class="string">'vid'</span>&#125;.get(msg[<span class="string">'Type'</span>], <span class="string">'fil'</span>), msg[<span class="string">'FileName'</span>]), item[<span class="string">'UserName'</span>])</span><br></pre></td></tr></table></figure>
+
+
+            
+        </div>
+               
         <span class="post-cat">分类：
             
         </span>
@@ -166,9 +189,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2018/02/22/others/2018-02-22-基于H5的人脸检测实践/">
+        <a href="/2018/02/24/others/2018-02-24-使用SeetaFace 和Dlib实现人脸识别/">
             
-                基于H5的人脸检测实践
+                使用SeetaFace和Dlib实现人脸识别
             
         </a>
     </span>
@@ -177,9 +200,9 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2010/01/01/hello-world/">
+        <a href="/2018/02/22/others/2018-02-22-基于H5的人脸检测实践/">
             
-                Hello World
+                基于H5的人脸检测实践
             
         </a>
     </span>
@@ -276,8 +299,8 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/其他/">其他</a>
-        <span class="badge">(3)</span>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
     <li>
@@ -286,8 +309,8 @@
     </li>
     
     <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
     </li>
     
 </ul>
@@ -299,41 +322,41 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
-    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
-  
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

@@ -158,6 +158,56 @@
 
     </div>
     <p class="post-meta">
+        <div class="entry">
+               <!--02-->
+                <div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目依赖"><span class="toc-text">项目依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用说明"><span class="toc-text">使用说明</span></a></li></ol>
+</div>
+            
+                <p>在工作流开发过程中经常会使用一些主流的工作流框架，这些框架是否强大灵活，但往往需要引入大量的资源，增加了工程的复杂度。简易工作流控制框架是一个可以独立嵌入到java工程或者与Spring整合的简易工作流程框架，可以适应一些只需要简单审核审批业务场景的开发，开发简单，极少的依赖，不对工程已有业务带来大影响。</p>
+<h2 id="项目依赖"><a href="#项目依赖" class="headerlink" title="项目依赖"></a>项目依赖</h2><pre><code>aspectjweaver、spring-core、spring-beans、spring-context</code></pre><h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><p>###一、开发步骤<br>1、添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.zone7<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zone7-flow<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>2、spring 配置文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 流程管理.开始 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"flowPersistance"</span> <span class="attr">class</span>=<span class="string">"com.github.zone7.admin.bean.FlowPersistanceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"businessEventFactory"</span> <span class="attr">class</span>=<span class="string">"com.github.zone7.flow.spring.common.BusinessEventFactoryImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"taskService"</span> <span class="attr">class</span>=<span class="string">"com.github.zone7..flow.spring.service.impl.TaskServiceImpl"</span>&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"flowPersistance"</span> <span class="attr">ref</span>=<span class="string">"flowPersistance"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"businessEventFactory"</span> <span class="attr">ref</span>=<span class="string">"businessEventFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> 	</span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"flowAdvising"</span> <span class="attr">class</span>=<span class="string">"com.github.zone7.flow.spring.common.FlowAspect"</span>&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"taskService"</span> <span class="attr">ref</span>=<span class="string">"taskService"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">"flowAdvising"</span>&gt;</span>   </span><br><span class="line">          <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"performance"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.github.zone7.*.*.service.*.*(com.github.zone7.flow.spring.common.FlowAttribute,..)) and @annotation(flow) and args(attr,..)"</span> /&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">aop:around</span>  <span class="attr">pointcut-ref</span>=<span class="string">"performance"</span> <span class="attr">method</span>=<span class="string">"round"</span> /&gt;</span>   </span><br><span class="line">       <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"> 	<span class="comment">&lt;!-- 流程管理.结束 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>####3、开发持久化类FlowPersistanceImpl<br>    必须是IFlowPersistance接口的实现，可直接使用Demo中的持久化类</p>
+<p>####4、开发业务流程事件类<br>    事件类包含流程开始、结束；流程环节的开始、结束等事件。<br>    例如：<br>    @Component(value=”businessEvent”)<br>    public class BusinessEventImpl extends AbstractBusinessEvent {<br>    }<br>    详细内容可参考Demo</p>
+<p>####5、配置业务类型表Business<br>    为每一个业务添加一条记录。<br>    Action 配置流程事件类的服务名；<br>    ViewURL字段为经办界面还原的视图，在审核审批过程中，显示需要查看的内容。<br>    Businessid字段需要开发人员记住，建议设置为一个有逻辑意义的字符串。</p>
+<p>以上是手动配置，也可以通过系统的图形化界面配置。</p>
+<p>####6、配置流程表 Procedure<br>    流程表由流程ID、机构ID、业务ID组成，表示一种业务，不同的机构可以定义不同的流程。<br>    以上是手动配置，也可以通过系统的图形化界面配置。</p>
+<p>####7、配置流程环节表 Step</p>
+<pre><code>流程环节表示流程中一个环节的定义。包括流程ID、流程环节ID、流程环节名称、上级节点、下级节点、分配方式等。</code></pre><p>以上是手动配置，也可以通过系统的图形化界面配置。</p>
+<p>####8、配置流程环节权限表 Stepgant</p>
+<pre><code>可以给流程环节分配权限，可以按用户ID、角色ID或者机构ID分配权限。
+以上是手动配置，也可以通过系统的图形化界面配置。</code></pre><p>####9、开发与流程相关的业务代码<br>    与提交审核审批相关的服务代码，需要在函数前使用注解“@Flow”，并且函数的第一个入参数必须是FlowAttribute 。在调用提交审核审批的时候需要将FlowAttrribute参数传进去，FlowAttribute 包含businessid、taskid、userid等属性，以确保系统可以获取到流程相关内容。<br>    例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//服务层代码 Service</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Flow</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> FlowtestModel <span class="title">commit</span><span class="params">(FlowAttribute attr1,String id)</span> </span>&#123;		</span><br><span class="line">	String taskid=attr1.getTaskid();	 </span><br><span class="line">	Flowtest test = flowtestDAO.get(Flowtest.class, id); </span><br><span class="line">	<span class="keyword">if</span>(test==<span class="keyword">null</span>)&#123;</span><br><span class="line">		<span class="keyword">new</span> BusinessException(<span class="string">"数据不存在"</span>);</span><br><span class="line">	&#125;		</span><br><span class="line">	test.setTaskid(taskid);</span><br><span class="line">	flowtestDAO.update(test);		 </span><br><span class="line">	FlowtestModel flowtest=<span class="keyword">new</span> FlowtestModel();		</span><br><span class="line">	BeanUtils.copyProperties(test, flowtest);</span><br><span class="line">	<span class="keyword">return</span> flowtest;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//控制层代码 Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/commit"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> FlowtestModel <span class="title">commit</span><span class="params">(FlowtestModel model,</span></span></span><br><span class="line"><span class="function"><span class="params">   HttpServletRequest req,HttpServletResponse res)</span></span>&#123;</span><br><span class="line">    <span class="comment">//随机产生一个任务ID</span></span><br><span class="line">	String taskid=UUID.randomUUID().toString().replaceAll(<span class="string">"-"</span>, <span class="string">""</span>);</span><br><span class="line">	FlowAttribute attr=<span class="keyword">new</span> FlowAttribute();</span><br><span class="line">	attr.setTaskid(taskid);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//配置业务类型编码参考Business表 </span></span><br><span class="line">	attr.setBusinessid(<span class="string">"1"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//设置当前用户的组织机构编号</span></span><br><span class="line">	attr.setGroupid(<span class="string">"0"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//设置当前用户的Id</span></span><br><span class="line">	attr.setUserid(getCurrentUser().getUserid());</span><br><span class="line">	</span><br><span class="line">	model = flowtestService.get(model.getId());</span><br><span class="line">	</span><br><span class="line">	Map params= MapBeanUtil.beanToMap(model);</span><br><span class="line">	attr.setParams(params);</span><br><span class="line">	</span><br><span class="line">	FlowtestModel f = flowtestService.commit(attr,model.getId()); </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###二、表结构说明</p>
+<p>####1、业务类型表Business</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">名称	类型	可否为空	默认值	描述</span><br><span class="line">BUSINESSID               	VARCHAR2(32)	否		主键</span><br><span class="line">业务类型ID</span><br><span class="line">BUSINESSNAME         	VARCHAR2(100)	否		业务名称</span><br><span class="line">ACTIVE               	VARCHAR2(1)	否	default &apos;1&apos;	是否可用</span><br><span class="line">ACTION	VARCHAR2(500)	是		事件服务名称</span><br><span class="line">VIEWURL              	VARCHAR2(500)	是		审核审核</span><br><span class="line">查看明细页面</span><br><span class="line">BUSINESSURL          	VARCHAR2(500)	是		经办页面</span><br><span class="line">ALLOWCROSS           	VARCHAR2(1)	是		是否交叉授权</span><br><span class="line">预留</span><br></pre></td></tr></table></figure>
+
+<p>####2、业务流程表 Procedure</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">名称	类型	可否为空	默认值	描述</span><br><span class="line">PROCEDUREID	VARCHAR2(32)	否		主键</span><br><span class="line">业务流程ID</span><br><span class="line">PROCEDURENAME	VARCHAR2(50)	否		业务流程名称</span><br><span class="line">ACTIVE               	VARCHAR2(1)	否	default &apos;1&apos;	是否可用</span><br><span class="line">BUSINESSID	VARCHAR2(32)	是		业务类型ID</span><br><span class="line">GROUPID	VARCHAR2(32)	是		机构ID </span><br><span class="line">PROCEDUREDESC	VARCHAR2(100)	是		描述</span><br></pre></td></tr></table></figure>
+
+<p>####3、业务流程环节表Step</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">名称	类型	可否为空	默认值	描述</span><br><span class="line">STEPID	VARCHAR2(32)	否		主键</span><br><span class="line">业务环节ID</span><br><span class="line">PROCEDUREID	VARCHAR2(32)	否		流程ID</span><br><span class="line">PREVIOUSSTEPID	VARCHAR2(32)	是		上级流程ID</span><br><span class="line">NEXTSTEPID	VARCHAR2(32)	是		下级流程ID</span><br><span class="line">STEPNAME	VARCHAR2(100)	否		流程环节名称 </span><br><span class="line">FLOWTYPE	VARCHAR2(3)	是		流程环节类型</span><br><span class="line">REFUSERULE	VARCHAR2(3)	是		拒绝规则</span><br><span class="line">ACTION	VARCHAR2(500)	是		事件类</span><br><span class="line">ASSIGNRULE	VARCHAR2(3)	是		分发规则</span><br><span class="line">URL	VARCHAR2(500)	是		预留</span><br></pre></td></tr></table></figure>
+
+<p>####4、业务流程环节权限stepgrant</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">名称	类型	可否为空	默认值	描述</span><br><span class="line">FLOWGRANTID  	VARCHAR2(32)	否		主键 </span><br><span class="line">STEPID       	VARCHAR2(32)	否		流程环节ID</span><br><span class="line">USERID       	VARCHAR2(32)	是		用户ID</span><br><span class="line">GROUPID        	VARCHAR2(32)	是		机构ID</span><br><span class="line">ROLEID	VARCHAR2(32)	是		角色ID </span><br><span class="line">ALLOWGRANT   	VARCHAR2(1)	是	0	是否允许授权</span><br><span class="line">STARTTIME    	DATE	是		起始时间</span><br><span class="line">ENDTIME      	DATE	是		截止时间</span><br><span class="line">DESCRIPTIOIN	VARCHAR2(500)	是		描述</span><br></pre></td></tr></table></figure>
+
+<p>####5、业务流程任务stepTASK</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    名称	类型	可否为空	默认值	描述</span><br><span class="line">    TASKID     	VARCHAR2(32)	否		主键 </span><br><span class="line">    BUSINESSID	VARCHAR2(32)	是		业务ID</span><br><span class="line">    BUSINESSNAME	VARCHAR2(100)	是		业务名称</span><br><span class="line">    STEPID     	VARCHAR2(32)	是		环节ID</span><br><span class="line">    STEPNAME   	VARCHAR2(100)	是		角色ID </span><br><span class="line">    USERID     	VARCHAR2(32)	是		用户ID</span><br><span class="line">    NEXTSTEPID     	VARCHAR2(32)	是		下级流程ID</span><br><span class="line">    NEXTSTEPNAME   	VARCHAR2(100)	是		下级流程名称</span><br><span class="line">    NEXTUSERID     	VARCHAR2(32)	是		下级流程指派用户ID</span><br><span class="line">    TASKSTATE  	VARCHAR2(3)	是		任务状态</span><br><span class="line">                                    1任务未领取,</span><br><span class="line">                                    2任务已领取,</span><br><span class="line">                                    3 任务完成</span><br><span class="line">    CONTENT    	VARCHAR2(100)	是		内容描述</span><br><span class="line">    RESULT     	VARCHAR2(3)	是		审核结果</span><br><span class="line">    CREATETIME	timestamp	是		创建时间</span><br><span class="line">    UPDATETIME	timestamp	是		更新时间</span><br><span class="line">    TASKLEVEL  	NUMBER	是		任务级别</span><br><span class="line">```               </span><br><span class="line"></span><br><span class="line">####6、任务数据明细steptaskinfo</span><br><span class="line">```text</span><br><span class="line">    名称	类型	可否为空	默认值	描述</span><br><span class="line">    taskinfoid	VARCHAR2(32)	否		主键 </span><br><span class="line">    taskid	VARCHAR2(32)	是		任务ID</span><br><span class="line">    name	VARCHAR2(50)	是		字段名称</span><br><span class="line">    value	VARCHAR2(500)	是		字段值</span><br></pre></td></tr></table></figure>
+
+<p>####7、任务日志表stepTASKLOG</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">名称	类型	可否为空	默认值	描述</span><br><span class="line">TASKLOGID  	VARCHAR2(32)	否		主键</span><br><span class="line">TASKID     	VARCHAR2(32)	否		任务ID</span><br><span class="line">BUSINESSID	VARCHAR2(32)	是		业务ID</span><br><span class="line">BUSINESSNAME	VARCHAR2(100)	是		业务名称</span><br><span class="line">STEPID     	VARCHAR2(32)	是		环节ID</span><br><span class="line">STEPNAME   	VARCHAR2(100)	是		角色ID </span><br><span class="line">USERID     	VARCHAR2(32)	是		用户ID</span><br><span class="line">TASKSTATE  	VARCHAR2(3)	是		任务状态</span><br><span class="line">                                1任务未领取,</span><br><span class="line">                                2任务已领取,</span><br><span class="line">                                3 任务完成</span><br><span class="line">CONTENT    	VARCHAR2(100)	是		内容描述</span><br><span class="line">RESULT     	VARCHAR2(3)	是		审核结果</span><br><span class="line">CREATETIME	timestamp	是		创建时间</span><br><span class="line">UPDATETIME	timestamp	是		更新时间</span><br><span class="line">TASKLEVEL  	NUMBER	是		任务级别</span><br><span class="line">ISCANCEL   	VARCHAR2(1)</span><br><span class="line">    是		是否已经撤销</span><br></pre></td></tr></table></figure>
+
+
+            
+        </div>
+               
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/其他/">其他</a>
         </span>
@@ -301,8 +351,8 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/其他/">其他</a>
-        <span class="badge">(3)</span>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
     <li>
@@ -311,8 +361,8 @@
     </li>
     
     <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
     </li>
     
 </ul>
@@ -324,41 +374,41 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
-    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
-  
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

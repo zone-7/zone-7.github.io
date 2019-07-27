@@ -624,6 +624,14 @@ hr {
   font-family: "HomizioNova", "Microsoft Yahei";
   font-style: italic;
 }
+.logo a .cover .name2 {
+  display: block;
+  height: 100%;
+  font-size: 28px;
+  font-family: "Arial";
+  color: #fff;
+  background-color: #84cc5d;
+}
 .logo a .cover .description {
   display: block;
   height: 100%;

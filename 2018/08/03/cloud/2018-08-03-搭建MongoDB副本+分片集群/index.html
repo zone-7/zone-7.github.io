@@ -260,6 +260,158 @@ MongoDB的数据库复制增加了冗余，确保了高可用性，简化了管�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall mongod</span><br><span class="line">killall mongos</span><br></pre></td></tr></table></figure>
     </div>
     <p class="post-meta">
+        <div class="entry">
+               <!--02-->
+                <div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、概念"><span class="toc-text">一、概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-路由-mongos"><span class="toc-text">1.路由 mongos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-副本集-replica-set"><span class="toc-text">2.副本集 replica set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-分片-sharding"><span class="toc-text">3.分片 sharding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置服务器config-server"><span class="toc-text">4.配置服务器config server</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、环境准备"><span class="toc-text">二、环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-资源"><span class="toc-text">1.资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，服务器规划"><span class="toc-text">2，服务器规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、架构图"><span class="toc-text">3、架构图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、集群搭建"><span class="toc-text">三、集群搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、安装mongodb"><span class="toc-text">1、安装mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解压"><span class="toc-text">解压</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#改名"><span class="toc-text">改名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#使立即生效"><span class="toc-text">使立即生效</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、config-server配置服务器"><span class="toc-text">2、config server配置服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#配置文件内容"><span class="toc-text">配置文件内容</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、配置分片副本集-三台机器"><span class="toc-text">3、配置分片副本集(三台机器)</span></a></li></ol></li></ol>
+</div>
+            
+                <p>mongodb是目前开源数据库中最常用的NoSQL数据库， MongoDb在用于生产环境的三种模式，master/slaves（主从模式）;replica set(副本集);auto shard 分片模式，本文主要介绍如何搭建高可用的mongodb副本+分片（Replication）集群。</p>
+<h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><p>在搭建集群之前，需要首先了解几个概念：路由、副本集、分片、配置服务器等。<br><img src="https://zone-7.github.io/img/mongodbReplica2.png" alt="概念图"></p>
+<h3 id="1-路由-mongos"><a href="#1-路由-mongos" class="headerlink" title="1.路由 mongos"></a>1.路由 mongos</h3><pre><code>数据库集群请求的入口，所有的请求都通过mongos进行协调，不需要在应用程序添加一个路由选择器，mongos自己就是一个请求分发中心，它负责把对应的数据请求请求转发到对应的shard服务器上。在生产环境通常有多mongos作为请求的入口，防止其中一个挂掉所有的mongodb请求都没有办法操作。</code></pre><h3 id="2-副本集-replica-set"><a href="#2-副本集-replica-set" class="headerlink" title="2.副本集 replica set"></a>2.副本集 replica set</h3><pre><code>MongoDB的replica set是一个mongod进程实例簇，数据在这个簇中相互复制，并自动进行故障切换。
+MongoDB的数据库复制增加了冗余，确保了高可用性，简化了管理任务如备份，并且增加了读能力。大多数产品部署都使用了复制。MongoDB中primary处理写操作，其它进行复制的成员则是secondaries。</code></pre><h3 id="3-分片-sharding"><a href="#3-分片-sharding" class="headerlink" title="3.分片 sharding"></a>3.分片 sharding</h3><pre><code>到目前为止，你都是把MongoDB当做一台服务器在用，每个mongod实例都包含应用程序数据的完整副本。就算使用了复制，每个副本也都是完整克隆了其他副本的数据。对于大多数应用程序而言，在一台服务器上保存完整数据集是完全可以接受的。但随着数据量的增长，以及应用程序对读写吞吐量的要求越来越高，普通服务器渐渐显得捉襟见肘了。尤其是这些服务器可能无法分配足够的内存，或者没有足够的CPU核数来有效处理工作负荷。除此之外，随着数据量的增长，要在一块磁盘或者一组RAID阵列上保存和管理备份如此大规模的数据集也变得不太现实。如果还想继续使用普通硬件或者虚拟硬件来托管数据库，那么这对这类问题的解决方案就是将数据库分布到多台服务器上，这种方法称之为分片。
+一个副本集可以最多支持12个成员，但是只有7个成员可以参与投票。</code></pre><h3 id="4-配置服务器config-server"><a href="#4-配置服务器config-server" class="headerlink" title="4.配置服务器config server"></a>4.配置服务器config server</h3><pre><code>顾名思义为配置服务器，存储所有数据库元信息（路由、分片）的配置。mongos本身没有物理存储分片服务器和数据路由信息，只是缓存在内存里，配置服务器则实际存储这些数据。mongos第一次启动或者关掉重启就会从 config server 加载配置信息，以后如果配置服务器信息变化会通知到所有的 mongos 更新自己的状态，这样 mongos 就能继续准确路由。在生产环境通常有多个 config server 配置服务器，因为它存储了分片路由的元数据，防止数据丢失！</code></pre><h2 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h2><h3 id="1-资源"><a href="#1-资源" class="headerlink" title="1.资源"></a>1.资源</h3><pre><code>系统系统 centos7，三台服务器：192.168.22.101/102/103，下载MongoDB安装包： mongodb-linux-x86_64-3.4.6.tgz</code></pre><h3 id="2，服务器规划"><a href="#2，服务器规划" class="headerlink" title="2，服务器规划"></a>2，服务器规划</h3><pre><code>| 服务器101   |   服务器102 | 服务器103|
+|-----------|------------|---------|
+| mongos     |   mongos   | mongos  |
+| config server |    config server |    config server |
+| shard server1 主节点    |    shard server1 副节点 |    shard server1 仲裁 |
+| shard server2 仲裁      |    shard server2 主节点 |    shard server2 副节点 |
+| shard server3 副节点    |    shard server3 仲裁 |    shard server3 主节点 |
+----------
+
+端口分配：
+    mongos：20000
+    config：21000
+    shard1：27001
+    shard2：27002
+    shard3：27003</code></pre><h3 id="3、架构图"><a href="#3、架构图" class="headerlink" title="3、架构图"></a>3、架构图</h3><p><img src="https://zone-7.github.io/img/mongodbReplica1.png" alt="架构图"></p>
+<h2 id="三、集群搭建"><a href="#三、集群搭建" class="headerlink" title="三、集群搭建"></a>三、集群搭建</h2><h3 id="1、安装mongodb"><a href="#1、安装mongodb" class="headerlink" title="1、安装mongodb"></a>1、安装mongodb</h3><h5 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf mongodb-linux-x86_64-3.4.6.tgz -C /usr/local/</span><br></pre></td></tr></table></figure>
+
+<h5 id="改名"><a href="#改名" class="headerlink" title="改名"></a>改名</h5><p>mv mongodb-linux-x86_64-3.4.6 mongodb<br>分别在每台机器建立conf、mongos、config、shard1、shard2、shard3六个目录，因为mongos不存储数据，只需要建立日志文件目录即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/mongodb/conf</span><br><span class="line">mkdir -p /usr/local/mongodb/mongos/log</span><br><span class="line">mkdir -p /usr/local/mongodb/config/data</span><br><span class="line">mkdir -p /usr/local/mongodb/config/log</span><br><span class="line">mkdir -p /usr/local/mongodb/shard1/data</span><br><span class="line">mkdir -p /usr/local/mongodb/shard1/log</span><br><span class="line">mkdir -p /usr/local/mongodb/shard2/data</span><br><span class="line">mkdir -p /usr/local/mongodb/shard2/log</span><br><span class="line">mkdir -p /usr/local/mongodb/shard3/data</span><br><span class="line">mkdir -p /usr/local/mongodb/shard3/log</span><br></pre></td></tr></table></figure>
+
+<p>#####配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h5 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MONGODB_HOME=/usr/local/mongodb</span><br><span class="line">export PATH=$MONGODB_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<h5 id="使立即生效"><a href="#使立即生效" class="headerlink" title="使立即生效"></a>使立即生效</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、config-server配置服务器"><a href="#2、config-server配置服务器" class="headerlink" title="2、config server配置服务器"></a>2、config server配置服务器</h3><p>mongodb3.4以后要求配置服务器也创建副本集，不然集群搭建不成功。<br>添加配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/mongodb/conf/config.conf</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pidfilepath = /usr/local/mongodb/config/log/configsrv.pid</span><br><span class="line">dbpath = /usr/local/mongodb/config/data</span><br><span class="line">logpath = /usr/local/mongodb/config/log/congigsrv.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line">port = 21000</span><br><span class="line">fork = true</span><br><span class="line"></span><br><span class="line">#declare this is a config db of a cluster;</span><br><span class="line">configsvr = true</span><br><span class="line"></span><br><span class="line">#副本集名称</span><br><span class="line">replSet=configs</span><br><span class="line"></span><br><span class="line">#设置最大连接数</span><br><span class="line">maxConns=20000</span><br></pre></td></tr></table></figure>
+
+<p>启动三台服务器的config server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/local/mongodb/conf/config.conf</span><br></pre></td></tr></table></figure>
+
+<p>登录任意一台配置服务器，初始化配置副本集</p>
+<p>#####连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 21000</span><br></pre></td></tr></table></figure>
+
+<p>#####config变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">config = &#123;</span><br><span class="line">    _id : &quot;configs&quot;,</span><br><span class="line">     members : [</span><br><span class="line">         &#123;_id : 0, host : &quot;192.168.22.101:21000&quot; &#125;,</span><br><span class="line">         &#123;_id : 1, host : &quot;192.168.22.102:21000&quot; &#125;,</span><br><span class="line">         &#123;_id : 2, host : &quot;192.168.22.103:21000&quot; &#125;</span><br><span class="line">     ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#####初始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(config)</span><br></pre></td></tr></table></figure>
+
+<p>其中，”_id” : “configs”应与配置文件中配置的 replicaction.replSetName 一致，”members” 中的 “host” 为三个节点的 ip 和 port</p>
+<h3 id="3、配置分片副本集-三台机器"><a href="#3、配置分片副本集-三台机器" class="headerlink" title="3、配置分片副本集(三台机器)"></a>3、配置分片副本集(三台机器)</h3><p>设置第一个分片副本集<br>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/mongodb/conf/shard1.conf</span><br></pre></td></tr></table></figure>
+
+<p>#####配置文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pidfilepath = /usr/local/mongodb/shard1/log/shard1.pid</span><br><span class="line">dbpath = /usr/local/mongodb/shard1/data</span><br><span class="line">logpath = /usr/local/mongodb/shard1/log/shard1.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line">port = 27001</span><br><span class="line">fork = true</span><br><span class="line">  </span><br><span class="line">#副本集名称</span><br><span class="line">replSet=shard1</span><br><span class="line"> </span><br><span class="line">#declare this is a shard db of a cluster;</span><br><span class="line">shardsvr = true</span><br><span class="line"> </span><br><span class="line">#设置最大连接数</span><br><span class="line">maxConns=20000</span><br></pre></td></tr></table></figure>
+
+<p>启动三台服务器的shard1 server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/local/mongodb/conf/shard1.conf</span><br></pre></td></tr></table></figure>
+
+<p>登陆任意一台服务器，初始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 27001</span><br></pre></td></tr></table></figure>
+
+<p>#####使用admin数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+
+<p>#####定义副本集配置，第三个节点的 “arbiterOnly”:true 代表其为仲裁节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">config = &#123;</span><br><span class="line">_id : &quot;shard1&quot;,</span><br><span class="line">members:[&#123;_id : 0, host : &quot;192.168.22.101:27001&quot; &#125;,</span><br><span class="line">&#123;_id : 1, host : &quot;192.168.22.102:27001&quot; &#125;,</span><br><span class="line">&#123;_id : 2, host : &quot;192.168.22.103:27001&quot;, arbiterOnly: true &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#####初始化副本集配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(config);</span><br></pre></td></tr></table></figure>
+
+<p>设置第二个分片副本集<br>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/mongodb/conf/shard2.conf</span><br></pre></td></tr></table></figure>
+
+<p>#####配置文件内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pidfilepath = /usr/local/mongodb/shard2/log/shard2.pid</span><br><span class="line">dbpath = /usr/local/mongodb/shard2/data</span><br><span class="line">logpath = /usr/local/mongodb/shard2/log/shard2.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line">port = 27002</span><br><span class="line">fork = true</span><br><span class="line">   </span><br><span class="line">#副本集名称</span><br><span class="line">replSet=shard2 </span><br><span class="line">#declare this is a shard db of a cluster;</span><br><span class="line">shardsvr = true</span><br><span class="line"> </span><br><span class="line">#设置最大连接数</span><br><span class="line">maxConns=20000</span><br></pre></td></tr></table></figure>
+
+<p>启动三台服务器的shard2 server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/local/mongodb/conf/shard2.conf</span><br></pre></td></tr></table></figure>
+
+<p>登陆任意一台服务器，初始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 27002</span><br></pre></td></tr></table></figure>
+
+<p>#####使用admin数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+
+<p>#####定义副本集配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">config = &#123;</span><br><span class="line">   _id : &quot;shard2&quot;,</span><br><span class="line">  members : [</span><br><span class="line">      &#123;_id : 0, host : &quot;192.168.22.101:27002&quot;  , arbiterOnly: true &#125;,</span><br><span class="line">     &#123;_id : 1, host : &quot;192.168.22.102:27002&quot; &#125;,</span><br><span class="line">     &#123;_id : 2, host : &quot;192.168.22.103:27002&quot; &#125;</span><br><span class="line">    ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>#####初始化副本集配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(config);</span><br></pre></td></tr></table></figure>
+
+<p>设置第三个分片副本集<br>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/mongodb/conf/shard3.conf</span><br></pre></td></tr></table></figure>
+
+<p>#####配置文件内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pidfilepath = /usr/local/mongodb/shard3/log/shard3.pid</span><br><span class="line">dbpath = /usr/local/mongodb/shard3/data</span><br><span class="line">logpath = /usr/local/mongodb/shard3/log/shard3.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line">port = 27003</span><br><span class="line">fork = true</span><br><span class="line">  </span><br><span class="line">#副本集名称</span><br><span class="line">replSet=shard3</span><br><span class="line"> </span><br><span class="line">#declare this is a shard db of a cluster;</span><br><span class="line">shardsvr = true</span><br><span class="line"> </span><br><span class="line">#设置最大连接数</span><br><span class="line">maxConns=20000</span><br></pre></td></tr></table></figure>
+
+<p>启动三台服务器的shard3 server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/local/mongodb/conf/shard3.conf</span><br></pre></td></tr></table></figure>
+
+<p>登陆任意一台服务器，初始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 27003</span><br></pre></td></tr></table></figure>
+
+<p>#####使用admin数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+
+<p>#####定义副本集配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">config = &#123;</span><br><span class="line">  _id : &quot;shard3&quot;,</span><br><span class="line"> members : [</span><br><span class="line">  &#123;_id : 0, host : &quot;192.168.22.101:27003&quot; &#125;,</span><br><span class="line">      &#123;_id : 1, host : &quot;192.168.22.102:27003&quot; , arbiterOnly: true&#125;,</span><br><span class="line">   &#123;_id : 2, host : &quot;192.168.22.103:27003&quot; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#####初始化副本集配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(config);</span><br></pre></td></tr></table></figure>
+
+<p>###4、配置路由服务器 mongos<br>先启动配置服务器和分片服务器,后启动路由实例启动路由实例:（三台机器）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/mongodb/conf/mongos.conf</span><br></pre></td></tr></table></figure>
+
+<p>#####内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pidfilepath = /usr/local/mongodb/mongos/log/mongos.pid</span><br><span class="line">logpath = /usr/local/mongodb/mongos/log/mongos.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line">port = 20000</span><br><span class="line">fork = true</span><br><span class="line"></span><br><span class="line">#监听的配置服务器,只能有1个或者3个 configs为配置服务器的副本集名字</span><br><span class="line">configdb = configs/192.168.22.101:21000,192.168.22.102:21000,192.168.22.103:21000</span><br><span class="line"> </span><br><span class="line">#设置最大连接数</span><br><span class="line">maxConns=20000</span><br></pre></td></tr></table></figure>
+
+<p>启动三台服务器的mongos server<br>mongos -f /usr/local/mongodb/conf/mongos.conf</p>
+<p>###5、启用分片<br>目前搭建了mongodb配置服务器、路由服务器，各个分片服务器，不过应用程序连接到mongos路由服务器并不能使用分片机制，还需要在程序里设置分片配置，让分片生效。<br>登陆任意一台mongos<br>mongo –port 20000</p>
+<p>#使用admin数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use  admin</span><br><span class="line">#串联路由服务器与分配副本集</span><br><span class="line">sh.addShard(&quot;shard1/192.168.22.101:27001,192.168.22.102:27001,192.168.22.103:27001&quot;)</span><br><span class="line">sh.addShard(&quot;shard2/192.168.22.101:27002,192.168.22.102:27002,192.168.22.103:27002&quot;)</span><br><span class="line">sh.addShard(&quot;shard3/192.168.22.101:27003,192.168.22.102:27003,192.168.22.103:27003&quot;)</span><br><span class="line">#查看集群状态</span><br><span class="line">sh.status()</span><br></pre></td></tr></table></figure>
+
+<p>###6、测试<br>目前配置服务、路由服务、分片服务、副本集服务都已经串联起来了，但我们的目的是希望插入数据，数据能够自动分片。连接在mongos上，准备让指定的数据库、指定的集合分片生效。</p>
+<p>#####指定testdb分片生效<br>db.runCommand( { enablesharding :”testdb”});</p>
+<p>use tested<br>db.table1.ensureIndex({id:1})</p>
+<p>#####指定数据库里需要分片的集合和片键</p>
+<p>db.runCommand( { shardcollection : “testdb.table1”,key : {id: 1} } )</p>
+<p>#####如果是采用hash分片</p>
+<p>#####db.runCommand( { shardcollection : “testdb.table1”,key : {_id: “hashed”} } )</p>
+<p>我们设置testdb的 table1 表需要分片，根据 id 自动分片到 shard1 ，shard2，shard3 上面去。要这样设置是因为不是所有mongodb 的数据库和表 都需要分片！<br>测试分片配置结果<br>mongo  127.0.0.1:20000</p>
+<p>#####使用testdb<br>use  testdb;</p>
+<p>#####插入测试数据<br>for (var i = 1; i &lt;= 100; i++)db.table2.save({id:i,”test1”:”testval1”});</p>
+<p>#####查看分片情况如下，部分无关信息省掉了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">db.table1.stats();</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">        &quot;sharded&quot; : true,</span><br><span class="line">        &quot;ns&quot; : &quot;testdb.table1&quot;,</span><br><span class="line">        &quot;count&quot; : 100000,</span><br><span class="line">        &quot;numExtents&quot; : 13,</span><br><span class="line">        &quot;size&quot; : 5600000,</span><br><span class="line">        &quot;storageSize&quot; : 22372352,</span><br><span class="line">        &quot;totalIndexSize&quot; : 6213760,</span><br><span class="line">        &quot;indexSizes&quot; : &#123;</span><br><span class="line">                &quot;_id_&quot; : 3335808,</span><br><span class="line">                &quot;id_1&quot; : 2877952</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;avgObjSize&quot; : 56,</span><br><span class="line">        &quot;nindexes&quot; : 2,</span><br><span class="line">        &quot;nchunks&quot; : 3,</span><br><span class="line">        &quot;shards&quot; : &#123;</span><br><span class="line">                &quot;shard1&quot; : &#123;</span><br><span class="line">                        &quot;ns&quot; : &quot;testdb.table1&quot;,</span><br><span class="line">                        &quot;count&quot; : 42183,</span><br><span class="line">                        &quot;size&quot; : 0,</span><br><span class="line">                        ...</span><br><span class="line">                        &quot;ok&quot; : 1</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;shard2&quot; : &#123;</span><br><span class="line">                        &quot;ns&quot; : &quot;testdb.table1&quot;,</span><br><span class="line">                        &quot;count&quot; : 38937,</span><br><span class="line">                        &quot;size&quot; : 2180472,</span><br><span class="line">                        ...</span><br><span class="line">                        &quot;ok&quot; : 1</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;shard3&quot; : &#123;</span><br><span class="line">                        &quot;ns&quot; : &quot;testdb.table1&quot;,</span><br><span class="line">                        &quot;count&quot; :18880,</span><br><span class="line">                        &quot;size&quot; : 3419528,</span><br><span class="line">                        ...</span><br><span class="line">                        &quot;ok&quot; : 1</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;ok&quot; : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到数据分到3个分片，各自分片数量为： shard1 “count” : 42183，shard2 “count” : 38937，shard3 “count” : 18880。已经成功了！<br>后期运维<br>启动关闭<br>mongodb的启动顺序是，先启动配置服务器，在启动分片，最后启动mongos.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/local/mongodb/conf/config.conf</span><br><span class="line">mongod -f /usr/local/mongodb/conf/shard1.conf</span><br><span class="line">mongod -f /usr/local/mongodb/conf/shard2.conf</span><br><span class="line">mongod -f /usr/local/mongodb/conf/shard3.conf</span><br><span class="line">mongod -f /usr/local/mongodb/conf/mongos.conf</span><br></pre></td></tr></table></figure>
+
+<p>关闭时，直接killall杀掉所有进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall mongod</span><br><span class="line">killall mongos</span><br></pre></td></tr></table></figure>
+            
+        </div>
+               
         <span class="post-cat">分类：
             
         </span>
@@ -405,8 +557,8 @@ MongoDB的数据库复制增加了冗余，确保了高可用性，简化了管�
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/其他/">其他</a>
-        <span class="badge">(3)</span>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
     <li>
@@ -415,8 +567,8 @@ MongoDB的数据库复制增加了冗余，确保了高可用性，简化了管�
     </li>
     
     <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
     </li>
     
 </ul>
@@ -428,41 +580,41 @@ MongoDB的数据库复制增加了冗余，确保了高可用性，简化了管�
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
-    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
-  
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>

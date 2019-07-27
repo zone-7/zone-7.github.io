@@ -133,6 +133,31 @@
 
     </div>
     <p class="post-meta">
+        <div class="entry">
+               <!--02-->
+                <div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-单元测试"><span class="toc-text">1.14    单元测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-1-配置"><span class="toc-text">1.14.1    配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-2-编写测试代码"><span class="toc-text">1.14.2    编写测试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-3-执行单元测试"><span class="toc-text">1.14.3    执行单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-4-打包测试"><span class="toc-text">1.14.4    打包测试</span></a></li></ol></li></ol>
+</div>
+            
+                <h2 id="1-14-单元测试"><a href="#1-14-单元测试" class="headerlink" title="1.14    单元测试"></a>1.14    单元测试</h2><h3 id="1-14-1-配置"><a href="#1-14-1-配置" class="headerlink" title="1.14.1    配置"></a>1.14.1    配置</h3><p>修改配置文件pom.xml，一般使用idea新建一个SpringBoot web项目时，一般都会自动引入此依赖，如果没有，请手动添加依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-14-2-编写测试代码"><a href="#1-14-2-编写测试代码" class="headerlink" title="1.14.2    编写测试代码"></a>1.14.2    编写测试代码</h3><p>新建一个测试类，测试service中的两个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.SysUserService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.vo.SysUserVo;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.Assert;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloworldApplicationTests</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="keyword">private</span> SysUserService sysUserService;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindByName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      List&lt;SysUserVo&gt; users = sysUserService.findByName(<span class="string">"zone7"</span>);</span><br><span class="line">      System.out.println(<span class="string">"查询到用户数："</span>+users.size());</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSave</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      SysUserVo user = <span class="keyword">new</span> SysUserVo();</span><br><span class="line">      user.setName(<span class="string">"testuser"</span>);</span><br><span class="line">      user.setPassword(<span class="string">"123"</span>);</span><br><span class="line">      user.setPhone(<span class="string">"111111111111"</span>);</span><br><span class="line">      sysUserService.save(user);</span><br><span class="line">      List&lt;SysUserVo&gt; users = sysUserService.findByName(<span class="string">"testuser"</span>);</span><br><span class="line">      Assert.notEmpty(users,<span class="string">"保存失败"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码中使用@Autowired引入你想测试的类，在测试方法上加@Test注解。</p>
+<h3 id="1-14-3-执行单元测试"><a href="#1-14-3-执行单元测试" class="headerlink" title="1.14.3    执行单元测试"></a>1.14.3    执行单元测试</h3><p>通过点击方法前的小标执行测试，操作如下图所示：<br> <img src="https://zone-7.github.io/img/springboot/1.14.3.png" alt="单元测试"></p>
+<h3 id="1-14-4-打包测试"><a href="#1-14-4-打包测试" class="headerlink" title="1.14.4    打包测试"></a>1.14.4    打包测试</h3><p>开发完成之后，有可能我们已经写了一百多个测试用例类，我并不能每个类都点击进去一个个执行，SpringBoot提供了打包测试的方式：用一个类，把所有的测试类整理进去，然后直接运行这个类，所有的测试类都会执行。</p>
+<p>我这里建了两个测试类，分别是EntFileTest,EntFileTest2，现在我打包进TestSuits，让他们一次运行，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.Suite;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by zone7</span></span><br><span class="line"><span class="comment"> * Date 2019/6/2</span></span><br><span class="line"><span class="comment"> * Description:打包测试</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(Suite.class)</span><br><span class="line"><span class="meta">@Suite</span>.SuiteClasses(&#123;SysuserControllerTests.class,SysuserServiceTests.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSuits</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//不用写代码，只需要类顶级注解即可</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>当一个测试类中有1个方法暂时不想测测试，想在打包测试过程中跳过该方法，怎么办？这里有一个忽略注解@Ignore(“not ready yet”)，写在方法上，可以忽略这个测试方法，写在类上，可以忽略这个类。<br> <img src="https://zone-7.github.io/img/springboot/1.14.4.png" alt="单元测试"><br>此时，运行打包测试类TestSuits，SysuserServiceTests.testFindByName()方法就会忽略执行。</p>
+
+            
+        </div>
+               
         <span class="post-cat">分类：
             <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
         </span>
@@ -168,9 +193,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.7SpringBoot 整合RabbitMQ）/">
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.8SpringBoot 整合MongoDB）/">
             
-                1.7 Springboot&amp;VUE开发实践（SpringBoot 整合RabbitMQ）
+                1.8 Springboot&amp;VUE开发实践（SpringBoot整合MongoDB）
             
         </a>
     </span>
@@ -278,8 +303,8 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/其他/">其他</a>
-        <span class="badge">(3)</span>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
     </li>
     
     <li>
@@ -288,8 +313,8 @@
     </li>
     
     <li>
-        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
-        <span class="badge">(18)</span>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
     </li>
     
 </ul>
@@ -301,41 +326,41 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
-    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
-  
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
-  
-    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
-  
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
-    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
-  
-    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
   
 </div>
     </section>
