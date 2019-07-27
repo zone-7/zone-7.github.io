@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>1.8 Springboot&amp;VUE开发实践（SpringBoot整合MongoDB） | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.8SpringBoot 整合MongoDB）/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.8SpringBoot 整合MongoDB）/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.8SpringBoot 整合MongoDB）/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>1.8 Springboot&amp;VUE开发实践（SpringBoot整合MongoDB）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-07-25T16:00:00.000Z">2019-07-26</time>
+    </p>
+    <div class="post-content">
+        <h2 id="1-8-整合MongoDB"><a href="#1-8-整合MongoDB" class="headerlink" title="1.8    整合MongoDB"></a>1.8    整合MongoDB</h2><h3 id="1-8-1-MongoDB简介"><a href="#1-8-1-MongoDB简介" class="headerlink" title="1.8.1    MongoDB简介"></a>1.8.1    MongoDB简介</h3><p>MongoDB（来自于英文单词“Humongous”，中文含义为“庞大”）是可以应用于各种规模的企业、各个行业以及各类应用程序的开源数据库。基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。MongoDB是一个高性能，开源，无模式的文档型数据库，是当前NoSql数据库中比较热门的一种。<br>MongoDB是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。他支持的数据结构非常松散，是类似json的bjson格式，因此可以存储比较复杂的数据类型。Mongo最大的特点是他支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。<br>传统的关系数据库一般由数据库（database）、表（table）、记录（record）三个层次概念组成，MongoDB是由数据库（database）、集合（collection）、文档对象（document）三个层次组成。MongoDB对于关系型数据库里的表，但是集合中没有列、行和关系概念，这体现了模式自由的特点。<br>MongoDB 在实际应用中我们最常用到的是collection和gridFS两个功能，collection一般用于存储bjson数据，gridFS用于存储文件。</p>
+<h3 id="1-8-2-配置工程"><a href="#1-8-2-配置工程" class="headerlink" title="1.8.2    配置工程"></a>1.8.2    配置工程</h3><p>在pox.xml文件中添加spring-boot-starter-data-mongodb引用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>application-dev.properties 增加mongoDB配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#==================  mongoDB 配置 ===================#</span><br><span class="line">spring.data.mongodb.host=localhost</span><br><span class="line">spring.data.mongodb.port=27017</span><br><span class="line">spring.data.mongodb.database=test</span><br></pre></td></tr></table></figure>
+
+<p>开发机遇注解的配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.config.mongodb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mongodb.client.gridfs.GridFSBucket;</span><br><span class="line"><span class="keyword">import</span> com.mongodb.client.gridfs.GridFSBuckets;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.MongoDbFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MongoDB配置类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/5/7</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoDbConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MongoDbFactory mongoDbFactory;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GridFSBucket <span class="title">gridFSBucket</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> GridFSBuckets.create(mongoDbFactory.getDb());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-8-3-案例开发"><a href="#1-8-3-案例开发" class="headerlink" title="1.8.3    案例开发"></a>1.8.3    案例开发</h3><p>开发服务层代码，代码中引入三个对象，分别是  MongoTemplate 、GridFsTemplate、GridFSBucket，MongoTemplate主要用于操作mongodb的collection，GridFsTemplate和GridFSBucket主要操作mongodb的GridFS文件系统;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mongodb.client.gridfs.GridFSBucket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mongodb.client.gridfs.GridFSDownloadStream;</span><br><span class="line"><span class="keyword">import</span> com.mongodb.client.gridfs.model.GridFSFile;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.config.exception.GlobalException;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.pojo.SysUser;</span><br><span class="line"><span class="keyword">import</span> org.bson.types.ObjectId;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.core.MongoTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.core.query.Criteria;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.core.query.Query;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.core.query.Update;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.gridfs.GridFsResource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.gridfs.GridFsTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StreamUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 描述:</span></span><br><span class="line"><span class="comment"> * mongo</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/8/9 10:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoDBServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(MongoDBServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MongoTemplate mongoTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GridFSBucket gridFSBucket;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GridFsTemplate gridFsTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveObj</span><span class="params">(SysUser user)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB save start]"</span>);</span><br><span class="line">        mongoTemplate.save(user);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询所有</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;SysUser&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB find start]"</span>);</span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.findAll(SysUser.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 根据id查询</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SysUser <span class="title">getById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB find start]"</span>);</span><br><span class="line">        Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"_id"</span>).is(id));</span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.findOne(query, SysUser.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据名称查询</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SysUser <span class="title">getBookByName</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB find start]"</span>);</span><br><span class="line">        Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"username"</span>).is(username));</span><br><span class="line">        <span class="keyword">return</span> mongoTemplate.findOne(query, SysUser.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(SysUser user)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB update start]"</span>);</span><br><span class="line">        Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"_id"</span>).is(user.getId()));</span><br><span class="line">        Update update = <span class="keyword">new</span> Update().set(<span class="string">"password"</span>, user.getPassword())</span><br><span class="line">                .set(<span class="string">"name"</span>, user.getName())</span><br><span class="line">                .set(<span class="string">"updateTime"</span>, <span class="keyword">new</span> Date());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//updateFirst 更新查询返回结果集的第一条</span></span><br><span class="line">        mongoTemplate.updateFirst(query, update, SysUser.class);</span><br><span class="line">        <span class="comment">//updateMulti 更新查询返回结果集的全部</span></span><br><span class="line"><span class="comment">//        mongoTemplate.updateMulti(query,update,SysUser.class);</span></span><br><span class="line">        <span class="comment">//upsert 更新对象不存在则去添加</span></span><br><span class="line"><span class="comment">//        mongoTemplate.upsert(query,update,SysUser.class);</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 删除对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(SysUser user)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB delete start]"</span>);</span><br><span class="line">        mongoTemplate.remove(user);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id删除</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteById</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"---------------------&gt;[MongoDB delete start]"</span>);</span><br><span class="line">        <span class="comment">//findOne</span></span><br><span class="line">        SysUser book = getById(id);</span><br><span class="line">        <span class="comment">//delete</span></span><br><span class="line">        delete(book);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> input</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">saveFile</span><span class="params">(<span class="keyword">byte</span>[] input,String name)</span></span>&#123;</span><br><span class="line">        ObjectId objectId=gridFsTemplate.store(<span class="keyword">new</span> ByteArrayInputStream(input) ,name);</span><br><span class="line">        String s = objectId.toString();</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载文件</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span>[] loadFile(String id)   &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Query query = Query.query(Criteria.where(<span class="string">"_id"</span>).is(id));</span><br><span class="line">            GridFSFile gfsFile = gridFsTemplate.findOne(Query.query(Criteria.where(<span class="string">"_id"</span>).is(id)));</span><br><span class="line"></span><br><span class="line">            String filename = gfsFile.getFilename();</span><br><span class="line"></span><br><span class="line">            logger.info(<span class="string">"加载mongodb gf 文件名："</span>+filename);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//打开流下载对象</span></span><br><span class="line">            GridFSDownloadStream downloadStream = gridFSBucket.openDownloadStream(gfsFile.getObjectId());</span><br><span class="line">            <span class="comment">//获取流对象</span></span><br><span class="line">            GridFsResource gridFsResource = <span class="keyword">new</span> GridFsResource(gfsFile, downloadStream);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> StreamUtils.copyToByteArray(gridFsResource.getInputStream());</span><br><span class="line">        &#125;<span class="keyword">catch</span>(IOException e)&#123;</span><br><span class="line">            logger.error(<span class="string">"读取mongodb文件错误"</span>,e);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> GlobalException(<span class="string">"读取mongodb文件错误"</span>,e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>开发一个控制层用于测试调用服务层。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.response.ResponseData;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.pojo.SysUser;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.MongoDBService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.service.RabbitService;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.sys.vo.SysUserVo;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.BeanUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * mongodb 测试Controller</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2019/06/17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/mongo"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoDBController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MongoDBService mongoDBService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/save"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">save</span><span class="params">(SysUserVo userVo)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        SysUser user =   SysUser.builder().build();</span><br><span class="line"></span><br><span class="line">        BeanUtils.copyProperties(userVo,user);</span><br><span class="line">        mongoDBService.saveObj(user);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseData.successMessage(<span class="string">"保存成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/findAll"</span> )</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">save</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;SysUser&gt; users  = mongoDBService.findAll();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseData.success(users);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/saveFile"</span> )</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">saveFile</span><span class="params">(String content,String name)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        String id = mongoDBService.saveFile(content.getBytes(),name);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseData.success(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/loadFile"</span> )</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseData <span class="title">loadFile</span><span class="params">( String id)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] content = mongoDBService.loadFile(id);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseData.success(<span class="keyword">new</span> String(content));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来需要确保mongodb已经启动，然后启动工程，使用Postman进行测试：<br><img src="https://zone-7.github.io/img/springboot/1.8.3a.png" alt="mongo1"><br>查看mongo数据库发现已经自动创建了一个collection并增加了一条信息：<br><img src="https://zone-7.github.io/img/springboot/1.8.3b.png" alt="mongo1"><br>接着我们再继续测试剩下的几个接口：<br>加载所有对象<br><img src="https://zone-7.github.io/img/springboot/1.8.3c.png" alt="mongo1"></p>
+<p>保存文件，这里为了简化操作，使用字符串作为文件内容来进行测试。<br> <img src="https://zone-7.github.io/img/springboot/1.8.3d.png" alt="mongo1"><br>文件保存成功，我们打开mongo客户端可以查看到数据库多了一个fs的buckets<br> <img src="https://zone-7.github.io/img/springboot/1.8.3e.png" alt="mongo1"><br>最后我们再做一次加载文件测试<br> <img src="https://zone-7.github.io/img/springboot/1.8.3f.png" alt="mongo1"></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Springboot/" title="Springboot">Springboot</a> / 
+    
+        <a href="/tags/VUE/" title="VUE">VUE</a> / 
+    
+        <a href="/tags/mongodb/" title="mongodb">mongodb</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.15SpringBoot 应用部署）/">
+            
+                1.15 Springboot&amp;VUE开发实践（SpringBoot应用部署）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）/">
+            
+                1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程）
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'springboot/2019-07-26-Springboot&VUE开发实践（1.8SpringBoot 整合MongoDB）' || '2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.8SpringBoot 整合MongoDB）/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

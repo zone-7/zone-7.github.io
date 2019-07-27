@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程） | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.4SpringBoot 第一个工程 ）/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.4SpringBoot 第一个工程 ）/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.4SpringBoot 第一个工程 ）/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-07-25T16:00:00.000Z">2019-07-26</time>
+    </p>
+    <div class="post-content">
+        <h2 id="1-4-第一个工程"><a href="#1-4-第一个工程" class="headerlink" title="1.4    第一个工程"></a>1.4    第一个工程</h2><h3 id="1-4-1-step1-创建springboot项目HelloWorld"><a href="#1-4-1-step1-创建springboot项目HelloWorld" class="headerlink" title="1.4.1    step1:创建springboot项目HelloWorld"></a>1.4.1    step1:创建springboot项目HelloWorld</h3><ul>
+<li><p>（1）打开File-&gt;New-&gt;Module…新建模块<br><img src="https://zone-7.github.io/img/springboot/1.4.1a.png" alt="new1"></p>
+</li>
+<li><p>（2）选择Spring Initializr ，注意SDK使用1.8，点击Next<br><img src="https://zone-7.github.io/img/springboot/1.4.1b.png" alt="new2"></p>
+</li>
+<li><p>（3）设置工程Group和Artifact，点击Next<br><img src="https://zone-7.github.io/img/springboot/1.4.1c.png" alt="new3"></p>
+</li>
+<li><p>（4）添加Spring Web Starter依赖，点击Next<br><img src="https://zone-7.github.io/img/springboot/1.4.1d.png" alt="new4"></p>
+</li>
+<li><p>（5）保存工程<br><img src="https://zone-7.github.io/img/springboot/1.4.1e.png" alt="new5"></p>
+</li>
+<li><p>（6）项目结构如下图所示：<br><img src="https://zone-7.github.io/img/springboot/1.4.1f.png" alt="new6"></p>
+</li>
+</ul>
+<h3 id="1-4-2-Step2-理解工程结构"><a href="#1-4-2-Step2-理解工程结构" class="headerlink" title="1.4.2    Step2:理解工程结构"></a>1.4.2    Step2:理解工程结构</h3><p>创建完工程之后，我们可以看到工程目录中包含了一个完整的结构，比较重要的目录包括：src、test两个目录分别表示源代码和测试代码所在目录， src/main/java 为java代码路径，其中HelloworldApplication 是App 启动类。src/main/resources/application.properties 为工程配置文件，大多数情况下工程只需要一个配置文件即可。另外，在根目录下我们看到一个pom.xml ，这个文件是maven工程的重要配置文件，主要用于配置工程信息、依赖包、构建插件等（关于Maven知识点可上网查资料，这里不作深入介绍）。我们认真查看一下pom文件有利于理解springBoot的依赖关系：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zone7.demo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>helloworld<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">name</span>&gt;</span>helloworld<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>从pom文件可确认我们的工程继承至spring-boot-starter-parent的版本号为：2.1.5.RELEASE，SpringBoot的主要依赖包为：spring-boot-starter-web</p>
+<h3 id="1-4-3-Step3-配置工程"><a href="#1-4-3-Step3-配置工程" class="headerlink" title="1.4.3    Step3:配置工程"></a>1.4.3    Step3:配置工程</h3><ul>
+<li><p>（1）打开配置文件application.properties，Springboot也兼容application.yml<br>录入：</p>
+<pre><code>**spring.profiles.active=dev**</code></pre><p>spring.profiles.active=dev表示运行模式为开发模式，系统将使用application-dev.properties配置文件。</p>
+</li>
+<li><p>（2）在src/main/resources目录下新建application-dev.properties 配置文件，并添加配置：</p>
+<pre><code>**server.port=8080   #端口号为8080**</code></pre></li>
+</ul>
+<h3 id="1-4-4-Step4-开发测试控制层"><a href="#1-4-4-Step4-开发测试控制层" class="headerlink" title="1.4.4    Step4:开发测试控制层"></a>1.4.4    Step4:开发测试控制层</h3><p>在com.zone7.demo.helloworld 下创建包sys.controller，这里sys 表示子系统子模块的名称，在实际项目中可以根据功能模块划分包结构。在controller包中新建TestController类。<br>  <img src="https://zone-7.github.io/img/springboot/1.4.4.png" alt="controller"></p>
+<p>编写测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.sys.controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2019/06/17</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/show/&#123;name&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(@PathVariable String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi, "</span> +name +<span class="string">" , 你好！我是 zone7"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SpringBoot通过给类添加注解 @RestController 表示Java类为控制层类；通过给方法添加@GetMapping 、@PostMapping、@DeleteMapping、@PutMapping 等注解表示http协议的四个操作。也可以给类添加@RequestMapping注解，表示该类下面所有路径都是以该注解的路径开始。例如上例： @RequestMapping(“/test”)表示TestController类的所有方法对应的url都是以/test开始，<br>show方法对应的url为：<br> <strong><a href="http://IP:PORT/test/show/{name}。" target="_blank" rel="noopener">http://IP:PORT/test/show/{name}。</a></strong><br>Mapping注解中的参数{name} 可映射为方法入参。</p>
+<h3 id="1-4-5-Step5-运行工程"><a href="#1-4-5-Step5-运行工程" class="headerlink" title="1.4.5    Step5:运行工程"></a>1.4.5    Step5:运行工程</h3><ul>
+<li>(1)java 运行HelloworldApplication</li>
+<li>(2)打开浏览器访问控制层，效果如下图所示：<br><img src="https://zone-7.github.io/img/springboot/1.4.5.png" alt="res"></li>
+</ul>
+<h3 id="1-4-6-总结"><a href="#1-4-6-总结" class="headerlink" title="1.4.6    总结"></a>1.4.6    总结</h3><p>通过第一个工程的学习，我们了解到Springboot的开发过程主要就是配置、开发、测试三个内容：</p>
+<ul>
+<li>（1）    配置<ul>
+<li>pom配置：通过添加依赖增加相关的组件功能。</li>
+<li>application-dev.properties配置：默认情况下springboot的配置文件入口是application.yml 或者application.properties，这里我们对开发过程和生产过程的配置文件进行了分离，后续的案例开发也将延用这个模式。</li>
+<li>注解配置：通过注解配置系统的安全过滤、日志过滤、全局异常等功能。</li>
+</ul>
+</li>
+<li>（2）  业务模块开发<br>根据开发规范开发持久层、服务层、控制层（不同行业、不同团队制定的开发规范也许不同）</li>
+<li>（3）    测试</li>
+</ul>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Springboot/" title="Springboot">Springboot</a> / 
+    
+        <a href="/tags/VUE/" title="VUE">VUE</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.8SpringBoot 整合MongoDB）/">
+            
+                1.8 Springboot&amp;VUE开发实践（SpringBoot整合MongoDB）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.2SpringBoot 开发规范 ）/">
+            
+                1.2 Springboot&amp;VUE开发实践（SpringBoot开发规范）
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）' || '2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

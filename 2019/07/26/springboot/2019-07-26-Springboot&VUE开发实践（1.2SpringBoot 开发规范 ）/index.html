@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>1.2 Springboot&amp;VUE开发实践（SpringBoot开发规范） | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.2SpringBoot 开发规范 ）/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.2SpringBoot 开发规范 ）/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.2SpringBoot 开发规范 ）/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>1.2 Springboot&amp;VUE开发实践（SpringBoot开发规范）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-07-25T16:00:00.000Z">2019-07-26</time>
+    </p>
+    <div class="post-content">
+        <h2 id="1-2-SpringBoot开发规范"><a href="#1-2-SpringBoot开发规范" class="headerlink" title="1.2    SpringBoot开发规范"></a>1.2    SpringBoot开发规范</h2><h3 id="1-2-1-开发规范的作用"><a href="#1-2-1-开发规范的作用" class="headerlink" title="1.2.1    开发规范的作用"></a>1.2.1    开发规范的作用</h3><p>  开发规范是基于某种特定的开发语言和架构，进行开发的基本原则和推荐方式，在开发过程中有迷惑时进行参照的指南。 开发规范不同于编码规则，但一定要包含编码规则。</p>
+<p>编码规范有以下几点意义：</p>
+<ul>
+<li>(1)    编码规范可以最大限度的提高团队开发的合作效率。</li>
+<li>(2)    编码规范可以尽可能的减少一个软件的维护成本，并且几乎没有任何一个软件，在其整个生命周期中，均由最初的开发人员来维护 。</li>
+<li>(3)    编码规范可以改善软件的可读性，可以让开发人员尽快而彻底地理解新的代码 </li>
+<li>(4)    规范性编码还可以让开发人员养成好的编码习惯，甚至锻炼出更加严谨的思维</li>
+</ul>
+<p>本节关于开发规范的内容摘录自互联网上搜索到的经验，同时结合实际工作中的理解所整理，由于各个团队的开发制度或公司要求有所不同，开发规范不一定适用于所有团队，以下内容仅仅只是作为学习使用SpringBoot框架进行项目开发的参考。</p>
+<h3 id="1-2-2-代码仓库规范"><a href="#1-2-2-代码仓库规范" class="headerlink" title="1.2.2    代码仓库规范"></a>1.2.2    代码仓库规范</h3><h3 id="1-2-2-1-公共组件"><a href="#1-2-2-1-公共组件" class="headerlink" title="1.2.2.1    公共组件"></a>1.2.2.1    公共组件</h3><p>公共组件通常指Java库，提供特定问题的处理程序包。公共组件的命名规范为：</p>
+<ul>
+<li>(1)    分组编号：com.companyname.library 固定取值 </li>
+<li>(2)    组件名称：name   name根据组件名称定义 </li>
+<li>(3)    组件版本：x.y.z   x.y.z根据组件实际版本情况定义</li>
+</ul>
+<h4 id="1-2-2-2-服务组件"><a href="#1-2-2-2-服务组件" class="headerlink" title="1.2.2.2    服务组件"></a>1.2.2.2    服务组件</h4><p>服务组件通常指可以独立部署，运行，维护的服务程序包，应用组件的命名规范为：</p>
+<ul>
+<li>(1)    分组编号：com.companyname.server固定取值 </li>
+<li>(2)    组件名称：name  name根据组件名称定义 </li>
+<li>(3)    组件版本：x.y.z   x.y.z根据组件实际版本情况定义</li>
+</ul>
+<h4 id="1-2-2-3-开发环境"><a href="#1-2-2-3-开发环境" class="headerlink" title="1.2.2.3    开发环境"></a>1.2.2.3    开发环境</h4><ul>
+<li>(1)    开发环境：JDK1.8+ </li>
+<li>(2)    开发工具：IntelliJ IDEA 2017（安装Lombok Plugin） </li>
+<li>(3)    构建工具：Maven3.x </li>
+<li>(4)    代码管理工具：Git /TortoiseGit，根据公司或者组织统一配置管理（有得公司使用SVN）。</li>
+</ul>
+<p>本文所介绍的SpringBoot示例都是基于以下环境制作：</p>
+<ul>
+<li><p>开发工具：IDEA<br>可从官网下载<a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">https://www.jetbrains.com/idea/download/</a><br><img src="https://zone-7.github.io/img/springboot/1.2.2.3.1.png" alt="IDEA"></p>
+</li>
+<li><p>Java<br>JDK版本号：1.8</p>
+</li>
+<li><p>Maven<br>Maven版本号：3.5.2</p>
+<p><img src="https://zone-7.github.io/img/springboot/1.2.2.3.png" alt="maven"></p>
+</li>
+</ul>
+<h3 id="1-2-3-工程结构规范"><a href="#1-2-3-工程结构规范" class="headerlink" title="1.2.3    工程结构规范"></a>1.2.3    工程结构规范</h3><p>一个工程对应代码仓库中的一个仓库，项目结构是指一个基于Maven创建的项目目录结构。公共组件项目，通常会创建一个Maven普通项目。服务组件项目，通常会创建一个Maven聚合项目，并在聚合项目目录下创建多个继承Maven聚合项目的Maven模块，它们一起作为服务组件项目的组成部分。</p>
+<ul>
+<li>(1)    工程名称<br>使用英文作为仓库、项目、项目根目录、包结构、配置文件、代码文件、组件（公共组件，服务组件）的名称。使用中文作为用于代码仓库描述、模块功能描述、类描述、方法描述等。  </li>
+</ul>
+<p>Maven工程的命名、版本以及描述信息如：<br> <img src="https://zone-7.github.io/img/springboot/1.2.3.png" alt="project"></p>
+<ul>
+<li><p>(2)    模块命名<br>模块名称：{项目名称}-{模块名称} 模块名称简洁体现职责 ，使用模块名字作为模块组件的名称。例如：系统管理模块名称：sys</p>
+</li>
+<li><p>(3)    项目目录<br>项目目录遵循Maven约定目录格式</p>
+</li>
+<li><p>(1)    源码目录指：{项目目录}/src/main/ </p>
+</li>
+<li><p>(2)    打包定义目录：src/main/assembly </p>
+</li>
+<li><p>(3)    代码目录：src/main/java </p>
+</li>
+<li><p>(4)    资源目录：src/main/resources </p>
+</li>
+<li><p>(5)    数据库脚本归档：/db</p>
+</li>
+<li><p>(6)    内部依赖数据归档：/data</p>
+</li>
+<li><p>(7)    文档目录：src/main/docs </p>
+</li>
+<li><p>(8)    脚本目录：src/main/bin</p>
+</li>
+</ul>
+<h3 id="1-2-4-编码规范"><a href="#1-2-4-编码规范" class="headerlink" title="1.2.4    编码规范"></a>1.2.4    编码规范</h3><h4 id="1-2-4-1-包规范"><a href="#1-2-4-1-包规范" class="headerlink" title="1.2.4.1    包规范"></a>1.2.4.1    包规范</h4><p>包规范一般包含以下部分，有的团队也在组织内部自定义一个适应于团队的包命名规范。</p>
+<ul>
+<li>(1)    项目基本包：com.company.{项目英文名（较长时适当简化）}.{模块名（可选）} </li>
+<li>(2)    config：配置类 </li>
+<li>(3)    startup：与服务启动相关的类 </li>
+<li>(4)    client：提供客户端实现的相关类 </li>
+<li>(5)    common：公共类，定义常量类，通用组件</li>
+<li>(6)    entity: 数据库相关的实体类 ，有得使用pojo</li>
+<li>(7)    model:数据模型类(参数模型，数据传输模型等) ，有的使用vo</li>
+<li>(8)    controller:控制层接口 </li>
+<li>(9)    service: 服务层 </li>
+<li>(10)    dao：数据库访问层</li>
+<li>(11)    util： 工具类</li>
+</ul>
+<h4 id="1-2-4-2-日志记录"><a href="#1-2-4-2-日志记录" class="headerlink" title="1.2.4.2    日志记录"></a>1.2.4.2    日志记录</h4><p>系统统一使用SLF4j接口</p>
+<h4 id="1-2-4-3-异常处理"><a href="#1-2-4-3-异常处理" class="headerlink" title="1.2.4.3    异常处理"></a>1.2.4.3    异常处理</h4><p>一般情况下系统主要处理两类异常：</p>
+<ul>
+<li>(1)    运行时异常：通过参数检查等方式避免或抛出运行时异常，日志记录 </li>
+<li>(2)    检查异常：检查异常需要捕获，处理，日志记录<br>在我们的示例工程代码里，我们定义了以下几个类别的业务异常：</li>
+<li>(1)    AddOPException：增加操作异常</li>
+<li>(2)    ConfigException：配置异常</li>
+<li>(3)    DeleteOPException：删除操作异常</li>
+<li>(4)    DuplicationException：重复异常</li>
+<li>(5)    ModifyPasswordException：修改密码异常</li>
+<li>(6)    NoResultException： 没有结果异常</li>
+<li>(7)    ParamException：参数异常</li>
+<li>(8)    RecoverOPException：覆盖异常</li>
+<li>(9)    UpdateOPException：更新异常<br>异常类一般为RuntimeException，源代代码如下所示：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.config.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.response.ResponseCode;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * GlobalException</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span>: 2019.02.14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ResponseCode responseCode = ResponseCode.ERROR;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlobalException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlobalException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlobalException</span><span class="params">(String message, Throwable cause)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message, cause);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlobalException</span><span class="params">(Throwable cause)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(cause);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">GlobalException</span><span class="params">(String message, Throwable cause, <span class="keyword">boolean</span> enableSuppression, <span class="keyword">boolean</span> writableStackTrace)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message, cause, enableSuppression, writableStackTrace);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zone7.demo.helloworld.commons.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.commons.response.ResponseCode;</span><br><span class="line"><span class="keyword">import</span> com.zone7.demo.helloworld.config.exception.GlobalException;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ParamException</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zone7</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span>: 2019.02.14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamException</span> <span class="keyword">extends</span> <span class="title">GlobalException</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ResponseCode responseCode = ResponseCode.ERROR_PARAM_ILLGAL;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParamException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-4-4-接口定义"><a href="#1-2-4-4-接口定义" class="headerlink" title="1.2.4.4    接口定义"></a>1.2.4.4    接口定义</h4><ul>
+<li><p>(1)    原则</p>
+<ul>
+<li>接口地址定义表明用意</li>
+<li>接口地址定义清晰，简洁，无歧义</li>
+<li>同一个服务组件的接口定义具有一致性</li>
+</ul>
+</li>
+<li><p>(2)    格式 </p>
+<ul>
+<li>控制类的顶层地址格式:/{顶层分类名}，例如：/sys/user系统管理模块下用户管理相关的接口顶层地址 </li>
+<li>接口定义使用Swagger的API注解说明 </li>
+<li>标注完整的请求信息，请求方法，请求地址，参数可选性，接口描述</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>(3)    请求方式 </p>
+<ul>
+<li>GET URL-Params </li>
+<li>POST Form-Data </li>
+<li>POST RequestBody(JSON格式) </li>
+<li>POST Mulitpart</li>
+</ul>
+</li>
+<li><p>(4)    响应方式 </p>
+<ul>
+<li>统一的响应模型</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-4-5-辅助工具"><a href="#1-2-4-5-辅助工具" class="headerlink" title="1.2.4.5    辅助工具"></a>1.2.4.5    辅助工具</h4><pre><code>-    字符串处理：apache common-lang3 
+-    时间日期处理：joda-time 
+-    JSON处理：Gson，Fastjson 
+-    集合扩展工具：guava 
+-    文件和流处理：commons-io 
+-    编解码：commons-codec 
+-    建议：尽可能使用开源组件</code></pre><h4 id="1-2-4-6-代码注释"><a href="#1-2-4-6-代码注释" class="headerlink" title="1.2.4.6    代码注释"></a>1.2.4.6    代码注释</h4><p>代码注释是</p>
+<ul>
+<li>(1)    类，接口，枚举顶层注释 </li>
+<li>(2)    接口方法注释 </li>
+<li>(3)    静态方法注释 </li>
+<li>(4)    公开方法注释 </li>
+<li>(5)    类的属性字段注释 </li>
+<li>(6)    常量注释 </li>
+<li>(7)    不限于以上</li>
+</ul>
+<p>例如：<br> <img src="https://zone-7.github.io/img/springboot/1.2.4.6.png" alt="注释"></p>
+<h4 id="1-2-4-7-代码控制规范"><a href="#1-2-4-7-代码控制规范" class="headerlink" title="1.2.4.7    代码控制规范"></a>1.2.4.7    代码控制规范</h4><ul>
+<li><p>(1)    拉取原则<br>强制每日开始工作拉取，提交之前拉取。</p>
+</li>
+<li><p>(2)    提交原则 </p>
+</li>
+</ul>
+<ul>
+<li>强制要求提交代码必须构建成功（编译，打包成功） </li>
+<li>提交代码必须完整（例如：少提文件） </li>
+<li>提交代码必须忽略到本地临时文件（例如：target, logs, .idea, *.iml,dist 等）</li>
+<li>要求每完成一个功能就进行提交 </li>
+<li>每修改完一个Bug就进行提交 </li>
+<li>如有冲突，要求解决冲突完之后才可提交 </li>
+<li>建议每日结束工作提交</li>
+</ul>
+<ul>
+<li>(3)    提交注释<br>要求提交时使用中文填写注释，注释的内容必须反映本次提交变更情况<br>注释描述内容需要添加前缀，前缀如下： </li>
+</ul>
+<ul>
+<li>[创建] 通常在项目创建时使用 </li>
+<li>[新增] </li>
+<li>[修改] </li>
+<li>[删除] </li>
+<li>[修复-number] 修复Bug使用，number是Bug编号</li>
+</ul>
+<h4 id="1-2-4-8-构建规范"><a href="#1-2-4-8-构建规范" class="headerlink" title="1.2.4.8    构建规范"></a>1.2.4.8    构建规范</h4><ul>
+<li>(1)    公共组件构建规范 </li>
+<li>(1)    构建输出组件包 </li>
+<li>(2)    构建输出组件源码包 </li>
+<li>(3)    构建发布到公司私有仓库</li>
+<li>(4)    服务组件构建规范 </li>
+<li>(5)    服务组件包命名：{组件名称}-{版本号}-bin.zip </li>
+<li>(6)    构建输出到工程根目录下的target/{组件名称}-{yyyyMMddHH}目录</li>
+</ul>
+<h3 id="1-2-5-测试规范"><a href="#1-2-5-测试规范" class="headerlink" title="1.2.5    测试规范"></a>1.2.5    测试规范</h3><p>在制定测试规范前，我们先了解下测试的概念。软件测试的对象包括软件需求、概要设计、详细设计、软件运行环境、可运行程序和软件源代码等。软件测试包括质量、人员、资源、技术和流程五大要素，以及测试覆盖率和测试效率两个目标。<br>软件测试一般分为4个阶段：单元测试、集成测试、系统测试、验收测试。</p>
+<ul>
+<li>(1)    单元测试：测试系统最小可验证单元，发现BUG，确保符合设计要求。单元测试可以通过编写测试代码实现单元测试，也可以使用postman、浏览器等工具测试开发完的模块功能。</li>
+<li>(2)    集成测试：在单元测试的基础上，把软件单元按照软件概要设计规格说明的规格要求，组装成模块、子系统或系统的过程中各部分工作是否达到或实现相应技术指标及要求。集成测试是测试各个单元模块之间的接口，系统测试是测试整个系统的功能和性能；</li>
+<li>(3)    系统测试：将经过集成测试的软件，作为计算机系统的一部分，与系统中其他部分结合起来，在实际运行环境下进行一系列严格有效的测试，以发现软件潜在的问题，保证系统的正常运行。</li>
+<li>(4)    验收测试：也称交付测试，是针对用户需求、业务流程进行的正式的测试，以确定系统是否满足验收标准，由用户、客户或其他授权机构决定是否接受系统。验收测试包括alpha测试和beta测试，alpha测试是由开发者进行的软件测试，beta测试是由用户在脱离开发环境下进行的软件测试。<br>SpringBoot的测试需要在Pom 添加spring-boot-starter-test和Junit依赖。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>测试类统一放在src/test目录下。<br> <img src="https://zone-7.github.io/img/springboot/1.2.4.8.png" alt="目录结构"></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Springboot/" title="Springboot">Springboot</a> / 
+    
+        <a href="/tags/VUE/" title="VUE">VUE</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）/">
+            
+                1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.3SpringBoot 注解 ）/">
+            
+                1.3 Springboot&amp;VUE开发实践（SpringBoot注解）
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'springboot/2019-07-26-Springboot&VUE开发实践（1.2SpringBoot 开发规范 ）' || '2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.2SpringBoot 开发规范 ）/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

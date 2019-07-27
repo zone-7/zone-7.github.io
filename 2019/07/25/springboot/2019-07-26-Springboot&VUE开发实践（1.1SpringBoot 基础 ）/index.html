@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>1.1 Springboot&amp;VUE开发实践（SpringBoot基础） | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/07/25/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.1SpringBoot 基础 ）/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/07/25/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.1SpringBoot 基础 ）/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/07/25/springboot/2019-07-26-Springboot&amp;VUE开发实践（1.1SpringBoot 基础 ）/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>1.1 Springboot&amp;VUE开发实践（SpringBoot基础）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-07-24T16:00:00.000Z">2019-07-25</time>
+    </p>
+    <div class="post-content">
+        <h2 id="1-1-SpringBoot-基础"><a href="#1-1-SpringBoot-基础" class="headerlink" title="1.1    SpringBoot 基础"></a>1.1    SpringBoot 基础</h2><h3 id="1-1-1-Spring框架介绍"><a href="#1-1-1-Spring框架介绍" class="headerlink" title="1.1.1    Spring框架介绍"></a>1.1.1    Spring框架介绍</h3><p> Spring是一个开源Java轻量级框架。Spring是为了解决企业级应用开发的复杂性而创建的，使用Spring可以让简单的JavaBean实现之前只有EJB才能完成的事情。但是Spring不仅仅局限于服务器端开发，也为 Java应用提高了简单性、可测试性和松耦合性等。Spring已经集成了20多个模块，这些模块主要被分如下图所示的核心容器、数据访问/集成,、Web、AOP、工具、消息和测试等模块。Spring 框架如下图所示：<br> <img src="https://zone-7.github.io/img/springboot/arc.png" alt="总体架构"></p>
+<ul>
+<li><p>(1)    Core Container 核心容器<br>核心部分分为4大块，spring-core, spring-beans, spring-context, spring-expression. 其中core和bean是整个框架的核心，提供了基础的DI（依赖注入）和IOC（控制反转）功能。 Context建立在core和beans模块之上，提供一种类似JNDI且以框架的方式来操作对象的方式。Context模块从beans模块继承它的功能同时增加了国际化支持，如资源绑定等，同时，Context模块也支持JavaEE功能，如EJB，JMX和基本的远程调用。ApplicationContext接口是context模块的焦点。expression是一种很强大的expression language，支持在运行时查询和操作对象的属性，我们会在后面的文章中举些例子来说明spring expression language的用法。</p>
+</li>
+<li><p>(2)    AOP and instrumentation<br>Aop模块提供了面向切面编程的实现，和AspectJ集成。</p>
+</li>
+<li><p>(3)    Messaging<br>Messaging是spring4新增加的模块，包含了一部分主要的基于message的应用的实现。</p>
+</li>
+<li><p>(4)    Data Access/Integration<br>Data access顾名思义，是spring对数据层提供的支持，是功能比较丰富的模块。提供了包括JDBC，事物，ORM，JMS等一系列实现。</p>
+</li>
+<li><p>(5)    Web<br>Web模块主要提供面向web的一些实现，例如多文件上传，servlet监听器以及spring mvc方面的支持。</p>
+<p>(6)    Test<br>Test模块主要是针对spring的各个模块做各种各样的测试，包括单元测试、集成测试等等。</p>
+</li>
+</ul>
+<h3 id="1-1-2-SpringBoot框架介绍"><a href="#1-1-2-SpringBoot框架介绍" class="headerlink" title="1.1.2    SpringBoot框架介绍"></a>1.1.2    SpringBoot框架介绍</h3><pre><code>SpringBoot并非Spring官方的框架，而是由Pivotal 团队（这里就不介绍这个团队了）在Spring上二次开发并开源公布出来的一个比 Spring更为简化的开发的框架。简而言之，SpringBoot就是一个轻量级，简化配置和开发流程的web整合框架。我们在使用SpringBoot时只需要做相应的配置就可以用所有的Spring组件，不需要像SpringMVC那样手动写一堆xml配置。从本质上来说，Spring Boot就是Spring,它简化了很多开发者利用Spring框架进行开发时，都需要进行的配置。那么它到底有什么功能呢？与Spring相比又有什么优势呢？ </code></pre><h4 id="1-1-2-1-SpringBoot的核心功能"><a href="#1-1-2-1-SpringBoot的核心功能" class="headerlink" title="1.1.2.1    SpringBoot的核心功能"></a>1.1.2.1    SpringBoot的核心功能</h4><ul>
+<li>(1)    可独立运行Spring项目<br>  SpringBoot 可以以jar包形式独立运行，运行一个Spring Boot项目只需要通过java -jar xx.jar来运行。</li>
+<li>(2)    内嵌servlet容器<br>  SpringBoot可以选择内嵌Tomcat、jetty或者Undertow,这样我们无须以war包形式部署项目。</li>
+<li>(3)    提供starter简化Maven配置<br>  Spring提供了一系列的start pom来简化Maven的依赖加载，例如，当你使用了spring-boot-starter-web，会自动加入如图5-1所示的依赖包。</li>
+<li>(4)    自动装配Spring<br>  SpringBoot会根据在类路径中的jar包，类、为jar包里面的类自动配置Bean，这样会极大地减少我们要使用的配置。当然，SpringBoot只考虑大多数的开发场景，并不是所有的场景，若在实际开发中我们需要配置Bean，而SpringBoot灭有提供支持，则可以自定义自动配置。</li>
+<li>(5)    准生产的应用监控<br>  SpringBoot提供基于http ssh telnet对运行时的项目进行监控。</li>
+<li>(6)    无代码生产和xml配置　　<br>  SpringBoot不是借助与代码生成来实现的，而是通过条件注解来实现的，这是Spring4.x提供的新特性。</li>
+</ul>
+<h4 id="1-1-2-2-SpringBoot的优点"><a href="#1-1-2-2-SpringBoot的优点" class="headerlink" title="1.1.2.2    SpringBoot的优点"></a>1.1.2.2    SpringBoot的优点</h4><ul>
+<li><p>编码更简单<br>SpringBoot采用 JavaConfig的方式，对Spring进行配置，并且提供了大量的注解，极大的提高了工作效率。</p>
+</li>
+<li><p>配置更简单<br>SpringBoot提供许多默认配置，同时也支持自定义配置， SpringBoot项目只需一个配置文件：application.properties或者application.yml。不必担心查找配置错误的定位。<br><img src="https://zone-7.github.io/img/springboot/1.1.2.png" alt="优势"></p>
+</li>
+<li><p>部署更简单<br>SpringBoot内置了三种Servlet容器，Tomcat，Jetty,undertow.我们只需要一个Java的运行环境就可以跑SpringBoot的项目了，SpringBoot的项目可以打成一个jar包，然后通过Java -jar xxx.jar来运行（SpringBoot项目的入口是一个main方法，运行该方法即可）。</p>
+</li>
+<li><p>监控更简单<br>SpringBoot提供了actuator包，可以使用它来对应用进行监控。主要提供功能有如下截图</p>
+</li>
+</ul>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Springboot/" title="Springboot">Springboot</a> / 
+    
+        <a href="/tags/VUE/" title="VUE">VUE</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.6SpringBoot 整合Redis）/">
+            
+                1.6 Springboot&amp;VUE开发实践（SpringBoot 整合Redis）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/07/25/springboot/2019-07-25-Springboot&VUE开发实践/">
+            
+                Springboot&amp;VUE开发实践（目录）
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'springboot/2019-07-26-Springboot&VUE开发实践（1.1SpringBoot 基础 ）' || '2019/07/25/springboot/2019-07-26-Springboot&VUE开发实践（1.1SpringBoot 基础 ）/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

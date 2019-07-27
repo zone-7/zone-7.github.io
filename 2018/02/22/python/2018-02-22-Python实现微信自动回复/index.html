@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Python实现微信自动回复 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2018/02/22/python/2018-02-22-Python实现微信自动回复/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2018/02/22/python/2018-02-22-Python实现微信自动回复/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2018/02/22/python/2018-02-22-Python实现微信自动回复/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Python实现微信自动回复</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2018-02-21T16:00:00.000Z">2018-02-22</time>
+    </p>
+    <div class="post-content">
+        <p>春节期间接收到无数新年问候，总想一一答复，不想群发，难免有遗漏，抽空学习了Python自动回复的itchat。以下是学习摘要</p>
+<h3 id="入门尝试"><a href="#入门尝试" class="headerlink" title="入门尝试"></a>入门尝试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载包</span></span><br><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># 登陆</span></span><br><span class="line">itchat.auto_login()</span><br><span class="line"><span class="comment"># 发送文本消息，发送目标是“文件传输助手”</span></span><br><span class="line">itchat.send(<span class="string">'Hello, filehelper'</span>, toUserName=<span class="string">'filehelper'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息响应"><a href="#消息响应" class="headerlink" title="消息响应"></a>消息响应</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># 注册消息响应事件，消息类型为itchat.content.TEXT，即文本消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register(itchat.content.TEXT)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 返回同样的文本消息</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'Text'</span>]</span><br><span class="line"></span><br><span class="line">itchat.auto_login()</span><br><span class="line"><span class="comment"># 绑定消息响应事件后，让itchat运行起来，监听消息</span></span><br><span class="line">itchat.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他消息处理"><a href="#其他消息处理" class="headerlink" title="其他消息处理"></a>其他消息处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="comment"># import全部消息类型</span></span><br><span class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理文本类消息</span></span><br><span class="line"><span class="comment"># 包括文本、位置、名片、通知、分享</span></span><br><span class="line"><span class="meta">@itchat.msg_register([TEXT, MAP, CARD, NOTE, SHARING])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 微信里，每个用户和群聊，都使用很长的ID来区分</span></span><br><span class="line">    <span class="comment"># msg['FromUserName']就是发送者的ID</span></span><br><span class="line">    <span class="comment"># 将消息的类型和文本内容返回给发送者</span></span><br><span class="line">    itchat.send(<span class="string">'%s: %s'</span> % (msg[<span class="string">'Type'</span>], msg[<span class="string">'Text'</span>]), msg[<span class="string">'FromUserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理多媒体类消息</span></span><br><span class="line"><span class="comment"># 包括图片、录音、文件、视频</span></span><br><span class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_files</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># msg['Text']是一个文件下载函数</span></span><br><span class="line">    <span class="comment"># 传入文件名，将文件下载下来</span></span><br><span class="line">    msg[<span class="string">'Text'</span>](msg[<span class="string">'FileName'</span>])</span><br><span class="line">    <span class="comment"># 把下载好的文件再发回给发送者</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'@%s@%s'</span> % (&#123;<span class="string">'Picture'</span>: <span class="string">'img'</span>, <span class="string">'Video'</span>: <span class="string">'vid'</span>&#125;.get(msg[<span class="string">'Type'</span>], <span class="string">'fil'</span>), msg[<span class="string">'FileName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理好友添加请求</span></span><br><span class="line"><span class="meta">@itchat.msg_register(FRIENDS)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_friend</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 该操作会自动将新好友的消息录入，不需要重载通讯录</span></span><br><span class="line">    itchat.add_friend(**msg[<span class="string">'Text'</span>]) </span><br><span class="line">    <span class="comment"># 加完好友后，给好友打个招呼</span></span><br><span class="line">    itchat.send_msg(<span class="string">'Nice to meet you!'</span>, msg[<span class="string">'RecommendInfo'</span>][<span class="string">'UserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理群聊消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register(TEXT, isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'isAt'</span>]:</span><br><span class="line">        itchat.send(<span class="string">u'@%s\u2005I received: %s'</span> % (msg[<span class="string">'ActualNickName'</span>], msg[<span class="string">'Content'</span>]), msg[<span class="string">'FromUserName'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在auto_login()里面提供一个True，即hotReload=True</span></span><br><span class="line"><span class="comment"># 即可保留登陆状态</span></span><br><span class="line"><span class="comment"># 即使程序关闭，一定时间内重新开启也可以不用重新扫码</span></span><br><span class="line">itchat.auto_login(<span class="literal">True</span>)</span><br><span class="line">itchat.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本型消息转发"><a href="#文本型消息转发" class="headerlink" title="文本型消息转发"></a>文本型消息转发</h3><p>isGroupChat=True 表示群聊消息,默认False<br>[TEXT, SHARING] 表示文本型和分享内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动回复文本等类别的群聊消息</span></span><br><span class="line"><span class="comment"># isGroupChat=True表示为群聊消息</span></span><br><span class="line"><span class="meta">@itchat.msg_register([TEXT, SHARING], isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">group_reply_text</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 消息来自于哪个群聊</span></span><br><span class="line">    chatroom_id = msg[<span class="string">'FromUserName'</span>]</span><br><span class="line">    <span class="comment"># 发送者的昵称</span></span><br><span class="line">    username = msg[<span class="string">'ActualNickName'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 消息并不是来自于需要同步的群</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> chatroom_id <span class="keyword">in</span> chatroom_ids:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'Type'</span>] == TEXT:</span><br><span class="line">        content = msg[<span class="string">'Content'</span>]</span><br><span class="line">    <span class="keyword">elif</span> msg[<span class="string">'Type'</span>] == SHARING:</span><br><span class="line">        content = msg[<span class="string">'Text'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据消息类型转发至其他群</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'Type'</span>] == TEXT:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">                itchat.send(<span class="string">'%s\n%s'</span> % (username, msg[<span class="string">'Content'</span>]), item[<span class="string">'UserName'</span>])</span><br><span class="line">    <span class="keyword">elif</span> msg[<span class="string">'Type'</span>] == SHARING:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">                itchat.send(<span class="string">'%s\n%s\n%s'</span> % (username, msg[<span class="string">'Text'</span>], msg[<span class="string">'Url'</span>]), item[<span class="string">'UserName'</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="多媒体信息转发"><a href="#多媒体信息转发" class="headerlink" title="多媒体信息转发"></a>多媒体信息转发</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动回复图片等类别的群聊消息</span></span><br><span class="line"><span class="comment"># isGroupChat=True表示为群聊消息          </span></span><br><span class="line"><span class="meta">@itchat.msg_register([PICTURE, ATTACHMENT, VIDEO], isGroupChat=True)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">group_reply_media</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="comment"># 消息来自于哪个群聊</span></span><br><span class="line">    chatroom_id = msg[<span class="string">'FromUserName'</span>]</span><br><span class="line">    <span class="comment"># 发送者的昵称</span></span><br><span class="line">    username = msg[<span class="string">'ActualNickName'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 消息并不是来自于需要同步的群</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> chatroom_id <span class="keyword">in</span> chatroom_ids:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 如果为gif图片则不转发</span></span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'FileName'</span>][<span class="number">-4</span>:] == <span class="string">'.gif'</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 下载图片等文件</span></span><br><span class="line">    msg[<span class="string">'Text'</span>](msg[<span class="string">'FileName'</span>])</span><br><span class="line">    <span class="comment"># 转发至其他需要同步消息的群聊</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> chatrooms:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> item[<span class="string">'UserName'</span>] == chatroom_id:</span><br><span class="line">            itchat.send(<span class="string">'@%s@%s'</span> % (&#123;<span class="string">'Picture'</span>: <span class="string">'img'</span>, <span class="string">'Video'</span>: <span class="string">'vid'</span>&#125;.get(msg[<span class="string">'Type'</span>], <span class="string">'fil'</span>), msg[<span class="string">'FileName'</span>]), item[<span class="string">'UserName'</span>])</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Python/" title="Python">Python</a> / 
+    
+        <a href="/tags/微信/" title="微信">微信</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2018/02/22/others/2018-02-22-基于H5的人脸检测实践/">
+            
+                基于H5的人脸检测实践
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2010/01/01/hello-world/">
+            
+                Hello World
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'python/2018-02-22-Python实现微信自动回复' || '2018/02/22/python/2018-02-22-Python实现微信自动回复/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

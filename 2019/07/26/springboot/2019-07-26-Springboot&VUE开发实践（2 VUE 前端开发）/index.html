@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>2 Springboot&amp;VUE开发实践（VUE前端开发） | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发">
+    <meta name="description" content="Jelon个人前端小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">第七区</span>
+                    <span class="name">Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（2 VUE 前端开发）/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（2 VUE 前端开发）/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/07/26/springboot/2019-07-26-Springboot&amp;VUE开发实践（2 VUE 前端开发）/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>2 Springboot&amp;VUE开发实践（VUE前端开发）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-07-25T16:00:00.000Z">2019-07-26</time>
+    </p>
+    <div class="post-content">
+        <h1 id="2-前端开发框架VUE开发"><a href="#2-前端开发框架VUE开发" class="headerlink" title="2    前端开发框架VUE开发"></a>2    前端开发框架VUE开发</h1><h2 id="2-1-VUE简介"><a href="#2-1-VUE简介" class="headerlink" title="2.1    VUE简介"></a>2.1    VUE简介</h2><p>Vue框架设计采用的是MVVM设计模式MVVM是Model-View-ViewModel的简写，主要包括view（视图）、model（模型）、ViewModel（视图模型）。模型指的是后端传递的数据；视图指的是所看到的页面；视图模型是mvvm模式的核心，它是连接view和model的桥梁。它的两个主要作用是：一是将模型转化成视图，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将视图转化成模型，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。这两个方向的实现我们称之为数据的双向绑定。MVVM流程图如下：<br> <img src="https://zone-7.github.io/img/springboot/2.png" alt="VUE "> </p>
+<p>在VUE项目开发时我们不需要关注ViewModel层，这是Vue.js的内置功能，只需要关注视图层和模型层即可。vue通过一个尽量简单的api来提供api提供反应式的数据绑定和可组合、复用的视图组件，不是一个大而全的框架。快速开发原型，混合其他的库做更多的事情。</p>
+<h2 id="2-2-安装及快速入门"><a href="#2-2-安装及快速入门" class="headerlink" title="2.2    安装及快速入门"></a>2.2    安装及快速入门</h2><p>Web1.0时代网页是“只读的”；在Web 1.0之后，互联网的第二次迭代被称作Web 2.0，也就是“可读写”网络，形形色色的社交网站和点评网站，是Web 2.0的代表； Web 3.0时代，技术的发展带来的是在线应用和网站可以接收到已经在网络上的信息，并将新的信息和数据反馈给用户，网站因为有了自主学习能力，而变得更加智能。</p>
+<p>随着web技术的发展，前端技术也从原来的操作DOM的时代，发展到如今围绕着操作数据的阶段，之前大家常用的前端框架是JQuery、Bootstrap框架， 而今天大家用得更多的是React、Vue、Angular三大主流框架，这三个框架各有各的优势，而且都较为成熟。<br>vue作为三大前端框架之一，社区比较活跃，应用也已经十分广泛。下面主要介绍vue框架的安装和开发。</p>
+<h3 id="Step1：安装node-js"><a href="#Step1：安装node-js" class="headerlink" title="Step1：安装node.js"></a>Step1：安装node.js</h3><p>安装完node.js之后，npm也会自动安装<br>查询是否安装成功的命令：<br>node -v<br>npm -v</p>
+<h3 id="Step2：安装脚手架工具vue-cli"><a href="#Step2：安装脚手架工具vue-cli" class="headerlink" title="Step2：安装脚手架工具vue-cli"></a>Step2：安装脚手架工具vue-cli</h3><p>命令如下：<br>npm install –global vue-cli</p>
+<h3 id="Step3：全局安装Webpak"><a href="#Step3：全局安装Webpak" class="headerlink" title="Step3：全局安装Webpak"></a>Step3：全局安装Webpak</h3><p>命令如下：<br>npm install -g webpack<br>npm install -g webpack-cli<br>查看版本：<br>webpack -v</p>
+<h3 id="Step4：VUE项目初始化"><a href="#Step4：VUE项目初始化" class="headerlink" title="Step4：VUE项目初始化"></a>Step4：VUE项目初始化</h3><p>vue项目初始化命令如下：<br>vue init webpack helloworld<br>注：安装过程 中有个选项（Use ESLint to line your code ?选择 No ）<br>  <img src="https://zone-7.github.io/img/springboot/2.2.4a.png" alt="VUE项目初始化 "> </p>
+<p>初始化完成后的vue项目目录如下：<br>  <img src="https://zone-7.github.io/img/springboot/2.2.4b.png" alt="VUE项目初始化 "> </p>
+<h3 id="Step5-安装依赖"><a href="#Step5-安装依赖" class="headerlink" title="Step5: 安装依赖"></a>Step5: 安装依赖</h3><p>进入到Helloworld目录下，使用npm install 安装package.json包中的依赖<br>命令如下：<br>cd Helloworld<br>npm install</p>
+<h3 id="Step6：运行项目"><a href="#Step6：运行项目" class="headerlink" title="Step6：运行项目"></a>Step6：运行项目</h3><p>执行下面命令运行项目：<br>npm run dev<br><img src="https://zone-7.github.io/img/springboot/2.2.6a.png" alt="VUE项目运行项目1 "> </p>
+<p><img src="https://zone-7.github.io/img/springboot/2.2.6b.png" alt="VUE项目运行项目2 "> </p>
+<h3 id="Step7：停止项目"><a href="#Step7：停止项目" class="headerlink" title="Step7：停止项目"></a>Step7：停止项目</h3><p>ctrl+c，即可停止项目的运行</p>
+<h2 id="2-3-VUE项目目录说明"><a href="#2-3-VUE项目目录说明" class="headerlink" title="2.3    VUE项目目录说明"></a>2.3    VUE项目目录说明</h2><p>build：项目构建(webpack)相关代码<br>config：配置目录，包括端口号等<br>node_modules：npm加载的项目依赖块<br>src：这里是我们要开发的目录，基本上要做的事情都在这个目录里。里面包含了几个目录及文件：<br>assets: 放置一些图片，如logo等<br>components：该目录里存放的我们的开发文件组件，主要的开发文件都存放在这里了<br>App.vue：项目入口文件<br>main.js：项目的核心文件<br>router：路由配置目录<br>static：放置一些静态资源文件<br>test：初始测试目录，可删除<br>index.html：首页入口文件<br>package.json：项目配置文件<br>README.md：项目的说明文档，markdown 格式</p>
+<h2 id="2-4-VUE生命周期"><a href="#2-4-VUE生命周期" class="headerlink" title="2.4    VUE生命周期"></a>2.4    VUE生命周期</h2><p>VUE的运行过程都在node环境下进行，执行生命周期如下图所示：<br> <img src="https://zone-7.github.io/img/springboot/2.4.png" alt="VUE生命周期"> </p>
+<p>VUE的执行过程包括以下几个步骤：</p>
+<ul>
+<li><p>(1)在执行npm run dev的时候，首先在当前文件夹下的项目中找package.json文件,启动默认端口是8080。<br><img src="https://zone-7.github.io/img/springboot/2.4.1.png" alt="VUE生命周期1"> </p>
+</li>
+<li><p>(2)执行src的main.js文件，在该文件中创建一个Vue的实例，入参包括要渲染的元素、路由、绑定的组件以及模版。<br><img src="https://zone-7.github.io/img/springboot/2.4.2.png" alt="VUE生命周期2"> </p>
+</li>
+</ul>
+<ul>
+<li>(3)渲染模板并执行App.vue组件<br>在App.vue组件中有一个router-view，router-view对应的路由配置在src/router目录下，该文件夹下有个index.js文件，该文件用于配置路由词典，指定了路由地址是空，加载HelloWorld组件。<br><img src="https://zone-7.github.io/img/springboot/2.4.3a.png" alt="VUE生命周期3"><br><img src="https://zone-7.github.io/img/springboot/2.4.3b.png" alt="VUE生命周期3"> </li>
+</ul>
+<h2 id="2-5-第一个工程"><a href="#2-5-第一个工程" class="headerlink" title="2.5    第一个工程"></a>2.5    第一个工程</h2><h3 id="Step1-在src下创建views文件夹，并在src-views下创建-vue结尾的文件"><a href="#Step1-在src下创建views文件夹，并在src-views下创建-vue结尾的文件" class="headerlink" title="Step1:在src下创建views文件夹，并在src/views下创建.vue结尾的文件"></a>Step1:在src下创建views文件夹，并在src/views下创建.vue结尾的文件</h3><ul>
+<li>布局页面 Layout.vue</li>
+<li>页面导航菜单top.vue</li>
+<li>首页main.vue</li>
+<li>关于页面about.vue</li>
+</ul>
+<ul>
+<li><p>(1)src/views/Layout.vue</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">top</span>&gt;</span><span class="tag">&lt;/<span class="name">top</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">:key</span>=<span class="string">"key"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  import Top from '@/views/top'</span><br><span class="line">  import Main from '@/views/main'</span><br><span class="line">  import About from '@/views/about'</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: 'Layout',</span><br><span class="line">    components: &#123;</span><br><span class="line">      Top,</span><br><span class="line">      About,</span><br><span class="line">      Main</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(2)src/views/top.vue</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top navbar-fixed-top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-8 text-center"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"&#123;name:'Main'&#125;"</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"&#123;name:'About'&#125;"</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>关于<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  export default &#123;</span><br><span class="line">    name: 'Top',</span><br><span class="line">    data()&#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: '欢迎使用zone7 框架'</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>(3)src/views/main.vue</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;&#123;message&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  export default &#123;</span><br><span class="line">    name: 'Main',</span><br><span class="line">    data()&#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: 'Hello World 这是首页'</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(4)src/views/about.vue</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      &#123;&#123;message&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">export default &#123;</span><br><span class="line">  name: 'About',</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: '欢迎使用Zone7 框架'</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Step2-修改src-router-index-js-添加页面路由"><a href="#Step2-修改src-router-index-js-添加页面路由" class="headerlink" title="Step2:修改src/router/index.js 添加页面路由"></a>Step2:修改src/router/index.js 添加页面路由</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import Main from &apos;@/views/main&apos;</span><br><span class="line">import Layout from &apos;@/views/Layout&apos;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;&apos;,</span><br><span class="line">      component: Layout,</span><br><span class="line">      redirect: &apos;main&apos;,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: &apos;main&apos;,</span><br><span class="line">          component: () =&gt; import(&apos;@/views/main&apos;),</span><br><span class="line">          name: &apos;Main&apos;,</span><br><span class="line">          meta: &#123; title: &apos;首页&apos;, icon: &apos;dashboard&apos;, noCache: true, affix: true &#125;  </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path: &apos;about&apos;,</span><br><span class="line">          component: () =&gt; import(&apos;@/views/about&apos;),</span><br><span class="line">          name: &apos;About&apos;,</span><br><span class="line">          meta: &#123; title: &apos;关于&apos;, icon: &apos;about&apos;, noCache: true, affix: true &#125;   </span><br><span class="line">        &#125;,</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step3：运行npm-run-dev"><a href="#Step3：运行npm-run-dev" class="headerlink" title="Step3：运行npm run dev"></a>Step3：运行npm run dev</h3><p>  <img src="https://zone-7.github.io/img/springboot/2.5.3.png" alt="运行npm run dev"> </p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Springboot/" title="Springboot">Springboot</a> / 
+    
+        <a href="/tags/VUE/" title="VUE">VUE</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.14SpringBoot 单元测试）/">
+            
+                1.14 Springboot&amp;VUE开发实践（SpringBoot单元测试）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.7SpringBoot 整合RabbitMQ）/">
+            
+                1.7 Springboot&amp;VUE开发实践（SpringBoot 整合RabbitMQ）
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'springboot/2019-07-26-Springboot&VUE开发实践（2 VUE 前端开发）' || '2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（2 VUE 前端开发）/',
+    owner: 'your_github_id',
+    repo: 'your_blog_comments',
+    clientId: 'your_client_id',
+    clientSecret: 'your_client_secret'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/开发模式/">开发模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://jelon.top" target="_blank" title="Jelon个人前端小站">前端博客小站</a>
+        </li>
+    
+        <li>
+            <a href="https://www.baidu.com" target="_blank" title="百度搜索">百度</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="Zone7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
