@@ -129,8 +129,7 @@
         <time datetime="2019-07-30T16:00:00.000Z">2019-07-31</time>
     </p>
     <div class="post-content">
-        <p>#清除docker无用镜像</p>
-<p>在docker镜像列表中我们经常会看到一堆tag为 &lt;none&gt; 的镜像，已经没有在使用，但随着提交次数增加，这些僵尸的占用了大量的磁盘空间，有必要做一次清理。<br>可以使用以下命令清理none镜像</p>
+        <h1 id="清除docker无用镜像"><a href="#清除docker无用镜像" class="headerlink" title="清除docker无用镜像"></a>清除docker无用镜像</h1><p>在docker镜像列表中我们经常会看到一堆tag为 &lt;none&gt; 的镜像，已经没有在使用，但随着提交次数增加，这些僵尸的占用了大量的磁盘空间，有必要做一次清理。<br>可以使用以下命令清理none镜像</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi -f $(docker images | grep &quot;&lt;none&gt;&quot; | awk &quot;&#123;print \$3&#125;&quot;)</span><br></pre></td></tr></table></figure>
 
 <p>使用以下命令清理已经停止运行的docker容器</p>
@@ -279,7 +278,7 @@
         <h3 class="widget-hd"><strong>目录</strong></h3>
           
              
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清除docker无用镜像"><span class="toc-text">清除docker无用镜像</span></a></li></ol>
  
          
     </section>
@@ -330,13 +329,13 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
-  
     <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
     <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
   
     <a class="tag-item" href="/tags/docker/" title="docker">docker (1)</a>
   
@@ -358,9 +357,9 @@
   
     <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
   
-    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
-  
     <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
   
     <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
   
