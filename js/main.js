@@ -184,11 +184,16 @@ JELON = deepCopy(JELON, {
     if (typeof _this.$(_this.name + '__backToTop') === 'undefined') return;
     window.onscroll = window.onresize = function() {
       if (document.documentElement.scrollTop + document.body.scrollTop > 0) {
+        _this.$(_this.name + '__backToTop').css('display','block');
         _this.$(_this.name + '__backToTop').style.display = 'block';
+
       } else {
+        _this.$(_this.name + '__backToTop').css('display','block');
         _this.$(_this.name + '__backToTop').style.display = 'none';
+
       }
     };
+
     _this.$(_this.name + '__backToTop').onclick = function() {
       var Timer = setInterval(GoTop, 10);
 
