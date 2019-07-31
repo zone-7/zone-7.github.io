@@ -148,7 +148,7 @@ function deepCopy(c, p) {
  */
 var ZONE7 = window.ZONE7 || {};
 ZONE7 = deepCopy(ZONE7, {
-  name: 'Zone7',
+  name: 'ZONE7',
   version: '0.0.1',
   init: function() {
     this.toggleMenu();
@@ -183,11 +183,11 @@ ZONE7 = deepCopy(ZONE7, {
     if (typeof _this.$(_this.name + '__backToTop') === 'undefined') return;
     window.onscroll = window.onresize = function() {
       if (document.documentElement.scrollTop + document.body.scrollTop > 0) {
-        alert( _this.name  );
+         
         _this.$(_this.name + '__backToTop').style.display = 'block';
 
       } else {
-        alert(_this.name);
+       
         _this.$(_this.name + '__backToTop').style.display = 'none';
 
       }
