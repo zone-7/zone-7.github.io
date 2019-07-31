@@ -143,14 +143,13 @@ function deepCopy(c, p) {
 　return c;
 }
 /**
- * 网站js
- * @author Jelon
+ * 网站js 
  * @type {{init, toggleMenu}}
  */
-var JELON = window.JELON || {};
-JELON = deepCopy(JELON, {
-  name: 'JELON',
-  version: '0.0.2',
+var ZONE7 = window.ZONE7 || {};
+ZONE7 = deepCopy(ZONE7, {
+  name: 'Zone7',
+  version: '0.0.1',
   init: function() {
     this.toggleMenu();
     this.backToTop();
@@ -184,11 +183,11 @@ JELON = deepCopy(JELON, {
     if (typeof _this.$(_this.name + '__backToTop') === 'undefined') return;
     window.onscroll = window.onresize = function() {
       if (document.documentElement.scrollTop + document.body.scrollTop > 0) {
-        _this.$(_this.name + '__backToTop').css('display','block');
+        alert( _this.name  );
         _this.$(_this.name + '__backToTop').style.display = 'block';
 
       } else {
-        _this.$(_this.name + '__backToTop').css('display','block');
+        alert(_this.name);
         _this.$(_this.name + '__backToTop').style.display = 'none';
 
       }
@@ -212,4 +211,4 @@ JELON = deepCopy(JELON, {
 /**
  * 程序入口
  */
-JELON.init();
+ZONE7.init();

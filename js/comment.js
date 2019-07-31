@@ -10,10 +10,10 @@ if (!window['String']['prototype']['trim']) {
   } else if (typeof exports === 'object') { // cmd
     module.exports = factory();
   } else {
-    root.JELON = factory();
+    root.ZONE7 = factory();
   }
 }(this, function () {
-  var JL = window.JELON || {};
+  var JL = window.ZONE7 || {};
 
   var constants = {
     ACCESS_TOKEN_KEY: 'xups-github-comments-token', // access_token key
@@ -222,18 +222,18 @@ if (!window['String']['prototype']['trim']) {
   JL.Renders = {
     box: {
       tpl: [
-        '<section class="box" id="JELON__commentBox">',
-          '<div class="com-avatar"><img id="JELON__loginAvatar" src="/img/unsigned_avatar.jpg" alt="avatar"></div>',
+        '<section class="box" id="ZONE7__commentBox">',
+          '<div class="com-avatar"><img id="ZONE7__loginAvatar" src="/img/unsigned_avatar.jpg" alt="avatar"></div>',
           '<div class="com-text">',
             '<div class="main">',
-              '<textarea class="text-area-edited show" id="JELON__editBox" placeholder="欢迎评论！"></textarea>',
-              '<div class="text-area-preview" id="JELON__previewBox"></div>',
+              '<textarea class="text-area-edited show" id="ZONE7__editBox" placeholder="欢迎评论！"></textarea>',
+              '<div class="text-area-preview" id="ZONE7__previewBox"></div>',
             '</div>',
             '<div class="switch">',
-              '<div class="switch-item on" id="JELON__editSwitcher" onclick="JELON.Actions.editPreviewSwitch(\'edit\')">编辑</div>',
-              '<div class="switch-item" id="JELON__previewSwitcher" onclick="JELON.Actions.editPreviewSwitch(\'preview\')">预览</div>',
+              '<div class="switch-item on" id="ZONE7__editSwitcher" onclick="ZONE7.Actions.editPreviewSwitch(\'edit\')">编辑</div>',
+              '<div class="switch-item" id="ZONE7__previewSwitcher" onclick="ZONE7.Actions.editPreviewSwitch(\'preview\')">预览</div>',
             '</div>',
-            '<div class="button" onclick="JELON.Actions.postComment()">提交</div>',
+            '<div class="button" onclick="ZONE7.Actions.postComment()">提交</div>',
           '</div>',
         '</section>'
       ].join(''),
@@ -245,12 +245,12 @@ if (!window['String']['prototype']['trim']) {
           userInfo = {};
         }
         // 默认头像路径 /img/zone7.png
-        $('JELON__loginAvatar').src = userInfo.avatar_url || '/img/unsigned_avatar.jpg';
+        $('ZONE7__loginAvatar').src = userInfo.avatar_url || '/img/unsigned_avatar.jpg';
       }
     },
     list: {
       tpl: [
-        '<section class="list-wrap" id="JELON__commentList">',
+        '<section class="list-wrap" id="ZONE7__commentList">',
           '<div class="text-center">正在加载评论</div>',
         '</section>'
       ].join(''),
@@ -282,12 +282,12 @@ if (!window['String']['prototype']['trim']) {
                   '</a>',
                 '</div>',
                 '<div class="user-comment">',
-                  '<div class="user-comment-header" id="JELON__comment_' + list[i].id + '_reactions">',
+                  '<div class="user-comment-header" id="ZONE7__comment_' + list[i].id + '_reactions">',
                     '<span class="post-name">' + list[i].user.login +  '</span>',
                     '<span class="post-time">' + formatDate('yyyy-MM-dd hh:mm', new Date(list[i].created_at)) + '</span>',
-                    '<span class="like" onclick="JELON.Actions.like(' + list[i].id + ')">点赞</span>',
+                    '<span class="like" onclick="ZONE7.Actions.like(' + list[i].id + ')">点赞</span>',
                     '<span class="like-num">' + list[i].reactions.heart + '</span>',
-                    '<span class="reply" onclick="JELON.Actions.reply(\'' + list[i].user.login + '\', \'' + (list[i].body_html || list[i].body).replace(/<[^>]+>|\s|[\r\n]/g, ' ') + '\')">回复</span>',
+                    '<span class="reply" onclick="ZONE7.Actions.reply(\'' + list[i].user.login + '\', \'' + (list[i].body_html || list[i].body).replace(/<[^>]+>|\s|[\r\n]/g, ' ') + '\')">回复</span>',
                   '</div>',
                   '<div class="user-comment-body">' + (list[i].body_html || list[i].body) + '</div>',
                 '</div>',
@@ -303,15 +303,15 @@ if (!window['String']['prototype']['trim']) {
               if (i === page) {
                 pageItem = '<a href="javascript: void(0);" class="item current">' + page + '</a>';
               } else {
-                pageItem = '<a href="javascript: JELON.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
+                pageItem = '<a href="javascript: ZONE7.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
               }
               pageList.push(pageItem);
             }
             if (page !== 1) {
-              pageList.unshift('<a href="javascript: JELON.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
+              pageList.unshift('<a href="javascript: ZONE7.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
             }
             if (page !== allPages) {
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
             }
           } else if (allPages > perNavPageMaxSize) {
             if (page <= perNavPageMaxSize) {
@@ -319,54 +319,54 @@ if (!window['String']['prototype']['trim']) {
                 if (i === page) {
                   pageItem = '<a href="javascript: void(0);" class="item current">' + page + '</a>';
                 } else {
-                  pageItem = '<a href="javascript: JELON.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
+                  pageItem = '<a href="javascript: ZONE7.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
                 }
                 pageList.push(pageItem);
               }
               if (page !== 1) {
-                pageList.unshift('<a href="javascript: JELON.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
+                pageList.unshift('<a href="javascript: ZONE7.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
               }
               pageList.push('<span class="more">...</span>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + allPages + ');" class="item">末页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + allPages + ');" class="item">末页</a>');
             } else if (page > perNavPageMaxSize && page <= allPages - perNavPageMaxSize) {
               var mod = page % perNavPageMaxSize;
               var start = Math.floor(page / perNavPageMaxSize) * perNavPageMaxSize + 1;
               var end = Math.ceil(page / perNavPageMaxSize) * perNavPageMaxSize;
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(1);" class="item">首页</a>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(1);" class="item">首页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
               for (var i = start; i <= end; i++) {
                 if (i === page) {
                   pageItem = '<a href="javascript: void(0);" class="item current">' + page + '</a>';
                 } else {
-                  pageItem = '<a href="javascript: JELON.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
+                  pageItem = '<a href="javascript: ZONE7.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
                 }
                 pageList.push(pageItem);
               }
 
               pageList.push('<span class="more">...</span>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + allPages + ');" class="item">末页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + allPages + ');" class="item">末页</a>');
             } else if (page > perNavPageMaxSize && page > allPages - perNavPageMaxSize) {
               var start = allPages - perNavPageMaxSize + 1;
               var end = allPages;
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(1);" class="item">首页</a>');
-              pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(1);" class="item">首页</a>');
+              pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page - 1) + ');" class="item">上页</a>');
               for (var i = start; i <= end; i++) {
                 if (i === page) {
                   pageItem = '<a href="javascript: void(0);" class="item current">' + page + '</a>';
                 } else {
-                  pageItem = '<a href="javascript: JELON.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
+                  pageItem = '<a href="javascript: ZONE7.Actions.pageJump(' + i + ');" class="item">' + i + '</a>';
                 }
                 pageList.push(pageItem);
               }
               if (page !== allPages) {
-                pageList.push('<a href="javascript: JELON.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
+                pageList.push('<a href="javascript: ZONE7.Actions.pageJump(' + (page + 1) + ');" class="item">下页</a>');
               }
             }
           }
           html = [
-            '<header class="list-header">总共 <span class="comments-num" id="JELON__commentsNum">' + JL.issueComments + '</span> 条评论</header>',
+            '<header class="list-header">总共 <span class="comments-num" id="ZONE7__commentsNum">' + JL.issueComments + '</span> 条评论</header>',
             '<ul class="list">',
               htmlList.join(''),
             '</ul>',
@@ -375,7 +375,7 @@ if (!window['String']['prototype']['trim']) {
             '</div>'
           ].join('');
         }
-        $('JELON__commentList').innerHTML = html;
+        $('ZONE7__commentList').innerHTML = html;
         if (localStorage.getItem(constants.USER_INFO_KEY)) {
           callback && callback();
         }
@@ -391,8 +391,8 @@ if (!window['String']['prototype']['trim']) {
         for (var i = 0, len = reactions.length; i < len; i++) {
           if (userId === reactions[i].user.id) {
             console.log(userId, reactions[i].user.id);
-            addClass($('JELON__comment_' + commentId + '_reactions').getElementsByClassName('like')[0], 'liked');
-            $('JELON__comment_' + commentId + '_reactions').getElementsByClassName('like')[0].innerHTML = '已赞';
+            addClass($('ZONE7__comment_' + commentId + '_reactions').getElementsByClassName('like')[0], 'liked');
+            $('ZONE7__comment_' + commentId + '_reactions').getElementsByClassName('like')[0].innerHTML = '已赞';
             break;
           }
         }
@@ -407,24 +407,24 @@ if (!window['String']['prototype']['trim']) {
             '</a>',
           '</div>',
           '<div class="user-comment">',
-            '<div class="user-comment-header" id="JELON__comment_' + data.id + '_reactions">',
+            '<div class="user-comment-header" id="ZONE7__comment_' + data.id + '_reactions">',
               '<span class="post-name">' + data.user.login +  '</span>',
               '<span class="post-time">' + formatDate('yyyy-MM-dd hh:mm', new Date(data.created_at)) + '</span>',
-              '<span class="like" onclick="JELON.Actions.like(' + data.reactions.heart + ')">点赞</span>',
+              '<span class="like" onclick="ZONE7.Actions.like(' + data.reactions.heart + ')">点赞</span>',
               '<span class="like-num">' + data.reactions.heart + '</span>',
-              '<span class="reply" onclick="JELON.Actions.reply(\'' + data.user.login + '\', \'' + (data.body_html || data.body).replace(/<[^>]+>|\s|[\r\n]/g, ' ') + '\')">回复</span>',
+              '<span class="reply" onclick="ZONE7.Actions.reply(\'' + data.user.login + '\', \'' + (data.body_html || data.body).replace(/<[^>]+>|\s|[\r\n]/g, ' ') + '\')">回复</span>',
             '</div>',
             '<div class="user-comment-body">' + (data.body_html || data.body) + '</div>',
           '</div>'
         ].join('');
         oLi.innerHTML = item;
-        var oUl = $('JELON__commentList').getElementsByTagName('ul')[0];
+        var oUl = $('ZONE7__commentList').getElementsByTagName('ul')[0];
         if (oUl) {
           oUl.insertBefore(oLi, oUl.firstChild);
-          $('JELON__commentsNum').innerHTML = JL.issueComments + 1;
+          $('ZONE7__commentsNum').innerHTML = JL.issueComments + 1;
         } else {
-          $('JELON__commentList').innerHTML = [
-            '<header class="list-header">总共 <span class="comments-num" id="JELON__commentsNum">' + (JL.issueComments + 1) + '</span> 条评论</header>',
+          $('ZONE7__commentList').innerHTML = [
+            '<header class="list-header">总共 <span class="comments-num" id="ZONE7__commentsNum">' + (JL.issueComments + 1) + '</span> 条评论</header>',
             '<ul class="list">',
               '<li class="item">',
                 item,
@@ -436,7 +436,7 @@ if (!window['String']['prototype']['trim']) {
     },
     signBar: {
       tpl: [
-        '<div class="sign-bar" id="JELON__commentSignBar">',
+        '<div class="sign-bar" id="ZONE7__commentSignBar">',
         '</div>'
       ].join(''),
       update: function () {
@@ -447,7 +447,7 @@ if (!window['String']['prototype']['trim']) {
           userInfo = JSON.parse(userInfo);
           html = [
             '<span class="sign-txt" title="' + userInfo.login + '">GitHub 已登录!</span>',
-            '<span class="sign-link" onclick="JELON.Actions.signOut()">退出</span>'
+            '<span class="sign-link" onclick="ZONE7.Actions.signOut()">退出</span>'
           ].join('');
         } else {
           html = [
@@ -459,19 +459,19 @@ if (!window['String']['prototype']['trim']) {
             '</a>'
           ].join('');
         }
-        $('JELON__commentSignBar').innerHTML = html;
+        $('ZONE7__commentSignBar').innerHTML = html;
       }
     },
     tips: {
-      tpl: '<section class="tips clearfix" id="JELON__comment_tips">注：评论支持 markdown 语法！</section>',
+      tpl: '<section class="tips clearfix" id="ZONE7__comment_tips">注：评论支持 markdown 语法！</section>',
       update: function () {
         var userInfo = localStorage.getItem(constants.USER_INFO_KEY);
         var handler = '';
         // 如果文章还没关联 issue 并且登录账号是自己时
         if (userInfo && JSON.parse(userInfo).login === JL.options.owner && JL.issueNumber === 0) {
-          handler = '<a href="javascript: JELON.Actions.createIssue();" class="init" title="文章关联 issue">初始化评论</a>';
+          handler = '<a href="javascript: ZONE7.Actions.createIssue();" class="init" title="文章关联 issue">初始化评论</a>';
         }
-        $('JELON__comment_tips').innerHTML = handler + '注：评论支持 markdown 语法！';
+        $('ZONE7__comment_tips').innerHTML = handler + '注：评论支持 markdown 语法！';
       }
     },
     flashTitle: function (title) {
@@ -493,12 +493,12 @@ if (!window['String']['prototype']['trim']) {
         oParent = oParent || document.body;
         var oLoading = document.createElement('div');
         oLoading.className = 'loading-mask';
-        oLoading.id = 'JELON__loadingMask';
+        oLoading.id = 'ZONE7__loadingMask';
         oLoading.innerHTML = '<div class="loading-icon"><img src="/img/loading.gif" width="50" height="50" alt="加载中" ></div>';
         oParent.appendChild(oLoading);
       },
       remove: function () {
-        var oLoading = $('JELON__loadingMask');
+        var oLoading = $('ZONE7__loadingMask');
         oLoading.parentNode.removeChild(oLoading);
       }
     }
@@ -598,16 +598,16 @@ if (!window['String']['prototype']['trim']) {
     },
     editPreviewSwitch: function (flag) {
       if (flag === 'edit') {
-        removeClass('JELON__previewSwitcher', 'on');
-        addClass('JELON__editSwitcher', 'on');
-        removeClass('JELON__previewBox', 'show');
-        addClass('JELON__editBox', 'show');
+        removeClass('ZONE7__previewSwitcher', 'on');
+        addClass('ZONE7__editSwitcher', 'on');
+        removeClass('ZONE7__previewBox', 'show');
+        addClass('ZONE7__editBox', 'show');
       } else {
-        removeClass('JELON__editSwitcher', 'on');
-        addClass('JELON__previewSwitcher', 'on');
-        removeClass('JELON__editBox', 'show');
-        addClass('JELON__previewBox', 'show');
-        var text = $('JELON__editBox').value.trim();
+        removeClass('ZONE7__editSwitcher', 'on');
+        addClass('ZONE7__previewSwitcher', 'on');
+        removeClass('ZONE7__editBox', 'show');
+        addClass('ZONE7__previewBox', 'show');
+        var text = $('ZONE7__editBox').value.trim();
         // 安全转义
         text = htmlEncode(text);
         if (text) {
@@ -616,10 +616,10 @@ if (!window['String']['prototype']['trim']) {
             mode: 'markdown',
             context: 'github/gollum'
           }, function (res) {
-            $('JELON__previewBox').innerHTML = res;
+            $('ZONE7__previewBox').innerHTML = res;
           });
         } else {
-          $('JELON__previewBox').innerHTML = '';
+          $('ZONE7__previewBox').innerHTML = '';
         }
       }
     },
@@ -630,7 +630,7 @@ if (!window['String']['prototype']['trim']) {
         alert('请先登录哦..!^_^');
         return;
       }
-      var body = $('JELON__editBox').value.trim();
+      var body = $('ZONE7__editBox').value.trim();
       // 安全转义
       body = htmlEncode(body);
       if (body) {
@@ -642,8 +642,8 @@ if (!window['String']['prototype']['trim']) {
             if (res.id) {
               JL.Renders.list.addOne(res);
               JL.issueComments++;
-              $('JELON__editBox').value = '';
-              $('JELON__previewBox').innerHTML = '';
+              $('ZONE7__editBox').value = '';
+              $('ZONE7__previewBox').innerHTML = '';
             }
             JL.Renders.loading.remove();
           });
@@ -662,8 +662,8 @@ if (!window['String']['prototype']['trim']) {
                 if (res.id) {
                   JL.Renders.list.addOne(json);
                   JL.issueComments++;
-                  $('JELON__editBox').value = '';
-                  $('JELON__previewBox').innerHTML = '';
+                  $('ZONE7__editBox').value = '';
+                  $('ZONE7__previewBox').innerHTML = '';
                 }
                 JL.Renders.loading.remove();
               });
@@ -673,9 +673,9 @@ if (!window['String']['prototype']['trim']) {
       }
     },
     like: function (commentId) {
-      var oLiked = $('JELON__comment_' + commentId + '_reactions').getElementsByClassName('liked');
-      var oLike = $('JELON__comment_' + commentId + '_reactions').getElementsByClassName('like')[0];
-      var oNum = $('JELON__comment_' + commentId + '_reactions').getElementsByClassName('like-num')[0];
+      var oLiked = $('ZONE7__comment_' + commentId + '_reactions').getElementsByClassName('liked');
+      var oLike = $('ZONE7__comment_' + commentId + '_reactions').getElementsByClassName('like')[0];
+      var oNum = $('ZONE7__comment_' + commentId + '_reactions').getElementsByClassName('like-num')[0];
       var accessToken = localStorage.getItem(constants.ACCESS_TOKEN_KEY);
       var userInfo = localStorage.getItem(constants.USER_INFO_KEY);
       if (oLiked.length) {
@@ -713,14 +713,14 @@ if (!window['String']['prototype']['trim']) {
         return;
       }
       JL.Actions.editPreviewSwitch('edit');
-      $('JELON__editBox').value = '';
-      $('JELON__editBox').focus();
-      $('JELON__editBox').value = [
+      $('ZONE7__editBox').value = '';
+      $('ZONE7__editBox').focus();
+      $('ZONE7__editBox').value = [
         '@' + people + '\n',
         '> ' + content + '\n',
         '\n'
       ].join('');
-      $('JELON__previewBox').innerHTML = '';
+      $('ZONE7__previewBox').innerHTML = '';
     }
   };
   JL.Requests = {
