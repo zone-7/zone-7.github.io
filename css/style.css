@@ -840,7 +840,7 @@ hr {
 }
 .post header .post-title {
   display: inline;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: normal;
 }
 .post header .post-title a:hover {
@@ -848,7 +848,7 @@ hr {
 }
 .post .post-meta {
   color: #888;
-  font-size: 12px;
+  font-size: 14px;
 }
 .post .post-meta .post-views,
 .post .post-meta .post-cat,
