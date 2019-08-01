@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>清除docker无用镜像 | 第七区</title>
+    <title>Docker离线安装 | 第七区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
     <meta name="description" content="zone7的分享">
@@ -72,19 +72,19 @@
         <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
         <ul class="menu hidden" id="ZONE7__menu">
             
-            <li rel="/2019/07/31/docker/2019-07-31-清除docker无用镜像/index.html" class="item ">
+            <li rel="/2019/08/01/docker/2019-08-01-docker离线安装/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2019/07/31/docker/2019-07-31-清除docker无用镜像/index.html" class="item ">
+            <li rel="/2019/08/01/docker/2019-08-01-docker离线安装/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2019/07/31/docker/2019-07-31-清除docker无用镜像/index.html" class="item ">
+            <li rel="/2019/08/01/docker/2019-08-01-docker离线安装/index.html" class="item ">
                 <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
             </li>
             
-            <li rel="/2019/07/31/docker/2019-07-31-清除docker无用镜像/index.html" class="item ">
+            <li rel="/2019/08/01/docker/2019-08-01-docker离线安装/index.html" class="item ">
                 <a href="/support/" title="请我喝杯果汁" class="icon-office">&nbsp;请我喝杯果汁</a>
             </li>
             
@@ -129,19 +129,50 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>清除docker无用镜像</span></h3>
+        <h3 class="post-title"><span>Docker离线安装</span></h3>
     </header>
     <p class="post-meta text-center">
         zone-7 发表于
-        <time datetime="2019-07-30T16:00:00.000Z">2019-07-31</time>
+        <time datetime="2019-07-31T16:00:00.000Z">2019-08-01</time>
     </p>
     <div class="post-content">
-        <h1 id="清除docker无用镜像"><a href="#清除docker无用镜像" class="headerlink" title="清除docker无用镜像"></a>清除docker无用镜像</h1><p>在docker镜像列表中我们经常会看到一堆tag为 &lt;none&gt; 的镜像，已经没有在使用，但随着提交次数增加，这些僵尸的占用了大量的磁盘空间，有必要做一次清理。<br>可以使用以下命令清理none镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi -f $(docker images | grep &quot;&lt;none&gt;&quot; | awk &quot;&#123;print \$3&#125;&quot;)</span><br></pre></td></tr></table></figure>
+        <h1 id="Docker离线安装"><a href="#Docker离线安装" class="headerlink" title="Docker离线安装"></a>Docker离线安装</h1><h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><p>安装步骤如下：</p>
+<ul>
+<li>（1）拷贝docker 到 /usr/bin</li>
+<li>（2）修改Docker存储路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service docker stop</span><br><span class="line">cd /var/lib/</span><br><span class="line">mv docker/*/home/dockerfile</span><br><span class="line">rm -rf docker</span><br></pre></td></tr></table></figure>
 
-<p>使用以下命令清理已经停止运行的docker容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $(docker ps --all -q -f status=exited)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(3)进入/home/dockerfile创建软连接<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s/home/dockerfile/ /var/lib/docker</span><br><span class="line">service docker start</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h2 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h2><p>打开服务配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /lib/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
+
+<p>在文件中添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=https://docs.docker.com</span><br><span class="line">After=network-online.target firewalld.service</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line"># the default is not to use systemd for cgroups because the delegate issues still</span><br><span class="line"># exists and systemd currently does not support the cgroup feature set required</span><br><span class="line"># for containers run by docker</span><br><span class="line">ExecStart=/usr/bin/dockerd</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"># Having non-zero Limit*s causes performance problems due to accounting overhead</span><br><span class="line"># in the kernel. We recommend using cgroups to do container-local accounting.</span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"># Uncomment TasksMax if your systemd version supports it.</span><br><span class="line"># Only systemd 226 and above support this version.</span><br><span class="line">#TasksMax=infinity</span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"># set delegate yes so that systemd does not reset the cgroups of docker containers</span><br><span class="line">Delegate=yes</span><br><span class="line"># kill only the docker process, not all processes in the cgroup</span><br><span class="line">KillMode=process</span><br><span class="line"># restart the docker process if it exits prematurely</span><br><span class="line">Restart=on-failure</span><br><span class="line">StartLimitBurst=3</span><br><span class="line">StartLimitInterval=60s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ExecStart=</span><br><span class="line">ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启docker随系统启动模式"><a href="#开启docker随系统启动模式" class="headerlink" title="开启docker随系统启动模式"></a>开启docker随系统启动模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置仓库管理地址"><a href="#配置仓库管理地址" class="headerlink" title="配置仓库管理地址"></a>配置仓库管理地址</h2><p>这个步骤主要用于开启docker 仓库，如果您不需要将服务器作为docker仓库，可以跳过这个步骤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export DOCKER_HOST=tcp://0.0.0.0:2375&apos; &gt;&gt; /etc/profile </span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建docker仓库"><a href="#创建docker仓库" class="headerlink" title="创建docker仓库"></a>创建docker仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br><span class="line">docker run -d -p 5000:5000 --restart=always --privileged=true -v /opt/registry:/tmp/registry registry</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><ul>
+<li>-d<br>  后台执行</li>
+<li>-p<br>  端口映射, 宿主机80端口映射给容器的5000端口</li>
+<li>–restart=always<br>  容器意外关闭后, 自动重启(如果重启docker服务, 带这个参数的, 能自动启动为Up状态, 不带这个的,不会自动启动)</li>
+<li>-v /opt/registry:/tmp/registry<br>  默认情况下，会将仓库存放于容器内的/tmp/registry目录下，指定本地目录挂载到容器</li>
+<li>-privileged=true<br>  在CentOS7中，安全模块selinux把权限禁掉了，参数给容器加特权，如果不加上这个参数，在传镜像的过程中会报权限错误(OSError: [Errno 13] Permission denied: ‘/tmp/registry/repositories/liibrary’)或者（Received unexpected HTTP status: 500 Internal Server Error）</li>
+</ul>
+<h2 id="镜像仓库配置"><a href="#镜像仓库配置" class="headerlink" title="镜像仓库配置"></a>镜像仓库配置</h2><p>修改/etc/sysconfig/docker，在已有参数的在后面追加增加以下启动选项 ，保存并重启docker。</p>
+<ul>
+<li>CentOS 7系统 OPTIONS=’–insecure-registry 192.168.44.240:5000’    </li>
+<li>CentOS 6系统 other_args=’–insecure-registry 192.168.44.240:5000’<br>通过修改以上配置，让你的私有仓库支持 http，因为从 docker1.3.2 开始，docker registry 默认都是使用 https 协议而不使用 http</li>
+</ul>
 
     </div>
     <p class="post-meta">
@@ -180,20 +211,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/08/01/docker/2019-08-01-docker离线安装/">
-            
-                Docker离线安装
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/07/26/springboot/2019-07-26-Springboot&VUE开发实践（1.4SpringBoot 第一个工程 ）/">
+        <a href="/2019/07/31/docker/2019-07-31-清除docker无用镜像/">
             
-                1.4 Springboot&amp;VUE开发实践（SpringBoot第一个工程）
+                清除docker无用镜像
             
         </a>
     </span>
@@ -209,7 +236,7 @@
   <script>
   ZONE7.Comment({
     container: 'comments',
-    label: 'docker/2019-07-31-清除docker无用镜像' || '2019/07/31/docker/2019-07-31-清除docker无用镜像/',
+    label: 'docker/2019-08-01-docker离线安装' || '2019/08/01/docker/2019-08-01-docker离线安装/',
     owner: 'zone-7',
     repo: 'zone-7.github.io',
     clientId: '564f71fbf0c5e6e879f2',
@@ -228,7 +255,7 @@
         <h3 class="widget-hd"><strong>目录</strong></h3>
           
              
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清除docker无用镜像"><span class="toc-text">清除docker无用镜像</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker离线安装"><span class="toc-text">Docker离线安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装docker"><span class="toc-text">安装docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启远程访问"><span class="toc-text">开启远程访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启docker随系统启动模式"><span class="toc-text">开启docker随系统启动模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置仓库管理地址"><span class="toc-text">配置仓库管理地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建docker仓库"><span class="toc-text">创建docker仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数说明"><span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#镜像仓库配置"><span class="toc-text">镜像仓库配置</span></a></li></ol></li></ol>
  
          
     </section>
