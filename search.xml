@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[基于H5的人脸检测实践]]></title>
+    <title><![CDATA[解决go get 命令 timeout错误的方法]]></title>
     <url>%2F2019%2F10%2F10%2Fgo%2F2019-10-10-%E8%A7%A3%E5%86%B3%20go%20get%20%E5%91%BD%E4%BB%A4timeout%20%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[在执行go get 命令下载 golang.org/x 相关的包时经常报timeout错误。例如： 12package golang.org/x/time/rate: unrecognized import path &quot;golang.org/x/time/rate&quot; (https fetch: Get https://golang.org/x/time/rate?go-get=1: dial tcp 216.239.37.1:443: i/o timeout) 这是因为国内网络对https://golang.org/网站限制的愿意造成的。 安装依赖包golang.org/x 的包的解决方法是：*（1）去https://github.com/golang/寻找time/rate，找到GitHub地址是：https://github.com/golang/time.git*（2）执行以下命令 1234$mkdir -p $GOPATH/src/golang.org/x/$cd $GOPATH/src/golang.org/x/$git clone https://github.com/golang/time.git time $go install time 例如:package golang.org/x/net/context: unrecognized 去github查找，找到的地址为： https://github.com/golang/net.git然后执行命令：$mkdir -p $GOPATH/src/golang.org/x/$cd $GOPATH/src/golang.org/x/$git clone https://github.com/golang/net.git net$go install net]]></content>
       <categories>
