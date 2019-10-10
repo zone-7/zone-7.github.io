@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>Docker Redis 集群安装 | 第七区</title>
+    <title>基于H5的人脸检测实践 | 第七区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
     <meta name="description" content="zone7的分享">
@@ -76,19 +76,19 @@
         <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
         <ul class="menu hidden" id="ZONE7__menu">
             
-            <li rel="/2019/08/04/docker/2019-08-04-docker redis 集群安装/index.html" class="item ">
+            <li rel="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2019/08/04/docker/2019-08-04-docker redis 集群安装/index.html" class="item ">
+            <li rel="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2019/08/04/docker/2019-08-04-docker redis 集群安装/index.html" class="item ">
+            <li rel="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/index.html" class="item ">
                 <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
             </li>
             
-            <li rel="/2019/08/04/docker/2019-08-04-docker redis 集群安装/index.html" class="item ">
+            <li rel="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/index.html" class="item ">
                 <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
             </li>
             
@@ -150,23 +150,23 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h2 class="post-title"><span>Docker Redis 集群安装</span></h2>
+        <h2 class="post-title"><span>基于H5的人脸检测实践</span></h2>
     </header>
 
     <p class="post-meta text-center">
         zone-7 发表于
-        <time datetime="2019-08-03T16:00:00.000Z">2019-08-04</time>
+        <time datetime="2019-10-09T16:00:00.000Z">2019-10-10</time>
     </p>
     <p class="post-meta text-center">
         
             <span class="post-cat">分类：
-                <a class="cat-link" href="/categories/docker/">docker</a>
+                <a class="cat-link" href="/categories/GO/">GO</a>
             </span>
             <span class="post-tags">
                 标签：
                 
     
-        <a href="/tags/docker/" title="docker">docker</a>
+        <a href="/tags/GO/" title="GO">GO</a>
     
 
             </span> 
@@ -185,33 +185,15 @@
         </script>
     
     <div class="post-content">
-        <h1 id="拉取redis镜像"><a href="#拉取redis镜像" class="headerlink" title="拉取redis镜像"></a>拉取redis镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis:5.0.3</span><br></pre></td></tr></table></figure>
+        <p>在执行go get 命令下载 golang.org/x 相关的包时经常报timeout错误。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">package golang.org/x/time/rate: unrecognized import path </span><br><span class="line">&quot;golang.org/x/time/rate&quot; (https fetch: Get https://golang.org/x/time/rate?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)</span><br></pre></td></tr></table></figure>
 
-<h1 id="增加配置文件redis-cluster-tmpl"><a href="#增加配置文件redis-cluster-tmpl" class="headerlink" title="增加配置文件redis-cluster.tmpl"></a>增加配置文件redis-cluster.tmpl</h1><p>在用户目录下创建文件 ${userpath}/redis-cluster/redis-cluster.tmpl</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">port $&#123;PORT&#125;</span><br><span class="line">protected-mode no</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes.conf</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line">cluster-announce-ip 192.168.XX.XX //宿主机服务器IP</span><br><span class="line">cluster-announce-port $&#123;PORT&#125;</span><br><span class="line">cluster-announce-bus-port 1$&#123;PORT&#125;</span><br><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+<p>这是因为国内网络对<a href="https://golang.org/网站限制的愿意造成的。" target="_blank" rel="noopener">https://golang.org/网站限制的愿意造成的。</a></p>
+<p>安装依赖包golang.org/x 的包的解决方法是：<br>*（1）去<a href="https://github.com/golang/寻找time/rate，找到GitHub地址是：https://github.com/golang/time.git" target="_blank" rel="noopener">https://github.com/golang/寻找time/rate，找到GitHub地址是：https://github.com/golang/time.git</a><br>*（2）执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$mkdir -p $GOPATH/src/golang.org/x/</span><br><span class="line">$cd $GOPATH/src/golang.org/x/</span><br><span class="line">$git clone https://github.com/golang/time.git time </span><br><span class="line">$go install time</span><br></pre></td></tr></table></figure>
 
-<p>cluster-announce-ip 为宿主机服务器IP</p>
-<h1 id="创建redis配置文件"><a href="#创建redis配置文件" class="headerlink" title="创建redis配置文件"></a>创建redis配置文件</h1><p>在redis-cluster目录下创建并执行批处理命令，用于创建redis配置文件。<br>创建端口号为从7000 到 7005 的配置文件<br>for port in <code>seq 7000 7005</code>; do <br>  mkdir -p ./${port}/conf <br>  &amp;&amp; PORT=${port} envsubst &lt; ./redis-cluster.tmpl &gt; ./${port}/conf/redis.conf <br>  &amp;&amp; mkdir -p ./${port}/data; <br>done</p>
-<h1 id="创建redis集群的Docker-network"><a href="#创建redis集群的Docker-network" class="headerlink" title="创建redis集群的Docker network"></a>创建redis集群的Docker network</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create redis-net</span><br></pre></td></tr></table></figure>
+<p>例如:<br>package golang.org/x/net/context: unrecognized <br>去github查找，找到的地址为： <a href="https://github.com/golang/net.git" target="_blank" rel="noopener">https://github.com/golang/net.git</a><br>然后执行命令：<br>$mkdir -p $GOPATH/src/golang.org/x/<br>$cd $GOPATH/src/golang.org/x/<br>$git clone <a href="https://github.com/golang/net.git" target="_blank" rel="noopener">https://github.com/golang/net.git</a> net<br>$go install net</p>
 
-<h1 id="启动Redis容器"><a href="#启动Redis容器" class="headerlink" title="启动Redis容器"></a>启动Redis容器</h1><p>将以下批处理命令中${userpath}替换成你的真实路径。执行批处理命令以启动容器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for port in `seq 7000 7005`; do \</span><br><span class="line">  docker run -d -ti -p $&#123;port&#125;:$&#123;port&#125; -p 1$&#123;port&#125;:1$&#123;port&#125; \</span><br><span class="line">  -v $&#123;userpath&#125;/redis_cluster/$&#123;port&#125;/conf/redis.conf:/usr/local/etc/redis/redis.conf \</span><br><span class="line">  -v $&#123;userpath&#125;/redis_cluster/$&#123;port&#125;/data:/data \</span><br><span class="line">  --restart always --name redis-$&#123;port&#125; --net redis-net \</span><br><span class="line">  --sysctl net.core.somaxconn=1024 redis:tag redis-server /usr/local/etc/redis/redis.conf; \</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h1 id="搭建集群"><a href="#搭建集群" class="headerlink" title="搭建集群"></a>搭建集群</h1><h2 id="查看集群网络中的容器ip地址"><a href="#查看集群网络中的容器ip地址" class="headerlink" title="查看集群网络中的容器ip地址"></a>查看集群网络中的容器ip地址</h2><p>可以逐个查看</p>
-<p>查看7000～7005这6个redis容器的IP，命令行如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> docker inspect redis7000 | grep IPAddress</span><br><span class="line">``` </span><br><span class="line">查询结果如下： </span><br><span class="line">```text</span><br><span class="line">[root@localhost ~]# docker inspect redis7000 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;192.168.0.2&quot;, </span><br><span class="line">[root@localhost ~]#</span><br><span class="line">[root@localhost ~]# docker inspect redis7001 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;192.168.0.3&quot;, </span><br><span class="line">[root@localhost ~]#</span><br><span class="line">[root@localhost ~]# docker inspect redis7002 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;192.168.0.4&quot;, </span><br><span class="line">[root@localhost ~]#</span><br><span class="line">[root@localhost ~]# docker inspect redis7003 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;192.168.0.5&quot;, </span><br><span class="line">[root@localhost ~]# docker inspect redis7004 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;192.168.0.6&quot;, </span><br><span class="line">[root@localhost ~]#</span><br><span class="line">[root@localhost ~]# docker inspect redis7005 | grep IPAddress</span><br><span class="line">            &quot;SecondaryIPAddresses&quot;: null,</span><br><span class="line">            &quot;IPAddress&quot;: &quot;172.17.0.7&quot;, </span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用批处理命令查看IP列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for port in `seq 7000 7005`; do \</span><br><span class="line">    echo -n &quot;$(docker inspect --format &apos;&#123;&#123; (index .NetworkSettings.Networks &quot;redis-net&quot;).IPAddress &#125;&#125;&apos; &quot;redis-$&#123;port&#125;&quot;)&quot;:$&#123;port&#125; &apos; &apos; ; \</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<p>得到如下几个ip端口列表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.2:7000 192.168.0.3:7001 192.168.0.4:7002 192.168.0.5:7003 192.168.0.6:7004 192.168.0.7:7005</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h2><p>Redis 5.0版本开始，搭建集群已经不再使用ruby了,而是直接使用redis-cli来创建集群。<br>进入其中一个Redis容器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it redis-7005 /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>在docker容器内执行集群命令，注意需要用到上一步得到的IP地址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 192.168.0.2:7000  192.168.0.3:7001  192.168.0.4:7002  192.168.0.5:7003  192.168.0.6:7004  192.168.0.7:7005 --cluster-replicas 1</span><br></pre></td></tr></table></figure>
     </div>
 
 
@@ -219,13 +201,13 @@
     <p class="post-meta">
         
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/docker/">docker</a>
+            <a class="cat-link" href="/categories/GO/">GO</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/docker/" title="docker">docker</a>
+        <a href="/tags/GO/" title="GO">GO</a>
     
 
         </span> 
@@ -264,20 +246,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/">
-            
-                基于H5的人脸检测实践
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/08/01/docker/2019-08-01-docker离线安装/">
+        <a href="/2019/08/04/docker/2019-08-04-docker redis 集群安装/">
             
-                Docker离线安装
+                Docker Redis 集群安装
             
         </a>
     </span>
@@ -293,7 +271,7 @@
   <script>
   ZONE7.Comment({
     container: 'comments',
-    label: 'docker/2019-08-04-docker redis 集群安装' || '2019/08/04/docker/2019-08-04-docker redis 集群安装/',
+    label: 'go/2019-10-10-解决 go get 命令timeout 问题' || '2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/',
     owner: 'zone-7',
     repo: 'zone-7.github.io',
     clientId: '564f71fbf0c5e6e879f2',
@@ -313,7 +291,7 @@
         <h3 class="widget-hd"><strong>目录</strong></h3>
           
              
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#拉取redis镜像"><span class="toc-text">拉取redis镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加配置文件redis-cluster-tmpl"><span class="toc-text">增加配置文件redis-cluster.tmpl</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建redis配置文件"><span class="toc-text">创建redis配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建redis集群的Docker-network"><span class="toc-text">创建redis集群的Docker network</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#启动Redis容器"><span class="toc-text">启动Redis容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建集群"><span class="toc-text">搭建集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看集群网络中的容器ip地址"><span class="toc-text">查看集群网络中的容器ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建集群"><span class="toc-text">创建集群</span></a></li></ol></li></ol>
+    
  
          
     </section>
