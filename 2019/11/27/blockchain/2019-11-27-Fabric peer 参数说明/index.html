@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Fabric peer 参数说明 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            <li rel="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+            <li rel="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/index.html" class="item ">
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+            </li>
+            
+            
+            <li class="item">
+                    
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+  
+            </li>
+            
+        </ul>
+
+      
+        
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>Fabric peer 参数说明</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-11-26T16:00:00.000Z">2019-11-27</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+    <div class="post-content">
+        <p>peer模块是Fabric中的核心模块，在Fabric中被称为节点模块，主要负责存储区块链数据、运行链码、背书、提供对外服务接口等。在Fabric中使用最频繁</p>
+<h1 id="1-peer模块命令和参数"><a href="#1-peer模块命令和参数" class="headerlink" title="1 peer模块命令和参数"></a>1 peer模块命令和参数</h1><pre><code>Usage:
+  peer [flags]
+  peer [command]
+
+Available Commands:
+  chaincode   #操作链码，相关子命令: install|instantiate|invoke|package|query|signpackage|upgrade.
+  channel     #操作通道，相关子命令: create|fetch|join|list|update.
+  logging     #操作日志，相关子命令: getlevel|setlevel|revertlevels.
+  node        #节点服务，相关子命令: start|status.
+  version     #打印版本信息
+
+Flags:
+      --logging-level string       #日志级别
+      --test.coverprofile string   #测试配置文件
+      -v, --version                #显示当前服务器的版本</code></pre><h1 id="2-peer模块的配置选项"><a href="#2-peer模块的配置选项" class="headerlink" title="2 peer模块的配置选项"></a>2 peer模块的配置选项</h1><p>peer模块的配置选项可以通过环境变量或者配置文件的方式来配置,在具体操作中，如果是通过Docker方式启动，一般使用环境变量配置方式。<br>如果是采用直接命令启动，一般是采用配置文件方式</p>
+<ul>
+<li>环境变量的配置示例如下： </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">export set CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock   </span><br><span class="line">export set CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=host</span><br><span class="line">export set CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">export set CORE_PEER_TLS_ENABLED=true</span><br><span class="line">export set CORE_PEER_GOSSIP_USELEADERELECTION=true</span><br><span class="line">export set CORE_PEER_GOSSIP_ORGLEADER=false</span><br><span class="line">export set CORE_PEER_PROFILE_ENABLED=false</span><br><span class="line">export set CORE_PEER_TLS_CERT_FILE=/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.crt</span><br><span class="line">export set CORE_PEER_TLS_KEY_FILE=/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.key</span><br><span class="line">export set CORE_PEER_TLS_ROOTCERT_FILE=/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/ca.crt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置文件示例如下：<br>core.yaml 配置文件<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    peer:</span>       <span class="string">debug</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    cauthdsl:</span>   <span class="string">warning</span></span><br><span class="line"><span class="attr">    gossip:</span>     <span class="string">warning</span></span><br><span class="line"><span class="attr">    ledger:</span>     <span class="string">info</span></span><br><span class="line"><span class="attr">    msp:</span>        <span class="string">warning</span></span><br><span class="line"><span class="attr">    policies:</span>   <span class="string">warning</span></span><br><span class="line"><span class="attr">    grpc:</span>       <span class="string">error</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    format:</span> <span class="string">'<span class="template-variable">%&#123;color&#125;</span><span class="template-variable">%&#123;time:2006-01-02 15:04:05.000 MST&#125;</span> [<span class="template-variable">%&#123;module&#125;</span>] <span class="template-variable">%&#123;shortfunc&#125;</span> -&gt; <span class="template-variable">%&#123;level:.4s&#125;</span> <span class="template-variable">%&#123;id:03x&#125;</span><span class="template-variable">%&#123;color:reset&#125;</span> <span class="template-variable">%&#123;message&#125;</span>'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">peer:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    id:</span> <span class="string">peer0.org1.simple-network.com</span></span><br><span class="line"><span class="attr">    networkId:</span> <span class="string">dev</span></span><br><span class="line"><span class="attr">    listenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7051</span></span><br><span class="line"><span class="attr">    address:</span> <span class="string">peer0.org1.simple-network.com:7051</span></span><br><span class="line"><span class="attr">    chaincodeListenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7052</span></span><br><span class="line"><span class="attr">    addressAutoDetect:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    gomaxprocs:</span> <span class="bullet">-1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    gossip:</span></span><br><span class="line"><span class="attr">        bootstrap:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:7051</span></span><br><span class="line"><span class="attr">        useLeaderElection:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">        orgLeader:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">        endpoint:</span></span><br><span class="line"><span class="attr">        maxBlockCountToStore:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">        maxPropagationBurstLatency:</span> <span class="number">10</span><span class="string">ms</span></span><br><span class="line"><span class="attr">        maxPropagationBurstSize:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">        propagateIterations:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">        propagatePeerNum:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">        pullInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line"><span class="attr">        pullPeerNum:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">        requestStateInfoInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line"><span class="attr">        publishStateInfoInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line"><span class="attr">        stateInfoRetentionInterval:</span></span><br><span class="line"><span class="attr">        publishCertPeriod:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">        skipBlockVerification:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">        dialTimeout:</span> <span class="number">3</span><span class="string">s</span></span><br><span class="line"><span class="attr">        connTimeout:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line"><span class="attr">        recvBuffSize:</span> <span class="number">20</span></span><br><span class="line"><span class="attr">        sendBuffSize:</span> <span class="number">200</span></span><br><span class="line"><span class="attr">        digestWaitTime:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"><span class="attr">        requestWaitTime:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"><span class="attr">        responseWaitTime:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line"><span class="attr">        aliveTimeInterval:</span> <span class="number">5</span><span class="string">s</span></span><br><span class="line"><span class="attr">        aliveExpirationTimeout:</span> <span class="number">25</span><span class="string">s</span></span><br><span class="line"><span class="attr">        reconnectInterval:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">        externalEndpoint:</span> <span class="string">peer0.org1.simpe-network.com:7051</span></span><br><span class="line"><span class="attr">        election:</span></span><br><span class="line"><span class="attr">            startupGracePeriod:</span> <span class="number">15</span><span class="string">s</span></span><br><span class="line"><span class="attr">            membershipSampleInterval:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"><span class="attr">            leaderAliveThreshold:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">            leaderElectionDuration:</span> <span class="number">5</span><span class="string">s</span></span><br><span class="line"><span class="attr">        pvtData:</span></span><br><span class="line"><span class="attr">            maxPeers:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">            minAck:</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    events:</span></span><br><span class="line"><span class="attr">        address:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7053</span></span><br><span class="line"><span class="attr">        buffersize:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">        timeout:</span> <span class="number">10</span><span class="string">ms</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    tls:</span></span><br><span class="line"><span class="attr">        enabled:</span>  <span class="literal">false</span></span><br><span class="line"><span class="attr">        cert:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.crt</span></span><br><span class="line"><span class="attr">        key:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.key</span></span><br><span class="line"><span class="attr">        rootcert:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/ca.crt</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        serverhostoverride:</span></span><br><span class="line"><span class="attr">    fileSystemPath:</span> <span class="string">/home/zym/fabric-ws/simple-demo/peer0-org1/production</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    BCCSP:</span></span><br><span class="line"><span class="attr">        Default:</span> <span class="string">SW</span></span><br><span class="line"><span class="attr">        SW:</span></span><br><span class="line"><span class="attr">            Hash:</span> <span class="string">SHA2</span></span><br><span class="line"><span class="attr">            Security:</span> <span class="number">256</span></span><br><span class="line"><span class="attr">            FileKeyStore:</span></span><br><span class="line"><span class="attr">                KeyStore:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    mspConfigPath:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/msp</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    localMspId:</span> <span class="string">Org1MSP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    profile:</span></span><br><span class="line"><span class="attr">        enabled:</span>     <span class="literal">false</span></span><br><span class="line"><span class="attr">        listenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:6060</span></span><br><span class="line"><span class="attr">    handlers:</span></span><br><span class="line"><span class="attr">        authFilter:</span> <span class="string">"DefaultAuth"</span></span><br><span class="line"><span class="attr">        decorator:</span> <span class="string">"DefaultDecorator"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">vm:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    endpoint:</span> <span class="attr">unix:///var/run/docker.sock</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    docker:</span></span><br><span class="line"><span class="attr">        tls:</span></span><br><span class="line"><span class="attr">            enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">            ca:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/ca.crt</span></span><br><span class="line"><span class="attr">            cert:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/tls.crt</span></span><br><span class="line"><span class="attr">            key:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/tls.key</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        attachStdout:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        hostConfig:</span></span><br><span class="line"><span class="attr">            NetworkMode:</span> <span class="string">host</span></span><br><span class="line"><span class="attr">            Dns:</span></span><br><span class="line"><span class="attr">            LogConfig:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">json-file</span></span><br><span class="line"><span class="attr">                Config:</span></span><br><span class="line"><span class="attr">                    max-size:</span> <span class="string">"50m"</span></span><br><span class="line"><span class="attr">                    max-file:</span> <span class="string">"5"</span></span><br><span class="line"><span class="attr">            Memory:</span> <span class="number">2147483648</span></span><br><span class="line"></span><br><span class="line"><span class="attr">chaincode:</span></span><br><span class="line"><span class="attr">    peerAddress:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    id:</span></span><br><span class="line"><span class="attr">        path:</span></span><br><span class="line"><span class="attr">        name:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    builder:</span> <span class="string">$(DOCKER_NS)/fabric-ccenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    golang:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    car:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    java:</span></span><br><span class="line"><span class="attr">        Dockerfile:</span>  <span class="string">|</span></span><br><span class="line"><span class="string">            from $(DOCKER_NS)/fabric-javaenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">    startuptimeout:</span> <span class="number">300</span><span class="string">s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    executetimeout:</span> <span class="number">30</span><span class="string">s</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    mode:</span> <span class="string">net</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    keepalive:</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    system:</span></span><br><span class="line"><span class="attr">        cscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        lscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        escc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        vscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        qscc:</span> <span class="string">enable</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    logging:</span></span><br><span class="line"><span class="attr">      level:</span>  <span class="string">info</span></span><br><span class="line"><span class="attr">      shim:</span>   <span class="string">warning</span></span><br><span class="line"><span class="attr">      format:</span> <span class="string">'<span class="template-variable">%&#123;color&#125;</span><span class="template-variable">%&#123;time:2006-01-02 15:04:05.000 MST&#125;</span> [<span class="template-variable">%&#123;module&#125;</span>] <span class="template-variable">%&#123;shortfunc&#125;</span> -&gt; <span class="template-variable">%&#123;level:.4s&#125;</span> <span class="template-variable">%&#123;id:03x&#125;</span><span class="template-variable">%&#123;color:reset&#125;</span> <span class="template-variable">%&#123;message&#125;</span>'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">ledger:</span></span><br><span class="line"><span class="attr">  blockchain:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  state:</span></span><br><span class="line"><span class="attr">    stateDatabase:</span> <span class="string">goleveldb</span></span><br><span class="line"><span class="attr">    couchDBConfig:</span></span><br><span class="line"><span class="attr">       couchDBAddress:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:5984</span></span><br><span class="line"><span class="attr">       username:</span></span><br><span class="line"><span class="attr">       password:</span></span><br><span class="line"><span class="attr">       maxRetries:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">       maxRetriesOnStartup:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">       requestTimeout:</span> <span class="number">35</span><span class="string">s</span></span><br><span class="line"><span class="attr">       queryLimit:</span> <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  history:</span></span><br><span class="line"><span class="attr">    enableHistoryDatabase:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-1-peer模块配置文件详解"><a href="#2-1-peer模块配置文件详解" class="headerlink" title="2.1 peer模块配置文件详解"></a>2.1 peer模块配置文件详解</h2><p>peer的配置文件的默认名为core.yaml，配置文件分为logging、peer、vm、chaincode、ledger这5大部分。各部分相关属性如下所示。</p>
+<h3 id="2-1-1-配置文件中logging相关的属性"><a href="#2-1-1-配置文件中logging相关的属性" class="headerlink" title="2.1.1 配置文件中logging相关的属性"></a>2.1.1 配置文件中logging相关的属性</h3><p>longing节点定义了peer模块中所有模块的日志级别和日志格式。 日志级别:critical、error、warning、notice、info、debug</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    peer:</span>       <span class="string">debug</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    cauthdsl:</span>   <span class="string">warning</span></span><br><span class="line"><span class="attr">    gossip:</span>     <span class="string">warning</span></span><br><span class="line"><span class="attr">    ledger:</span>     <span class="string">info</span></span><br><span class="line"><span class="attr">    msp:</span>        <span class="string">warning</span></span><br><span class="line"><span class="attr">    policies:</span>   <span class="string">warning</span></span><br><span class="line"><span class="attr">    grpc:</span>       <span class="string">error</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    format:</span> <span class="string">'<span class="template-variable">%&#123;color&#125;</span><span class="template-variable">%&#123;time:2006-01-02 15:04:05.000 MST&#125;</span> [<span class="template-variable">%&#123;module&#125;</span>] <span class="template-variable">%&#123;shortfunc&#125;</span> -&gt; <span class="template-variable">%&#123;level:.4s&#125;</span> <span class="template-variable">%&#123;id:03x&#125;</span><span class="template-variable">%&#123;color:reset&#125;</span> <span class="template-variable">%&#123;message&#125;</span>'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-2-peer相关的配置"><a href="#2-1-2-peer相关的配置" class="headerlink" title="2.1.2 peer相关的配置"></a>2.1.2 peer相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">peer:</span></span><br><span class="line">	<span class="comment">#节点的编号</span></span><br><span class="line"><span class="attr">    id:</span> <span class="string">peer0.org1.simple-network.com</span> </span><br><span class="line">    <span class="comment">#节点的网络编号</span></span><br><span class="line"><span class="attr">    networkId:</span> <span class="string">dev</span></span><br><span class="line">    <span class="comment">#节点监听地址</span></span><br><span class="line"><span class="attr">    listenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7051</span></span><br><span class="line">    <span class="comment">#节点访问地址</span></span><br><span class="line"><span class="attr">    address:</span> <span class="string">peer0.org1.simple-network.com:7051</span></span><br><span class="line">    <span class="comment">#chaincode监听地址</span></span><br><span class="line"><span class="attr">    chaincodeListenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7052</span></span><br><span class="line">    <span class="comment">#对等端是否应以编程方式确定其地址</span></span><br><span class="line"><span class="attr">    addressAutoDetect:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#peer最大可用cpu数， -1表示用默认值</span></span><br><span class="line"><span class="attr">    gomaxprocs:</span> <span class="bullet">-1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    gossip:</span></span><br><span class="line">    	<span class="comment">#启动节点后向哪些节点发起gossip连接加入网络，本节点需要和所连接节点同属一个组织</span></span><br><span class="line"><span class="attr">        bootstrap:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:7051</span></span><br><span class="line">        <span class="comment">#是否开启主节点自动选举</span></span><br><span class="line"><span class="attr">        useLeaderElection:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment">#是否将当前节点配置成主节点</span></span><br><span class="line"><span class="attr">        orgLeader:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment">#当前节点在组织内的gossip id，默认为peer.address</span></span><br><span class="line"><span class="attr">        endpoint:</span></span><br><span class="line">        <span class="comment">#保存到内存中的区块个数上限，超过则丢弃</span></span><br><span class="line"><span class="attr">        maxBlockCountToStore:</span> <span class="number">100</span></span><br><span class="line">        <span class="comment">#保存消息的最大时间，超过则触发转发给其他节点</span></span><br><span class="line"><span class="attr">        maxPropagationBurstLatency:</span> <span class="number">10</span><span class="string">ms</span></span><br><span class="line">        <span class="comment">#保存消息最大个数，超过则转发给其他节点</span></span><br><span class="line"><span class="attr">        maxPropagationBurstSize:</span> <span class="number">10</span></span><br><span class="line">        <span class="comment">#消息转发次数</span></span><br><span class="line"><span class="attr">        propagateIterations:</span> <span class="number">1</span></span><br><span class="line">        <span class="comment">#消息转发给指定个数的节点</span></span><br><span class="line"><span class="attr">        propagatePeerNum:</span> <span class="number">3</span></span><br><span class="line">        <span class="comment">#拉去消息时间间隔</span></span><br><span class="line"><span class="attr">        pullInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#从指定个数的节点拉取消息</span></span><br><span class="line"><span class="attr">        pullPeerNum:</span> <span class="number">3</span></span><br><span class="line">        <span class="comment">#从节点拉取状态信息消息间隔</span></span><br><span class="line"><span class="attr">        requestStateInfoInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#向其他节点推送状态信息消息的间隔</span></span><br><span class="line"><span class="attr">        publishStateInfoInterval:</span> <span class="number">4</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#状态消息的超时时间</span></span><br><span class="line"><span class="attr">        stateInfoRetentionInterval:</span></span><br><span class="line">        <span class="comment">#启动后在心跳消息中嵌入证书的等待时间</span></span><br><span class="line"><span class="attr">        publishCertPeriod:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#是否不对区块消息进行校验，默认为false</span></span><br><span class="line"><span class="attr">        skipBlockVerification:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment">#gRPC连接拨号的超时时间</span></span><br><span class="line"><span class="attr">        dialTimeout:</span> <span class="number">3</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#建立连接的超时时间</span></span><br><span class="line"><span class="attr">        connTimeout:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#接收消息缓冲区大小</span></span><br><span class="line"><span class="attr">        recvBuffSize:</span> <span class="number">20</span></span><br><span class="line">        <span class="comment">#发送消息缓冲区大小</span></span><br><span class="line"><span class="attr">        sendBuffSize:</span> <span class="number">200</span></span><br><span class="line">        <span class="comment">#处理摘要数据的等待时间</span></span><br><span class="line"><span class="attr">        digestWaitTime:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#处理nonce数据的等待时间</span></span><br><span class="line"><span class="attr">        requestWaitTime:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#终止拉取数据的等待时间</span></span><br><span class="line"><span class="attr">        responseWaitTime:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#心跳发送间隔时间</span></span><br><span class="line"><span class="attr">        aliveTimeInterval:</span> <span class="number">5</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#心跳雄安锡的超时时间</span></span><br><span class="line"><span class="attr">        aliveExpirationTimeout:</span> <span class="number">25</span><span class="string">s</span></span><br><span class="line">        <span class="comment">#断线后重连的时间间隔</span></span><br><span class="line"><span class="attr">        reconnectInterval:</span> <span class="number">2</span></span><br><span class="line">        <span class="comment">#节点配组织外感知的地址，默认为空，表示不被外部感知</span></span><br><span class="line"><span class="attr">        externalEndpoint:</span> <span class="string">peer0.org1.simpe-network.com:7051</span></span><br><span class="line"><span class="attr">        election:</span></span><br><span class="line"><span class="attr">            startupGracePeriod:</span> <span class="number">15</span><span class="string">s</span></span><br><span class="line"><span class="attr">            membershipSampleInterval:</span> <span class="number">1</span><span class="string">s</span></span><br><span class="line"><span class="attr">            leaderAliveThreshold:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">            leaderElectionDuration:</span> <span class="number">5</span><span class="string">s</span></span><br><span class="line"><span class="attr">        pvtData:</span></span><br><span class="line"><span class="attr">            maxPeers:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">            minAck:</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    events:</span></span><br><span class="line">    	<span class="comment">#事件监听地址</span></span><br><span class="line"><span class="attr">        address:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:7053</span></span><br><span class="line">        <span class="comment">#事件消息缓存数，超过该值则被阻塞</span></span><br><span class="line"><span class="attr">        buffersize:</span> <span class="number">100</span></span><br><span class="line">        <span class="comment">#队列阻塞的超时时间</span></span><br><span class="line"><span class="attr">        timeout:</span> <span class="number">10</span><span class="string">ms</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    tls:</span></span><br><span class="line">        <span class="comment">#是否使能tls通信</span></span><br><span class="line"><span class="attr">        enabled:</span>  <span class="literal">false</span></span><br><span class="line">        <span class="comment">#服务器身份验证证书</span></span><br><span class="line"><span class="attr">        cert:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.crt</span></span><br><span class="line">        <span class="comment">#服务器私钥</span></span><br><span class="line"><span class="attr">        key:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/server.key</span></span><br><span class="line">        <span class="comment">#服务器根证书</span></span><br><span class="line"><span class="attr">        rootcert:</span></span><br><span class="line"><span class="attr">            file:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/tls/ca.crt</span></span><br><span class="line">		<span class="comment">#tls握手时指定服务器名称</span></span><br><span class="line"><span class="attr">        serverhostoverride:</span></span><br><span class="line">    <span class="comment">#账本数据文件存放路径</span></span><br><span class="line"><span class="attr">    fileSystemPath:</span> <span class="string">/home/zym/fabric-ws/simple-demo/peer0-org1/production</span></span><br><span class="line">	<span class="comment">#加密机制相关的配置</span></span><br><span class="line"><span class="attr">    BCCSP:</span></span><br><span class="line"><span class="attr">        Default:</span> <span class="string">SW</span></span><br><span class="line"><span class="attr">        SW:</span></span><br><span class="line"><span class="attr">            Hash:</span> <span class="string">SHA2</span></span><br><span class="line"><span class="attr">            Security:</span> <span class="number">256</span></span><br><span class="line"><span class="attr">            FileKeyStore:</span></span><br><span class="line"><span class="attr">                KeyStore:</span></span><br><span class="line">	<span class="comment">#当前节点的msp路径</span></span><br><span class="line"><span class="attr">    mspConfigPath:</span> <span class="string">/home/zym/fabric-ws/simple-demo/crypto-config/peerOrganizations/org1.simple-network.com/peers/peer0.org1.simple-network.com/msp</span></span><br><span class="line">	<span class="comment">#当前节点名称</span></span><br><span class="line"><span class="attr">    localMspId:</span> <span class="string">Org1MSP</span></span><br><span class="line">	</span><br><span class="line"><span class="attr">    profile:</span></span><br><span class="line">   		<span class="comment">#是否开启了go profile</span></span><br><span class="line"><span class="attr">        enabled:</span>     <span class="literal">false</span></span><br><span class="line">        <span class="comment">#go profile获取地址</span></span><br><span class="line"><span class="attr">        listenAddress:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:6060</span></span><br><span class="line"><span class="attr">    handlers:</span></span><br><span class="line"><span class="attr">        authFilter:</span> <span class="string">"DefaultAuth"</span></span><br><span class="line"><span class="attr">        decorator:</span> <span class="string">"DefaultDecorator"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-3-vm相关的配置"><a href="#2-1-3-vm相关的配置" class="headerlink" title="2.1.3 vm相关的配置"></a>2.1.3 vm相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">vm:</span></span><br><span class="line">    <span class="comment">#docker服务器的daemon的地址</span></span><br><span class="line"><span class="attr">    endpoint:</span> <span class="attr">unix:///var/run/docker.sock</span></span><br><span class="line"><span class="attr">    docker:</span></span><br><span class="line"><span class="attr">        tls:</span></span><br><span class="line">            <span class="comment">#是否启动docker的tls通信</span></span><br><span class="line"><span class="attr">            enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">            ca:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/ca.crt</span></span><br><span class="line"><span class="attr">            cert:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/tls.crt</span></span><br><span class="line"><span class="attr">            key:</span></span><br><span class="line"><span class="attr">                file:</span> <span class="string">docker/tls.key</span></span><br><span class="line">        <span class="comment">#是否将docker的消息绑定到指定的输出</span></span><br><span class="line"><span class="attr">        attachStdout:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        hostConfig:</span></span><br><span class="line">            <span class="comment">#chaincode容器的网络命名模式</span></span><br><span class="line"><span class="attr">            NetworkMode:</span> <span class="string">host</span></span><br><span class="line"><span class="attr">            Dns:</span></span><br><span class="line"><span class="attr">            LogConfig:</span></span><br><span class="line">                <span class="comment">#docker日志配置信息</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">json-file</span></span><br><span class="line"><span class="attr">                Config:</span></span><br><span class="line"><span class="attr">                    max-size:</span> <span class="string">"50m"</span></span><br><span class="line"><span class="attr">                    max-file:</span> <span class="string">"5"</span></span><br><span class="line"><span class="attr">            Memory:</span> <span class="number">2147483648</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-4-chaincode相关的配置"><a href="#2-1-4-chaincode相关的配置" class="headerlink" title="2.1.4 chaincode相关的配置"></a>2.1.4 chaincode相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">chaincode:</span></span><br><span class="line">    <span class="comment">#chaincode中peer服务器地址</span></span><br><span class="line"><span class="attr">    peerAddress:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    id:</span></span><br><span class="line"><span class="attr">        path:</span></span><br><span class="line"><span class="attr">        name:</span></span><br><span class="line">    <span class="comment">#本地编译环境为docker镜像</span></span><br><span class="line"><span class="attr">    builder:</span> <span class="string">$(DOCKER_NS)/fabric-ccenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line">    <span class="comment">#go语言版本的chaincode的基础镜像</span></span><br><span class="line"><span class="attr">    golang:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line">    <span class="comment">#car格式的chaincode生成镜像文件时的基础镜像</span></span><br><span class="line"><span class="attr">    car:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line">    <span class="comment">#java版本的chaincode基础镜像</span></span><br><span class="line"><span class="attr">    java:</span></span><br><span class="line"><span class="attr">        Dockerfile:</span>  <span class="string">|</span></span><br><span class="line"><span class="string">            from $(DOCKER_NS)/fabric-javaenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line"><span class="string">    #启动chaincode容器时的超时时间，超过这个时间认为启动失败</span></span><br><span class="line"><span class="string"></span><span class="attr">    startuptimeout:</span> <span class="number">300</span><span class="string">s</span></span><br><span class="line">    <span class="comment">#执行Invoke和Init方法时的超时时间，超过这个时间认定执行失败</span></span><br><span class="line"><span class="attr">    executetimeout:</span> <span class="number">30</span><span class="string">s</span></span><br><span class="line">    <span class="comment">#chaincode运行模式，net为网络模式，dev为开发模式，dev模式下，可以在容器外运行chaincode</span></span><br><span class="line"><span class="attr">    mode:</span> <span class="string">net</span></span><br><span class="line">    <span class="comment">#peer节点和chaincode节点的心跳时间的保持时间，如果这个之小于等于0，相当于关闭心跳保持</span></span><br><span class="line"><span class="attr">    keepalive:</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#系统chaincode的开关</span></span><br><span class="line"><span class="attr">    system:</span></span><br><span class="line"><span class="attr">        cscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        lscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        escc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        vscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        qscc:</span> <span class="string">enable</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#chaincode的模块日志级别和日志格式</span></span><br><span class="line"><span class="attr">    logging:</span></span><br><span class="line"><span class="attr">      level:</span>  <span class="string">info</span></span><br><span class="line"><span class="attr">      shim:</span>   <span class="string">warning</span></span><br><span class="line"></span><br><span class="line"><span class="attr">      format:</span> <span class="string">'<span class="template-variable">%&#123;color&#125;</span><span class="template-variable">%&#123;time:2006-01-02 15:04:05.000 MST&#125;</span> [<span class="template-variable">%&#123;module&#125;</span>] <span class="template-variable">%&#123;shortfunc&#125;</span> -&gt; <span class="template-variable">%&#123;level:.4s&#125;</span> <span class="template-variable">%&#123;id:03x&#125;</span><span class="template-variable">%&#123;color:reset&#125;</span> <span class="template-variable">%&#123;message&#125;</span>'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-5-ledger相关的配置"><a href="#2-1-5-ledger相关的配置" class="headerlink" title="2.1.5 ledger相关的配置"></a>2.1.5 ledger相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">ledger:</span></span><br><span class="line"><span class="attr">  blockchain:</span></span><br><span class="line"><span class="attr">  state:</span></span><br><span class="line">    <span class="comment">#数据库类型，目前支持golevedb和CouchDB</span></span><br><span class="line"><span class="attr">    stateDatabase:</span> <span class="string">goleveldb</span></span><br><span class="line">    <span class="comment">#如果上面配置了CouchDB，则下面couchDB相关的配置生效</span></span><br><span class="line"><span class="attr">    couchDBConfig:</span></span><br><span class="line"><span class="attr">       couchDBAddress:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:5984</span></span><br><span class="line"><span class="attr">       username:</span></span><br><span class="line"><span class="attr">       password:</span></span><br><span class="line"><span class="attr">       maxRetries:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">       maxRetriesOnStartup:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">       requestTimeout:</span> <span class="number">35</span><span class="string">s</span></span><br><span class="line"><span class="attr">       queryLimit:</span> <span class="number">10000</span></span><br><span class="line">    </span><br><span class="line">  <span class="comment">#是否使能历史状态数据库</span></span><br><span class="line"><span class="attr">  history:</span></span><br><span class="line"><span class="attr">    enableHistoryDatabase:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/10/10/go/2019-10-10-解决 go get 命令timeout 问题/">
+            
+                解决go get 命令 timeout错误的方法
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'blockchain/2019-11-27-Fabric peer 参数说明' || '2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+     
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-peer模块命令和参数"><span class="toc-text">1 peer模块命令和参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-peer模块的配置选项"><span class="toc-text">2 peer模块的配置选项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-peer模块配置文件详解"><span class="toc-text">2.1 peer模块配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-配置文件中logging相关的属性"><span class="toc-text">2.1.1 配置文件中logging相关的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-peer相关的配置"><span class="toc-text">2.1.2 peer相关的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-vm相关的配置"><span class="toc-text">2.1.3 vm相关的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-chaincode相关的配置"><span class="toc-text">2.1.4 chaincode相关的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-ledger相关的配置"><span class="toc-text">2.1.5 ledger相关的配置</span></a></li></ol></li></ol></li></ol>
+ 
+         
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd1"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    <!-- 
+    <li>
+        <a href="/categories/GO/">GO</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/docker/">docker</a>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/区块链/">区块链</a>
+        <span class="badge">(1)</span>
+    </li>
+     -->
+
+    
+    <div class="category-block"> 
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GO/">GO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/springboot-vue前后端开发/">springboot&vue前后端开发</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">1</span></li></ul>
+    </div>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (1)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>
