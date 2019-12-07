@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>五、Fabric 动态添加节点 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/index.html" class="item ">
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+            </li>
+            
+            
+            <li class="item">
+                    
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+  
+            </li>
+            
+        </ul>
+
+      
+        
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>五、Fabric 动态添加节点</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-06T16:00:00.000Z">2019-12-07</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+    <div class="post-content">
+        <p>本文基于hellowrold区块链环境，为org1动态添加节点peer2。 </p>
+<p>#1. 修改crypto-config.yaml 文件添加peer2</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># "OrdererOrgs" - Definition of organizations managing orderer nodes</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">OrdererOrgs:</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Orderer</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Orderer</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Specs" - See PeerOrgs below for complete description</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer2</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer3</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer4</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># "PeerOrgs" - Definition of organizations managing peer nodes</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">PeerOrgs:</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Org1</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Org1</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">org1.example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer0</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer1</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer2</span>    <span class="comment">#增加节点</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Specs"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Uncomment this section to enable the explicit definition of hosts in your</span></span><br><span class="line">    <span class="comment"># configuration.  Most users will want to use Template, below</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># Specs is an array of Spec entries.  Each Spec entry consists of two fields:</span></span><br><span class="line">    <span class="comment">#   - Hostname:   (Required) The desired hostname, sans the domain.</span></span><br><span class="line">    <span class="comment">#   - CommonName: (Optional) Specifies the template or explicit override for</span></span><br><span class="line">    <span class="comment">#                 the CN.  By default, this is the template:</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#                              "&#123;&#123;.Hostname&#125;&#125;.&#123;&#123;.Domain&#125;&#125;"</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#                 which obtains its values from the Spec.Hostname and</span></span><br><span class="line">    <span class="comment">#                 Org.Domain, respectively.</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Specs:</span></span><br><span class="line">    <span class="comment">#   - Hostname: foo # implicitly "foo.org1.example.com"</span></span><br><span class="line">    <span class="comment">#     CommonName: foo27.org5.example.com # overrides Hostname-based FQDN set above</span></span><br><span class="line">    <span class="comment">#   - Hostname: bar</span></span><br><span class="line">    <span class="comment">#   - Hostname: baz</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Template"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Allows for the definition of 1 or more hosts that are created sequentially</span></span><br><span class="line">    <span class="comment"># from a template. By default, this looks like "peer%d" from 0 to Count-1.</span></span><br><span class="line">    <span class="comment"># You may override the number of nodes (Count), the starting index (Start)</span></span><br><span class="line">    <span class="comment"># or the template used to construct the name (Hostname).</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># Note: Template and Specs are not mutually exclusive.  You may define both</span></span><br><span class="line">    <span class="comment"># sections and the aggregate nodes will be created for you.  Take care with</span></span><br><span class="line">    <span class="comment"># name collisions</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Template:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">3</span>    <span class="comment">#增加节点</span></span><br><span class="line">      <span class="comment"># Start: 5</span></span><br><span class="line">      <span class="comment"># Hostname: &#123;&#123;.Prefix&#125;&#125;&#123;&#123;.Index&#125;&#125; # default</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Users"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Count: The number of user accounts _in addition_ to Admin</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Users:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Org2: See "Org1" for full specification</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Org2</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">org2.example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer0</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer1</span> </span><br><span class="line"><span class="attr">    Template:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    Users:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>#2. 生成peer2的密钥<br>执行./bin/cryptogen extend –config=./crypto-config.yaml 生成peer2的密钥</p>
+<p><img src="https://zone-7.github.io/img/fabric/crypto-config.png" alt="密钥"> </p>
+<p>#3. 添加peer2的docker-compose 配置文件<br>docker-compose-org1-peer3.yaml </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  hello:</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">peer2.org1.example.com:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">peer2.org1.example.com</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-peer</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_ID=peer2.org1.example.com</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_LISTENADDRESS=0.0.0.0:7251</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_ADDRESS=peer2.org1.example.com:7251</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_CHAINCODEADDRESS=peer2.org1.example.com:7252</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7252</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7251</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_LOCALMSPID=Org1MSP</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span></span><br><span class="line">      <span class="comment"># the following setting starts chaincode containers on the same</span></span><br><span class="line">      <span class="comment"># bridge network as the peers</span></span><br><span class="line">      <span class="comment"># https://docs.docker.com/compose/networking/</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=helloworld_hello</span></span><br><span class="line">      <span class="comment">#- CORE_LOGGING_LEVEL=ERROR</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_LOGGING_LEVEL=DEBUG</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_GOSSIP_USELEADERELECTION=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_GOSSIP_ORGLEADER=false</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_PROFILE_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt</span></span><br><span class="line"><span class="attr">    working_dir:</span> <span class="string">/opt/gopath/src/github.com/hyperledger/fabric/peer</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">peer</span> <span class="string">node</span> <span class="string">start</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">/var/run/:/host/var/run/</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/msp:/etc/hyperledger/fabric/msp</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls:/etc/hyperledger/fabric/tls</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">7251</span><span class="string">:7251</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">7252</span><span class="string">:7252</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">7253</span><span class="string">:7253</span> </span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  cli_peer2_org1:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">cli_peer2_org1</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-tools</span></span><br><span class="line"><span class="attr">    tty:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">GOPATH=/opt/gopath</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_LOGGING_LEVEL=DEBUG</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_ID=cli_peer2_org1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_ADDRESS=peer2.org1.example.com:7251</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_LOCALMSPID=Org1MSP</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls/server.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls/server.key</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls/ca.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp</span></span><br><span class="line"><span class="attr">    working_dir:</span> <span class="string">/opt/gopath/src/github.com/hyperledger/fabric/peer</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">/var/run/:/host/var/run/</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./chaincode/go/:/opt/gopath/src/github.com/hyperledger/fabric/helloworld/chaincode/go</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">peer2.org1.example.com</span> </span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>启动节点 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose -f docker-compose-org1-peer2.yaml  up -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置新节点的通道和链码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#进入cli 执行</span><br><span class="line">docker exec -it cli_peer2_org1 bash</span><br><span class="line">#CA 路径配置 </span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">#添加到channel   </span><br><span class="line">peer channel join -b mychannel.block</span><br><span class="line">#安装链码</span><br><span class="line">peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0</span><br><span class="line">#查询链码</span><br><span class="line">peer chaincode query -C mychannel -n mycc -c &apos;&#123;&quot;function&quot;:&quot;get&quot;,&quot;Args&quot;:[&quot;a&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-一、Fabric 简介/">
+            
+                一、Fabric 简介
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/">
+            
+                ca-server和ca-client的TLS连接配置
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'blockchain/2019-12-07-五、Fabric 动态添加节点' || '2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+     
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    
+ 
+         
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd1"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    <!-- 
+    <li>
+        <a href="/categories/区块链/Fabric/">Fabric</a>
+        <span class="badge">(8)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/GO/">GO</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/docker/">docker</a>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/区块链/">区块链</a>
+        <span class="badge">(8)</span>
+    </li>
+     -->
+
+    
+    <div class="category-block"> 
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GO/">GO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot-vue前后端开发/">springboot&vue前后端开发</a><span class="category-list-count">18</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/Fabric/">Fabric</a><span class="category-list-count">8</span></li></ul></li></ul>
+    </div>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (8)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (8)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>
