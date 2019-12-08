@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>七、Fabric CA环境集成与应用 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-七、Fabric CA环境集成与应用/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-七、Fabric CA环境集成与应用/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-七、Fabric CA环境集成与应用/index.html" class="item ">
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+            </li>
+            
+            <li rel="/2019/12/07/blockchain/2019-12-07-七、Fabric CA环境集成与应用/index.html" class="item ">
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+            </li>
+            
+            
+            <li class="item">
+                    
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+  
+            </li>
+            
+        </ul>
+
+      
+        
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>七、Fabric CA环境集成与应用</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-06T16:00:00.000Z">2019-12-07</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+    <div class="post-content">
+        <p>本文基于hellowrold区块链环境，添加CA服务，并使用chaincode测试。  </p>
+<p>在helloworld案例中是由cryptogen这个工具根据crypto-config.yaml而生成用户信息。<br>但是在实际生产环境中，我们应该为每个Org建立一个CA，由CA来管理其中的用户。</p>
+<p>#1.新建docker-compose文件，增加CA容器<br><strong><em>docker-compose-ca.yaml</em></strong>内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  hello:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  ca0:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_CA_NAME=ca-org1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/$&#123;PRIVATE_KEY1&#125;</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_PORT=7054</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"7054:7054"</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">sh</span> <span class="bullet">-c</span> <span class="string">'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/$&#123;PRIVATE_KEY1&#125; -b admin:adminpw -d'</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./client/ca:/root/ca</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">ca_peerOrg1</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  ca1:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-ca</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_CA_NAME=ca-org2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/$&#123;PRIVATE_KEY2&#125;</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">FABRIC_CA_SERVER_PORT=9054</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"9054:9054"</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">sh</span> <span class="bullet">-c</span> <span class="string">'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/$&#123;PRIVATE_KEY2&#125; -b admin:adminpw -d'</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./client/ca:/root/ca</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">ca_peerOrg2</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br></pre></td></tr></table></figure>
+
+<p>Fabric CA Server启动的时候，带了3个重要的参数：</p>
+<ul>
+<li>（1）ca.certfile ：指定了CA的根证书。</li>
+<li>（2）ca.keyfile ：指定了接下来给新用户签发证书时的私钥，这里我们使用变量${PRIVATE_KEY}代替，这是因为每次network_setup的时候，私钥的名字是不一样的，所以需要从启动脚本中传入。</li>
+<li>（3）-b参数：指定了CA Client连接CA Server时使用的用户名密码。</li>
+</ul>
+<h1 id="2-添加startCA-sh启动脚本，将CA容器启动的参数带入"><a href="#2-添加startCA-sh启动脚本，将CA容器启动的参数带入" class="headerlink" title="2.添加startCA.sh启动脚本，将CA容器启动的参数带入"></a>2.添加startCA.sh启动脚本，将CA容器启动的参数带入</h1><p>我们需要新增加一个startCA.sh文件，因为前面我们使用了变量${PRIVATE_KEY1}和${PRIVATE_KEY2}，<br>所以这里我们需要读取变量并带入docker-compose-ca.yaml 启动的时候。具体脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">COMPOSE_FILE=&quot;docker-compose-ca.yaml&quot;</span><br><span class="line">##########</span><br><span class="line">#key1</span><br><span class="line">folder1=&quot;crypto-config/peerOrganizations/org1.example.com/ca&quot;</span><br><span class="line">privName1=&quot;&quot;</span><br><span class="line">for file_a in $&#123;folder1&#125;/*</span><br><span class="line">do</span><br><span class="line">  temp_file=`basename $file_a`</span><br><span class="line"></span><br><span class="line">  if [ $&#123;temp_file##*.&#125; != &quot;pem&quot; ];then</span><br><span class="line">    privName1=$temp_file</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo $privName1</span><br><span class="line"></span><br><span class="line">############</span><br><span class="line">#key2</span><br><span class="line">folder2=&quot;crypto-config/peerOrganizations/org2.example.com/ca&quot;</span><br><span class="line">privName2=&quot;&quot;</span><br><span class="line">for file_a in $&#123;folder2&#125;/*</span><br><span class="line">do</span><br><span class="line">  temp_file=`basename $file_a`</span><br><span class="line"></span><br><span class="line">  if [ $&#123;temp_file##*.&#125; != &quot;pem&quot; ];then</span><br><span class="line">    privName2=$temp_file</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line">echo $privName2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CHANNEL_NAME=$CH_NAME TIMEOUT=$CLI_TIMEOUT PRIVATE_KEY1=$privName1 PRIVATE_KEY2=$privName2 docker-compose -f $COMPOSE_FILE up -d 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>这里脚本的逻辑是去crypto-config/peerOrganizations/org1.example.com/ca这个文件夹中去遍历文件，找到后缀_sk的私钥文件的文件名，并把文件名赋值给privName，然后在docker-compse-ca的启动时，指定到PRIVATE_KEY。</p>
+<p>#3.使用CA Client生成新用户<br>通过前面2步，我们给Org1、Org2设置的CA Server。接下来我们需要安装ca client，用于访问和操作CA。</p>
+<p>##3.1启动Fabric网络<br>运行./startCA.sh</p>
+<p>##3.2下载并安装Fabric CA Client</p>
+<p>然后执行以下命令安装Fabric CA Client：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/hyperledger/fabric-ca/cmd/...</span><br></pre></td></tr></table></figure>
+
+<p>该命令执行完毕后，我们应该在~/go/bin下面看到生成的2个文件：</p>
+<p>fabric-ca-client  fabric-ca-server</p>
+<p>##3.3注册认证管理员<br>首先需要以管理员身份使用CA Client连接到Org1的 CA Server，并生成相应的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export FABRIC_CA_CLIENT_HOME=/Users/zgq/ca</span><br><span class="line">fabric-ca-client enroll -u http://admin:adminpw@localhost:7054</span><br></pre></td></tr></table></figure>
+
+<p>这个时候我们可以去$HOME/ca目录，看到CA Client创建了一个fabric-ca-client-config.yaml文件和一个msp文件夹。config可以去修改一些组织信息之类的。</p>
+<h2 id="3-4注册新用户"><a href="#3-4注册新用户" class="headerlink" title="3.4注册新用户"></a>3.4注册新用户</h2><p>接着新建一个叫zgq的用户，那么需要先执行这个命令：<br>fabric-ca-client register –id.name zgq –id.type user –id.affiliation org1.department1 –id.attrs ‘hf.Revoker=true,foo=bar’<br>系统会返回一个该用户的密码：</p>
+<p>User provided config file: /Users/zgq/ca/fabric-ca-client-config.yaml<br>Configuration file location: /Users/zgq/ca/fabric-ca-client-config.yaml </p>
+<p>Password: GOuMzkcGgGzq<br>拿到这个密码后就可以再次使用enroll命令，给zgq这个用户生成msp的私钥和证书：</p>
+<p>fabric-ca-client enroll -u <a href="http://zgq:GOuMzkcGgGzq@localhost:7054" target="_blank" rel="noopener">http://zgq:GOuMzkcGgGzq@localhost:7054</a> -M $FABRIC_CA_CLIENT_HOME/zgq<br>现在新用户devin的私钥和证书就在$HOME/ca/devinmsp目录下，我们可以使用tree命令查看一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zgq/ </span><br><span class="line">├── cacerts </span><br><span class="line">│   └── localhost-7054.pem </span><br><span class="line">├── keystore </span><br><span class="line">│   └── a044e43ad1fd7cdfd1fd995abaef53895534bd70e8cdfdb665430d12665f2041_sk </span><br><span class="line">└── signcerts </span><br><span class="line">    └── cert.pem</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-编写ChainCode验证CA用户"><a href="#4-编写ChainCode验证CA用户" class="headerlink" title="4.编写ChainCode验证CA用户"></a>4.编写ChainCode验证CA用户</h1><h2 id="4-1-编写链码"><a href="#4-1-编写链码" class="headerlink" title="4.1 编写链码"></a>4.1 编写链码</h2><p>当前用户的信息的获取主要是用到ChainCode接口提供的GetCreator方法，具体的ChainCode如下：</p>
+<p><strong><em>sampleChaincode.go</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">   &quot;github.com/hyperledger/fabric/core/chaincode/shim&quot;</span><br><span class="line">   pb &quot;github.com/hyperledger/fabric/protos/peer&quot;</span><br><span class="line">   &quot;fmt&quot;</span><br><span class="line">   &quot;encoding/pem&quot;</span><br><span class="line">   &quot;crypto/x509&quot;</span><br><span class="line">   &quot;bytes&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type SimpleChaincode struct &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">   err := shim.Start(new(SimpleChaincode))</span><br><span class="line">   if err != nil &#123;</span><br><span class="line">      fmt.Printf(&quot;Error starting Simple chaincode: %s&quot;, err)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response &#123;</span><br><span class="line">   return shim.Success(nil)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response &#123;</span><br><span class="line">   function, args := stub.GetFunctionAndParameters()</span><br><span class="line">   fmt.Println(&quot;invoke is running &quot; + function)</span><br><span class="line">   if function == &quot;cert&quot; &#123;//自定义函数名称</span><br><span class="line">      return t.testCertificate(stub, args)//定义调用的函数</span><br><span class="line">   &#125;</span><br><span class="line">   return shim.Error(&quot;Received unknown function invocation&quot;)</span><br><span class="line">&#125;</span><br><span class="line">func (t *SimpleChaincode) testCertificate(stub shim.ChaincodeStubInterface, args []string) pb.Response&#123;</span><br><span class="line">   creatorByte,_:= stub.GetCreator()</span><br><span class="line">   certStart := bytes.IndexAny(creatorByte, &quot;-----&quot;)// Devin:I don&apos;t know why sometimes -----BEGIN is invalid, so I use -----</span><br><span class="line">   if certStart == -1 &#123;</span><br><span class="line">      fmt.Errorf(&quot;No certificate found&quot;)</span><br><span class="line">   &#125;</span><br><span class="line">   certText := creatorByte[certStart:]</span><br><span class="line">   bl, _ := pem.Decode(certText)</span><br><span class="line">   if bl == nil &#123;</span><br><span class="line">      fmt.Errorf(&quot;Could not decode the PEM structure&quot;)</span><br><span class="line">   &#125;</span><br><span class="line">   fmt.Println(string(certText))</span><br><span class="line">   cert, err := x509.ParseCertificate(bl.Bytes)</span><br><span class="line">   if err != nil &#123;</span><br><span class="line">      fmt.Errorf(&quot;ParseCertificate failed&quot;)</span><br><span class="line">   &#125;</span><br><span class="line">   fmt.Println(cert)</span><br><span class="line">   uname:=cert.Subject.CommonName</span><br><span class="line">   fmt.Println(&quot;Name:&quot;+uname)</span><br><span class="line">   return shim.Success([]byte(&quot;Called testCertificate &quot;+uname))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##4.2 安装链码比验证CA</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#进入peer 客户端</span><br><span class="line">docker exec -it cli_peer0_org1 bash</span><br><span class="line">#安装</span><br><span class="line">peer chaincode install -n sicc -p github.com/hyperledger/fabric/helloworld/chaincode/go/simplecc/ -v 1.0</span><br><span class="line"></span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line">#实例化</span><br><span class="line">peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n sicc -v 1.0 -c &apos;&#123;&quot;Args&quot;:[]&#125;&apos; -P &quot;OR (&apos;Org1MSP.peer&apos;,&apos;Org2MSP.peer&apos;)&quot;</span><br><span class="line">#验证CA用户信息</span><br><span class="line">peer chaincode query -C mychannel -n sicc -c &apos;&#123;&quot;Args&quot;:[&quot;cert&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<p>系统返回结果，说明我们当前的用户是<a href="mailto:Admin@org1.example.com" target="_blank" rel="noopener">Admin@org1.example.com</a></p>
+<h1 id="5-验证新用户"><a href="#5-验证新用户" class="headerlink" title="5.验证新用户"></a>5.验证新用户</h1><p>设置新用户的证书和私钥文件夹，验证新用户的可用性。<br>我们已经给org1设置的CA，用户zgq是在org1下，所以需要把/Users/zgq/ca/zgq下面的文件转移到org1下面。org1的用户证书和私钥文件夹在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~/go/src/fabric-examples/helloworld/crypto-config/peerOrganizations/org1.example.com/users</span><br><span class="line"></span><br><span class="line">#新建文件夹zgq用于保存新用户的证书和私钥，新建命令行窗口，保留前面已经登录的cli_peer0_org1窗口，接下来还会用于验证CA用户。</span><br><span class="line"></span><br><span class="line">cd ~/go/src/fabric-examples/helloworld/crypto-config/peerOrganizations/org1.example.com/users</span><br><span class="line"></span><br><span class="line">mkdir zgq</span><br><span class="line"></span><br><span class="line">cp ~/ca/zgq/ zgq/msp –R</span><br><span class="line">#从signcerts这个文件夹中拷贝一个.pem到admincerts目录，运行以下命令：</span><br><span class="line"></span><br><span class="line">mkdir zgq/msp/admincerts</span><br><span class="line"></span><br><span class="line">cp zgq/msp/signcerts/cert.pem zgq/msp/admincerts/</span><br></pre></td></tr></table></figure>
+
+<p>新用户的所有证书准备完毕，tree zgq看看结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tree zgq</span><br><span class="line"></span><br><span class="line">zgq/ </span><br><span class="line">└── msp </span><br><span class="line">    ├── admincerts </span><br><span class="line">    │   └── cert.pem </span><br><span class="line">    ├── cacerts </span><br><span class="line">    │   └── localhost-7054.pem </span><br><span class="line">    ├── keystore </span><br><span class="line">    │   └── a044e43ad1fd7cdfd1fd995abaef53895534bd70e8cdfdb665430d12665f2041_sk </span><br><span class="line">    └── signcerts </span><br><span class="line">        └── cert.pem</span><br></pre></td></tr></table></figure>
+
+<p>切换到cli_peer0_org1窗口，我们把当前用户msp文件夹切换成zgq的文件夹，具体命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/devin/msp</span><br></pre></td></tr></table></figure>
+
+<p>接着再运行一下ChainCode：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode query -C mychannel -n test1 -c &apos;&#123;&quot;Args&quot;:[&quot;cert&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到结果已经变化了，用户已经由Admin变成了zgq。</p>
+<p>关于CA其他内容可参考官方文档：<a href="http://hyperledger-fabric-ca.readthedocs.io/en/latest/" target="_blank" rel="noopener">http://hyperledger-fabric-ca.readthedocs.io/en/latest/</a></p>
+
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/">
+            
+                五、Fabric 动态添加节点
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-一、Fabric 简介/">
+            
+                一、Fabric 简介
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'blockchain/2019-12-07-七、Fabric CA环境集成与应用' || '2019/12/07/blockchain/2019-12-07-七、Fabric CA环境集成与应用/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+     
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2-添加startCA-sh启动脚本，将CA容器启动的参数带入"><span class="toc-text">2.添加startCA.sh启动脚本，将CA容器启动的参数带入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4注册新用户"><span class="toc-text">3.4注册新用户</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-编写ChainCode验证CA用户"><span class="toc-text">4.编写ChainCode验证CA用户</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-编写链码"><span class="toc-text">4.1 编写链码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-验证新用户"><span class="toc-text">5.验证新用户</span></a></li></ol>
+ 
+         
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd1"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    <!-- 
+    <li>
+        <a href="/categories/区块链/Fabric/">Fabric</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/GO/">GO</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/docker/">docker</a>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/springboot-vue前后端开发/">springboot&amp;vue前后端开发</a>
+        <span class="badge">(18)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/其他/">其他</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/区块链/">区块链</a>
+        <span class="badge">(9)</span>
+    </li>
+     -->
+
+    
+    <div class="category-block"> 
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GO/">GO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot-vue前后端开发/">springboot&vue前后端开发</a><span class="category-list-count">18</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/Fabric/">Fabric</a><span class="category-list-count">9</span></li></ul></li></ul>
+    </div>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (9)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (9)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>
