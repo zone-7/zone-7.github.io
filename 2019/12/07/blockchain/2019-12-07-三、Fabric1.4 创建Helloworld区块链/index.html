@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>三、Fabric 创建Helloword区块链 | 第七区</title>
+    <title>三、Fabric1.4 创建Helloword区块链 | 第七区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
     <meta name="description" content="zone7的分享">
@@ -76,19 +76,19 @@
         <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
         <ul class="menu hidden" id="ZONE7__menu">
             
-            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric 创建Helloworld区块链/index.html" class="item ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric 创建Helloworld区块链/index.html" class="item ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
-            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric 创建Helloworld区块链/index.html" class="item ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链/index.html" class="item ">
                 <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
             </li>
             
-            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric 创建Helloworld区块链/index.html" class="item ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链/index.html" class="item ">
                 <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
             </li>
             
@@ -150,7 +150,7 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h2 class="post-title"><span>三、Fabric 创建Helloword区块链</span></h2>
+        <h2 class="post-title"><span>三、Fabric1.4 创建Helloword区块链</span></h2>
     </header>
 
     <p class="post-meta text-center">
@@ -188,7 +188,7 @@
     
     <div class="post-content">
         <p>以下内容记录了基于Fabric 架构，利用docker容器创建一个简单的区块链案例，并实现第一个智能合约（链码）。详细配置可以参考fabric-sample/first-network</p>
-<p>#1.环境准备<br>安装以下环境，详细安装过程上网搜索相关资料：</p>
+<h1 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1.环境准备"></a>1.环境准备</h1><p>安装以下环境，详细安装过程上网搜索相关资料：</p>
 <ul>
 <li>git</li>
 <li>nodejs</li>
@@ -200,8 +200,7 @@
 <p>配置gopath环境变量,以mac系统为例,打开~/.bash_profile 添加下面内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#go的安装路径</span><br><span class="line">export GOROOT=/usr/local/Cellar/go/1.13.4 #go安装包安装的路径 </span><br><span class="line">#hyperledger相关可运行文件，所在的目录，自己可以随意设置</span><br><span class="line">export GOPATH=$HOME/go   </span><br><span class="line">#一些其他与运行hyperledger fabric运行有关的可执行文件所在的目录</span><br><span class="line">export PATH=$GOROOT/bin:$GOPATH/bin:$PATH</span><br></pre></td></tr></table></figure>
 
-<p>#2.下载fabric资源</p>
-<ul>
+<h1 id="2-下载fabric资源"><a href="#2-下载fabric资源" class="headerlink" title="2.下载fabric资源"></a>2.下载fabric资源</h1><ul>
 <li><p>下载fabric</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入文件hyperledger文件路径</span><br><span class="line"># /Users/zgq/go为GPATH </span><br><span class="line">cd /Users/zgq/go/src/github.com/hyperledger</span><br><span class="line">git clone https://github.com/hyperledger/fabric.git</span><br><span class="line">cd fabric</span><br><span class="line">git tag #查看所有版本，点击q退出</span><br><span class="line">git checkout v1.14.2 #切换到tag中你想要切换到的版本</span><br></pre></td></tr></table></figure>
 </li>
@@ -281,8 +280,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./startCA.sh</span><br></pre></td></tr></table></figure>
 
 <p>docker启动后如下所示：<br><img src="https://zone-7.github.io/img/fabric/docker_ps.png" alt="dockerps"> </p>
-<p>#5.创建通道并加入通道</p>
-<ul>
+<h1 id="5-创建通道并加入通道"><a href="#5-创建通道并加入通道" class="headerlink" title="5.创建通道并加入通道"></a>5.创建通道并加入通道</h1><ul>
 <li>节点：peer0.org1.example.com</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#1进入peer0 的客户端</span><br><span class="line">docker exec -it cli_peer0_org1 bash</span><br><span class="line">#2设置ca路径</span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line"></span><br><span class="line">#3创建通道mychannel</span><br><span class="line">peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/mychannel.tx --tls --cafile $ORDERER_CA</span><br><span class="line"></span><br><span class="line">#4节点加入通道mychannel</span><br><span class="line">peer channel join -b mychannel.block</span><br><span class="line"></span><br><span class="line">#5拷贝mychannel.block到宿主机</span><br></pre></td></tr></table></figure>
@@ -295,8 +293,7 @@
 <ul>
 <li>其他节点与peer1.org1.example.com类似</li>
 </ul>
-<p>#6.链码开发与安装</p>
-<p>##6.1 链码开发<br>在helloworld目录下创建 chaincode/go/helloworld文件夹。</p>
+<h1 id="6-链码开发与安装"><a href="#6-链码开发与安装" class="headerlink" title="6.链码开发与安装"></a>6.链码开发与安装</h1><h2 id="6-1-链码开发"><a href="#6-1-链码开发" class="headerlink" title="6.1 链码开发"></a>6.1 链码开发</h2><p>在helloworld目录下创建 chaincode/go/helloworld文件夹。</p>
 <p>目录fabric-samples/helloworld/chaincode/go/helloworld</p>
 <p>我们使用go开发一个包含get和一个set功能的简单的链码，代码如下：</p>
 <ul>
@@ -307,9 +304,7 @@
 <p>*helloworld.go</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> *</span><br><span class="line"> * 文件名称 : main.go</span><br><span class="line"> * 创建者 : zgq</span><br><span class="line"> * 创建日期: 2019/11/24</span><br><span class="line"> * 文件描述: 主入口函数</span><br><span class="line"> * 历史记录: 无</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">    &quot;github.com/hyperledger/fabric/core/chaincode/shim&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    err := shim.Start(new(SimpleChaincode))</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        fmt.Printf(&quot;Error starting Simple chaincode: %s&quot;, err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>##6.2 安装链码</p>
-<p>###在peer0.org1.example.com 安装链码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#进入cli_peer0_org1 docker环境</span><br><span class="line">docker exec -it cli_peer0_org1 bash</span><br><span class="line">#orderer证书</span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line"></span><br><span class="line">#安装链码</span><br><span class="line">peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0</span><br><span class="line"></span><br><span class="line">#查看已经安装的链码</span><br><span class="line">peer chaincode list --installed</span><br><span class="line"></span><br><span class="line">#实例化链码,初始化 a=hello</span><br><span class="line">peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n mycc -v 1.0 -c &apos;&#123;&quot;Args&quot;:[&quot;a&quot;,&quot;hello&quot;]&#125;&apos; -P &quot;OR (&apos;Org1MSP.peer&apos;,&apos;Org2MSP.peer&apos;)&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="6-2-安装链码"><a href="#6-2-安装链码" class="headerlink" title="6.2 安装链码"></a>6.2 安装链码</h2><h3 id="在peer0-org1-example-com-安装链码"><a href="#在peer0-org1-example-com-安装链码" class="headerlink" title="在peer0.org1.example.com 安装链码"></a>在peer0.org1.example.com 安装链码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#进入cli_peer0_org1 docker环境</span><br><span class="line">docker exec -it cli_peer0_org1 bash</span><br><span class="line">#orderer证书</span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line"></span><br><span class="line">#安装链码</span><br><span class="line">peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0</span><br><span class="line"></span><br><span class="line">#查看已经安装的链码</span><br><span class="line">peer chaincode list --installed</span><br><span class="line"></span><br><span class="line">#实例化链码,初始化 a=hello</span><br><span class="line">peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n mycc -v 1.0 -c &apos;&#123;&quot;Args&quot;:[&quot;a&quot;,&quot;hello&quot;]&#125;&apos; -P &quot;OR (&apos;Org1MSP.peer&apos;,&apos;Org2MSP.peer&apos;)&quot;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>查询</p>
@@ -320,10 +315,9 @@
 
 </li>
 </ul>
-<p>###在peer1.org1.example.com 安装链码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#进入cli_peer1_org1 docker环境</span><br><span class="line">docker exec -it cli_peer1_org1 bash</span><br><span class="line">#orderer证书</span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line"></span><br><span class="line">#安装链码</span><br><span class="line">peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0</span><br><span class="line"></span><br><span class="line">#安装完后查询就可以发现数据已经有了</span><br><span class="line">peer chaincode query -C mychannel -n mycc -c &apos;&#123;&quot;function&quot;:&quot;get&quot;,&quot;Args&quot;:[&quot;a&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="在peer1-org1-example-com-安装链码"><a href="#在peer1-org1-example-com-安装链码" class="headerlink" title="在peer1.org1.example.com 安装链码"></a>在peer1.org1.example.com 安装链码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#进入cli_peer1_org1 docker环境</span><br><span class="line">docker exec -it cli_peer1_org1 bash</span><br><span class="line">#orderer证书</span><br><span class="line">ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</span><br><span class="line"></span><br><span class="line">#安装链码</span><br><span class="line">peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0</span><br><span class="line"></span><br><span class="line">#安装完后查询就可以发现数据已经有了</span><br><span class="line">peer chaincode query -C mychannel -n mycc -c &apos;&#123;&quot;function&quot;:&quot;get&quot;,&quot;Args&quot;:[&quot;a&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
 
-<p>###在其他节点安装链码<br>与peer1.org1.example.com 安装链码过程类似。</p>
+<h3 id="在其他节点安装链码"><a href="#在其他节点安装链码" class="headerlink" title="在其他节点安装链码"></a>在其他节点安装链码</h3><p>与peer1.org1.example.com 安装链码过程类似。</p>
 <p>通过docker ps命令我们会发现多出来几个链码服务，例如：<br>dev-peer0.org1.example.com-mycc-1.0-388fcb871dc37045ac29faaba82745e39035f4243bf46d1c97df818b4b341bbe<br>dev-peer1.org1.example.com-mycc-1.0-cd123150154e6bf2df7ce682e0b1bcbea40499416f37a6da3aae14c4eb51b08d<br>dev-peer0.org2.example.com-mycc-1.0-15b571b3ce849066b7ec74497da3b27e54e0df1345daff3951b94245ce09c42b<br>dev-peer1.org2.example.com-mycc-1.0-26c2ef32838554aac4f7ad6f100aca865e87959c9a126e86d764c8d01f8346ab </p>
 
     </div>
@@ -380,9 +374,9 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/12/07/blockchain/2019-12-07-四、Fabric 使用Node SDK/">
+        <a href="/2019/12/07/blockchain/2019-12-07-七、Fabric1.4 CA环境集成与应用/">
             
-                四、Fabric 使用Node SDK
+                七、Fabric1.4 CA环境集成与应用
             
         </a>
     </span>
@@ -391,9 +385,9 @@
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/12/07/blockchain/2019-12-07-五、Fabric 动态添加节点/">
+        <a href="/2019/12/07/blockchain/2019-12-07-四、Fabric1.4 使用Node SDK/">
             
-                五、Fabric 动态添加节点
+                四、Fabric1.4 使用Node SDK
             
         </a>
     </span>
@@ -409,7 +403,7 @@
   <script>
   ZONE7.Comment({
     container: 'comments',
-    label: 'blockchain/2019-12-07-三、Fabric 创建Helloworld区块链' || '2019/12/07/blockchain/2019-12-07-三、Fabric 创建Helloworld区块链/',
+    label: 'blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链' || '2019/12/07/blockchain/2019-12-07-三、Fabric1.4 创建Helloworld区块链/',
     owner: 'zone-7',
     repo: 'zone-7.github.io',
     clientId: '564f71fbf0c5e6e879f2',
@@ -429,7 +423,7 @@
         <h3 class="widget-hd"><strong>目录</strong></h3>
           
              
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-体验Fabric区块链网络"><span class="toc-text">3. 体验Fabric区块链网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-创建Helloworld区块链网络"><span class="toc-text">4.创建Helloworld区块链网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-架构设计"><span class="toc-text">4.1 架构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-准备"><span class="toc-text">4.2 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-生成配置文件"><span class="toc-text">4.3 生成配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-创建crypto-config-yaml"><span class="toc-text">4.3.1 创建crypto-config.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-生成证书文件"><span class="toc-text">4.3.2 生成证书文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-生成创世区块"><span class="toc-text">4.3.3 生成创世区块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-生成通道配置文件"><span class="toc-text">4.3.4 生成通道配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-5-生成锚节点配置文件"><span class="toc-text">4.3.5 生成锚节点配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Org1"><span class="toc-text">Org1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Org2"><span class="toc-text">Org2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-配置docker-compose文件"><span class="toc-text">4.4 配置docker-compose文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-orderer-yaml"><span class="toc-text">docker-compose-orderer.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org1-peer0-yaml"><span class="toc-text">docker-compose-org1-peer0.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org1-peer1-yaml"><span class="toc-text">docker-compose-org1-peer1.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org2-peer0-yaml"><span class="toc-text">docker-compose-org2-peer0.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org2-peer1-yaml"><span class="toc-text">docker-compose-org2-peer1.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个CA服务"><span class="toc-text">两个CA服务</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-环境准备"><span class="toc-text">1.环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-下载fabric资源"><span class="toc-text">2.下载fabric资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-体验Fabric区块链网络"><span class="toc-text">3. 体验Fabric区块链网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-创建Helloworld区块链网络"><span class="toc-text">4.创建Helloworld区块链网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-架构设计"><span class="toc-text">4.1 架构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-准备"><span class="toc-text">4.2 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-生成配置文件"><span class="toc-text">4.3 生成配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-创建crypto-config-yaml"><span class="toc-text">4.3.1 创建crypto-config.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-生成证书文件"><span class="toc-text">4.3.2 生成证书文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-生成创世区块"><span class="toc-text">4.3.3 生成创世区块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-生成通道配置文件"><span class="toc-text">4.3.4 生成通道配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-5-生成锚节点配置文件"><span class="toc-text">4.3.5 生成锚节点配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Org1"><span class="toc-text">Org1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Org2"><span class="toc-text">Org2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-配置docker-compose文件"><span class="toc-text">4.4 配置docker-compose文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-orderer-yaml"><span class="toc-text">docker-compose-orderer.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org1-peer0-yaml"><span class="toc-text">docker-compose-org1-peer0.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org1-peer1-yaml"><span class="toc-text">docker-compose-org1-peer1.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org2-peer0-yaml"><span class="toc-text">docker-compose-org2-peer0.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose-org2-peer1-yaml"><span class="toc-text">docker-compose-org2-peer1.yaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个CA服务"><span class="toc-text">两个CA服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-创建通道并加入通道"><span class="toc-text">5.创建通道并加入通道</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-链码开发与安装"><span class="toc-text">6.链码开发与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-链码开发"><span class="toc-text">6.1 链码开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-安装链码"><span class="toc-text">6.2 安装链码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在peer0-org1-example-com-安装链码"><span class="toc-text">在peer0.org1.example.com 安装链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在peer1-org1-example-com-安装链码"><span class="toc-text">在peer1.org1.example.com 安装链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在其他节点安装链码"><span class="toc-text">在其他节点安装链码</span></a></li></ol></li></ol></li></ol>
  
          
     </section>
@@ -442,7 +436,7 @@
     <!-- 
     <li>
         <a href="/categories/区块链/Fabric/">Fabric</a>
-        <span class="badge">(9)</span>
+        <span class="badge">(10)</span>
     </li>
     
     <li>
@@ -472,13 +466,13 @@
     
     <li>
         <a href="/categories/区块链/">区块链</a>
-        <span class="badge">(9)</span>
+        <span class="badge">(10)</span>
     </li>
      -->
 
     
     <div class="category-block"> 
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GO/">GO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot-vue前后端开发/">springboot&vue前后端开发</a><span class="category-list-count">18</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/Fabric/">Fabric</a><span class="category-list-count">9</span></li></ul></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GO/">GO</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot-vue前后端开发/">springboot&vue前后端开发</a><span class="category-list-count">18</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/Fabric/">Fabric</a><span class="category-list-count">10</span></li></ul></li></ul>
     </div>
     
 </ul>
@@ -490,15 +484,9 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (9)</a>
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (10)</a>
   
-    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (9)</a>
-  
-    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
-  
-    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
-  
-    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (10)</a>
   
     <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
   
@@ -516,19 +504,25 @@
   
     <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
   
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
     <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
   
     <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
   
     <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
-  
-    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
-  
-    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
   
