@@ -1317,6 +1317,14 @@ pre .javascript .function {
   padding-bottom: 10px;
   color: #888;
 }
+.article-nav .prev {
+  padding-left: 5px;
+  border-left: 3px #88bbf4 solid;
+}
+.article-nav .next {
+  padding-left: 5px;
+  border-left: 3px #88bbf4 solid;
+}
 .article-share {
   padding: 0 0 15px;
 }
@@ -2087,4 +2095,56 @@ pre .javascript .function {
 }
 .category-list-count:after {
   content: ']';
+}
+.blocks {
+  width: 100%;
+  list-style-type: none;
+  display: inline-block;
+}
+.blocks h2 {
+  padding: 0px;
+  margin: 0px;
+}
+.blocks li {
+  list-style-type: none;
+}
+.block-item {
+  padding: 5px;
+  display: block;
+  margin: 5px;
+  width: 30%;
+  height: 350px;
+  border: 1px solid #edf0e9;
+  float: left;
+}
+.block-item:hover {
+  border: 1px solid #babdb7;
+}
+.block-logo {
+  height: 30px;
+}
+.block-image {
+  width: 100%;
+  max-height: 100px;
+}
+.block-sublogo {
+  height: 30px;
+}
+.block-content {
+  width: 100%;
+}
+.block-title {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #88bbf4;
+  font-size: 20px;
+  font-family: "Microsoft Yahei";
+}
+.block-title:hover {
+  color: #ff7a6e;
+  font-weight: bold;
+}
+.block-subtitle {
+  font-weight: bold;
 }
