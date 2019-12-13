@@ -656,6 +656,7 @@ hr {
   padding: 0 20px;
   height: 48px;
   line-height: 48px;
+  list-style-type: none;
   font-size: 16px;
 }
 .menu .item a {
@@ -790,6 +791,60 @@ hr {
 }
 .dropnav {
   display: none;
+}
+.submenu {
+  position: absolute;
+  z-index: 999;
+  display: none;
+  padding: 0px;
+  background-color: #f6f6f6;
+}
+.submenu::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: solid 20px;
+  position: absolute;
+  top: -40px;
+  left: 30px;
+  border-color: transparent transparent #f6f6f6;
+}
+.submenu::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: solid 20px;
+  position: absolute;
+  top: -38px;
+  left: 30px;
+  border-color: transparent transparent #f6f6f6;
+}
+.submenu>li {
+  list-style-type: none;
+  line-height: normal;
+  margin: 5px;
+  padding: 0px;
+}
+.submenu>li>a {
+  height: 35px;
+  font-weight: bold;
+}
+.submenu2 {
+  background-color: #f6f6f6;
+}
+.submenu2>li {
+  list-style-type: none;
+  line-height: normal;
+  margin: 5px;
+  padding: 0px;
+  font-size: 14px;
+}
+.submenu2>li>a {
+  height: 25px;
+}
+.menu-logo {
+  height: 20px;
+  width: 20px;
 }
 /*
  * 正文内容
@@ -2060,9 +2115,6 @@ pre .javascript .function {
 .menu .item .category-list a {
   padding: 3px;
   padding-left: 10px;
-}
-.menu .item:hover .category-list {
-  display: block;
 }
 .menu .item .category-list .category-list-item {
   border-bottom: 1px dotted #dedede;
