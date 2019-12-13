@@ -2109,13 +2109,35 @@ pre .javascript .function {
   list-style-type: none;
 }
 .block-item {
-  padding: 5px;
   display: block;
   margin: 5px;
-  width: 30%;
-  height: 350px;
+  padding: 5px;
   border: 1px solid #edf0e9;
   float: left;
+  height: 350px;
+  width: calc(100% / 3 - 30px);
+}
+@media screen and (max-width: 959px) {
+  .block-item {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #edf0e9;
+    float: left;
+    height: auto;
+    width: calc(100% - 20px);
+  }
+}
+@media screen and (max-width: 1000px) and (min-width: 960px) {
+  .block-item {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #edf0e9;
+    float: left;
+    height: 350px;
+    width: calc(100% / 2 - 30px);
+  }
 }
 .block-item:hover {
   border: 1px solid #babdb7;
@@ -2124,7 +2146,7 @@ pre .javascript .function {
   height: 30px;
 }
 .block-image {
-  width: 100%;
+  height: 30%;
   max-height: 100px;
 }
 .block-sublogo {
@@ -2132,6 +2154,15 @@ pre .javascript .function {
 }
 .block-content {
   width: 100%;
+  overflow: hidden;
+}
+.block-description {
+  text-align: left;
+}
+.block-image-a {
+  width: 100%;
+  display: block;
+  text-align: center;
 }
 .block-title {
   display: inline-block;
