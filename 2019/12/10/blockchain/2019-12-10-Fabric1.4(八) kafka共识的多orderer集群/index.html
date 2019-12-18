@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>八、Fabric1.4 kafka共识的多orderer集群 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script>
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            
+            
+            
+
+            <li rel="/2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/index.html" class="item  ">
+
+                
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+            
+            
+
+            <li rel="/2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/index.html" class="item menu-dropdown ">
+
+                
+                <a  title="教程" class="icon-lab">&nbsp;教程</a>
+                
+
+                
+                    <ul class="submenu hidden">
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/GO" title="GO" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/golang.png"  />
+                                    
+                                    &nbsp;GO
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/区块链/" title="区块链" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/区块链.png"  />
+                                    
+                                    &nbsp;区块链
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Fabric" title="Fabric 联盟链技术" class="">
+                                                &nbsp;Fabric 联盟链技术</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/EOS" title="Eos 公链" class="">
+                                                &nbsp;Eos 公链</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Ipfs" title="Ipfs 星际文件系统" class="">
+                                                &nbsp;Ipfs 星际文件系统</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/Java" title="Java" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/java.png"  />
+                                    
+                                    &nbsp;Java
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/Java/springboot-vue前后端开发" title="springboot-vue前后端开发" class="">
+                                                &nbsp;springboot-vue前后端开发</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/docker/" title="Docker" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/Docker.png"  />
+                                    
+                                    &nbsp;Docker
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/云计算与大数据/" title="云计算与大数据" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/cloud.png"  />
+                                    
+                                    &nbsp;云计算与大数据
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/云计算与大数据/MongoDB" title="MongoDB" class="">
+                                                &nbsp;MongoDB</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/其他/" title="其他" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/其他.png"  />
+                                    
+                                    &nbsp;其他
+                                </a>
+                            
+                            
+                        </li>
+                    
+                    </ul>
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/index.html" class="item  ">
+
+                
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/index.html" class="item  ">
+
+                
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/index.html" class="item  ">
+
+                
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+                
+
+                
+            </li>
+            
+
+
+        </ul>
+
+
+
+
+
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+
+
+$(".menu-dropdown").bind("click",function(){
+
+    var submenu=$(this).children("ul");
+    if(submenu){
+
+        if (submenu.is(':hidden')) {
+            submenu.show();
+
+        } else {
+            submenu.hide();
+        }
+
+    }
+});
+
+
+</script>
+
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+
+        <section class="content">
+
+
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/12/blockchain/2019-12-12-EOS-一、简介/">
+            
+                一、EOS 简介
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(七) CA环境集成与应用/">
+            
+                七、Fabric1.4 CA环境集成与应用
+            
+        </a>
+    </span>
+    
+
+</div>
+
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>八、Fabric1.4 kafka共识的多orderer集群</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-09T16:01:08.000Z">2019-12-10</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+
+    <div class="post-content">
+        <h1 id="1-排序节点介绍"><a href="#1-排序节点介绍" class="headerlink" title="1.排序节点介绍"></a>1.排序节点介绍</h1><p>本节内容基于前几节介绍的hellowrold区块链环境基础，实现基于kafka模式的排序节点部署和测试。</p>
+<p>Fabric 的共识模型是Execute-Order-Validate，即先执行再排序最后验证的过程。<br>在创建区块链创世块以及通道的时候我们会用到一个configtx.yaml文件，该配置文件中的Orderer配置信息中有一个OrdererType参数，<br>该参数可配置为”solo” and “kafka”，之前例子我们使用的配置皆是solo，即单节点共识。</p>
+<p>使用kafka集群作为orderer共识的技术方式可以为排序服务提供足够的容错空间，当客户端向peer节点提交Transaction的时候，<br>peer节点会得到一个读写集结果，该结果会发送给orderer节点进行共识和排序，此时如果orderer节点突然down掉，<br>将导致请求服务失效、数据丢失等问题。</p>
+<p>因此，在生产环境部署Fabric，往往需要采用具有容错能力的orderer，即kafka模式，使用kafka模式搭建orderer节点集群需要会依赖于kafka和zookeeper。</p>
+<h2 id="1-1-排序执行过程"><a href="#1-1-排序执行过程" class="headerlink" title="1.1.排序执行过程"></a>1.1.排序执行过程</h2><p>一个交易的生命周期包括下面几个步骤：</p>
+<ul>
+<li>client先向peer提交一个题案进行备案；</li>
+<li>peer执行智能合约，调用数据执行操作，peer将操作结果发送给orderer；</li>
+<li>orderer将收到的所有的题案排序，打包成区块，并发送给Peer;</li>
+<li>Peer打开每个区块，并进行验证，若验证通过，则写入本地账本，更新世界状态。向client发送event告知交易被提交到账本中。</li>
+</ul>
+<h2 id="1-2-Atomic-Broadcast-Total-Order"><a href="#1-2-Atomic-Broadcast-Total-Order" class="headerlink" title="1.2.Atomic Broadcast(Total Order):"></a>1.2.Atomic Broadcast(Total Order):</h2><p>客户端提交交易信息 –&gt; orderers：将交易排序并打包成块 –&gt; 各个账本写入全局有序的区块</p>
+<h3 id="1-2-1-全局排序要求："><a href="#1-2-1-全局排序要求：" class="headerlink" title="1.2.1 全局排序要求："></a>1.2.1 全局排序要求：</h3><ul>
+<li>全局唯一、容错(cft、bft)</li>
+<li>网络分区（分区出去的节点的限制）</li>
+<li>强一致性</li>
+<li>bft(fabric v1.4 的orderer是cft,并不代表fabric是cft)</li>
+</ul>
+<h3 id="1-2-2-Block-Cutting（打包规则）："><a href="#1-2-2-Block-Cutting（打包规则）：" class="headerlink" title="1.2.2 Block Cutting（打包规则）："></a>1.2.2 Block Cutting（打包规则）：</h3><h4 id="BatchSize-批次大小"><a href="#BatchSize-批次大小" class="headerlink" title="BatchSize:批次大小"></a>BatchSize:批次大小</h4><pre><code>MaxMessageCount：最大消息数量
+AbsoluteMaxBytes ：限制单个交易大小，超过该限制，会被拒绝掉
+PreferredMaxBytes ：综合可能超过PreferredMaxBytes,假设PreferredMaxBytes=200b,前9个交易大小为100b,第10个交易大小为200b,这时会把第10个交易一块打包，这样就会大于PreferredMaxBytes。</code></pre><h4 id="BatchTimeout"><a href="#BatchTimeout" class="headerlink" title="BatchTimeout"></a>BatchTimeout</h4><pre><code>Timeout 按照时间规则打包</code></pre><h1 id="2-部署基于kafka的排序节点"><a href="#2-部署基于kafka的排序节点" class="headerlink" title="2.部署基于kafka的排序节点"></a>2.部署基于kafka的排序节点</h1><p>我们将部署三个Oraderer节点，<br>基于前几节的helloworld案例按以下步骤重新修改配置文件，重新部署区块链网络。</p>
+<h2 id="步骤1-修改crypto-config-yaml，添加OrdererOrgs-的Specs"><a href="#步骤1-修改crypto-config-yaml，添加OrdererOrgs-的Specs" class="headerlink" title="步骤1. 修改crypto-config.yaml，添加OrdererOrgs  的Specs"></a>步骤1. 修改crypto-config.yaml，添加OrdererOrgs  的Specs</h2><pre><code>Specs:
+  - Hostname: orderer
+  - Hostname: orderer2
+  - Hostname: orderer3 </code></pre><p>crypto-config.yaml完整配置文件如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># "OrdererOrgs" - Definition of organizations managing orderer nodes</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">OrdererOrgs:</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Orderer</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Orderer</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Specs" - See PeerOrgs below for complete description</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer2</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">orderer3</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># "PeerOrgs" - Definition of organizations managing peer nodes</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">PeerOrgs:</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Org1</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Org1</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">org1.example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer0</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer1</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer2</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer3</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer4</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Specs"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Uncomment this section to enable the explicit definition of hosts in your</span></span><br><span class="line">    <span class="comment"># configuration.  Most users will want to use Template, below</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># Specs is an array of Spec entries.  Each Spec entry consists of two fields:</span></span><br><span class="line">    <span class="comment">#   - Hostname:   (Required) The desired hostname, sans the domain.</span></span><br><span class="line">    <span class="comment">#   - CommonName: (Optional) Specifies the template or explicit override for</span></span><br><span class="line">    <span class="comment">#                 the CN.  By default, this is the template:</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#                              "&#123;&#123;.Hostname&#125;&#125;.&#123;&#123;.Domain&#125;&#125;"</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#                 which obtains its values from the Spec.Hostname and</span></span><br><span class="line">    <span class="comment">#                 Org.Domain, respectively.</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Specs:</span></span><br><span class="line">    <span class="comment">#   - Hostname: foo # implicitly "foo.org1.example.com"</span></span><br><span class="line">    <span class="comment">#     CommonName: foo27.org5.example.com # overrides Hostname-based FQDN set above</span></span><br><span class="line">    <span class="comment">#   - Hostname: bar</span></span><br><span class="line">    <span class="comment">#   - Hostname: baz</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Template"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Allows for the definition of 1 or more hosts that are created sequentially</span></span><br><span class="line">    <span class="comment"># from a template. By default, this looks like "peer%d" from 0 to Count-1.</span></span><br><span class="line">    <span class="comment"># You may override the number of nodes (Count), the starting index (Start)</span></span><br><span class="line">    <span class="comment"># or the template used to construct the name (Hostname).</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># Note: Template and Specs are not mutually exclusive.  You may define both</span></span><br><span class="line">    <span class="comment"># sections and the aggregate nodes will be created for you.  Take care with</span></span><br><span class="line">    <span class="comment"># name collisions</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Template:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">3</span></span><br><span class="line">      <span class="comment"># Start: 5</span></span><br><span class="line">      <span class="comment"># Hostname: &#123;&#123;.Prefix&#125;&#125;&#123;&#123;.Index&#125;&#125; # default</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># "Users"</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment"># Count: The number of user accounts _in addition_ to Admin</span></span><br><span class="line">    <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">    Users:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line">  <span class="comment"># Org2: See "Org1" for full specification</span></span><br><span class="line">  <span class="comment"># ---------------------------------------------------------------------------</span></span><br><span class="line"><span class="attr">  - Name:</span> <span class="string">Org2</span></span><br><span class="line"><span class="attr">    Domain:</span> <span class="string">org2.example.com</span></span><br><span class="line"><span class="attr">    EnableNodeOUs:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    Specs:</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer0</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer1</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer2</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer3</span></span><br><span class="line"><span class="attr">      - Hostname:</span> <span class="string">peer4</span></span><br><span class="line"><span class="attr">    Template:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">    Users:</span></span><br><span class="line"><span class="attr">      Count:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤2-执行生成证书文件"><a href="#步骤2-执行生成证书文件" class="headerlink" title="步骤2. 执行生成证书文件"></a>步骤2. 执行生成证书文件</h2><pre><code>cryptogen generate --config=./crypto-config.yaml</code></pre><p>执行后可见crypto-config/orderOrganizations/example.com/orderers目录下出现了三个组织的证书：</p>
+<pre><code>orderer.example.com
+orderer2.example.com
+orderer3.example.com</code></pre><h2 id="步骤3-修改configtx-yaml配置文件"><a href="#步骤3-修改configtx-yaml配置文件" class="headerlink" title="步骤3. 修改configtx.yaml配置文件"></a>步骤3. 修改configtx.yaml配置文件</h2><p>将OrdererType设置为kafka 并配置打包规则和kafka地址</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Orderer:</span> <span class="meta">&amp;OrdererDefaults</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Orderer Type: The orderer implementation to start</span></span><br><span class="line">    <span class="comment"># Available types are "solo" and "kafka"</span></span><br><span class="line"><span class="attr">    OrdererType:</span> <span class="string">kafka</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    Addresses:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer.example.com:7050</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer2.example.com:7050</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer3.example.com:7050</span></span><br><span class="line">    <span class="comment"># Batch Timeout: The amount of time to wait before creating a batch</span></span><br><span class="line"><span class="attr">    BatchTimeout:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Batch Size: Controls the number of messages batched into a block</span></span><br><span class="line"><span class="attr">    BatchSize:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Max Message Count: The maximum number of messages to permit in a batch</span></span><br><span class="line"><span class="attr">        MaxMessageCount:</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Absolute Max Bytes: The absolute maximum number of bytes allowed for</span></span><br><span class="line">        <span class="comment"># the serialized messages in a batch.</span></span><br><span class="line"><span class="attr">        AbsoluteMaxBytes:</span> <span class="number">99</span> <span class="string">MB</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Preferred Max Bytes: The preferred maximum number of bytes allowed for</span></span><br><span class="line">        <span class="comment"># the serialized messages in a batch. A message larger than the preferred</span></span><br><span class="line">        <span class="comment"># max bytes will result in a batch larger than preferred max bytes.</span></span><br><span class="line"><span class="attr">        PreferredMaxBytes:</span> <span class="number">512</span> <span class="string">KB</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    Kafka:</span></span><br><span class="line">        <span class="comment"># Brokers: A list of Kafka brokers to which the orderer connects</span></span><br><span class="line">        <span class="comment"># <span class="doctag">NOTE:</span> Use IP:port notation</span></span><br><span class="line"><span class="attr">        Brokers:</span></span><br><span class="line"><span class="attr">            - kafka1:</span><span class="number">9092</span></span><br><span class="line"><span class="attr">            - kafka2:</span><span class="number">9092</span></span><br><span class="line"><span class="attr">            - kafka3:</span><span class="number">9092</span></span><br><span class="line">    <span class="comment"># Organizations is the list of orgs which are defined as participants on</span></span><br><span class="line">    <span class="comment"># the orderer side of the network</span></span><br><span class="line"><span class="attr">    Organizations:</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的configtx.yaml配置文件如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   Section: Organizations</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   - This section defines the different organizational identities which will</span></span><br><span class="line"><span class="comment">#   be referenced later in the configuration.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Organizations:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># SampleOrg defines an MSP using the sampleconfig.  It should never be used</span></span><br><span class="line">    <span class="comment"># in production but may be used as a template for other definitions</span></span><br><span class="line"><span class="bullet">    -</span> <span class="meta">&amp;OrdererOrg</span></span><br><span class="line">        <span class="comment"># DefaultOrg defines the organization which is used in the sampleconfig</span></span><br><span class="line">        <span class="comment"># of the fabric.git development environment</span></span><br><span class="line"><span class="attr">        Name:</span> <span class="string">OrdererOrg</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ID to load the MSP definition as</span></span><br><span class="line"><span class="attr">        ID:</span> <span class="string">OrdererMSP</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># MSPDir is the filesystem path which contains the MSP configuration</span></span><br><span class="line"><span class="attr">        MSPDir:</span> <span class="string">crypto-config/ordererOrganizations/example.com/msp</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">        <span class="comment"># For organization policies, their canonical path is usually</span></span><br><span class="line">        <span class="comment">#   /Channel/&lt;Application|Orderer&gt;/&lt;OrgName&gt;/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">        Policies:</span></span><br><span class="line"><span class="attr">            Readers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('OrdererMSP.member')"</span></span><br><span class="line"><span class="attr">            Writers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('OrdererMSP.member')"</span></span><br><span class="line"><span class="attr">            Admins:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('OrdererMSP.admin')"</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> <span class="meta">&amp;Org1</span></span><br><span class="line">        <span class="comment"># DefaultOrg defines the organization which is used in the sampleconfig</span></span><br><span class="line">        <span class="comment"># of the fabric.git development environment</span></span><br><span class="line"><span class="attr">        Name:</span> <span class="string">Org1MSP</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ID to load the MSP definition as</span></span><br><span class="line"><span class="attr">        ID:</span> <span class="string">Org1MSP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        MSPDir:</span> <span class="string">crypto-config/peerOrganizations/org1.example.com/msp</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">        <span class="comment"># For organization policies, their canonical path is usually</span></span><br><span class="line">        <span class="comment">#   /Channel/&lt;Application|Orderer&gt;/&lt;OrgName&gt;/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">        Policies:</span></span><br><span class="line"><span class="attr">            Readers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"</span></span><br><span class="line"><span class="attr">            Writers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org1MSP.admin', 'Org1MSP.client')"</span></span><br><span class="line"><span class="attr">            Admins:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org1MSP.admin')"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># leave this flag set to true.</span></span><br><span class="line"><span class="attr">        AnchorPeers:</span></span><br><span class="line">            <span class="comment"># AnchorPeers defines the location of peers which can be used</span></span><br><span class="line">            <span class="comment"># for cross org gossip communication.  Note, this value is only</span></span><br><span class="line">            <span class="comment"># encoded in the genesis block in the Application section context</span></span><br><span class="line"><span class="attr">            - Host:</span> <span class="string">peer0.org1.example.com</span></span><br><span class="line"><span class="attr">              Port:</span> <span class="number">7051</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> <span class="meta">&amp;Org2</span></span><br><span class="line">        <span class="comment"># DefaultOrg defines the organization which is used in the sampleconfig</span></span><br><span class="line">        <span class="comment"># of the fabric.git development environment</span></span><br><span class="line"><span class="attr">        Name:</span> <span class="string">Org2MSP</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ID to load the MSP definition as</span></span><br><span class="line"><span class="attr">        ID:</span> <span class="string">Org2MSP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        MSPDir:</span> <span class="string">crypto-config/peerOrganizations/org2.example.com/msp</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">        <span class="comment"># For organization policies, their canonical path is usually</span></span><br><span class="line">        <span class="comment">#   /Channel/&lt;Application|Orderer&gt;/&lt;OrgName&gt;/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">        Policies:</span></span><br><span class="line"><span class="attr">            Readers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"</span></span><br><span class="line"><span class="attr">            Writers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org2MSP.admin', 'Org2MSP.client')"</span></span><br><span class="line"><span class="attr">            Admins:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org2MSP.admin')"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        AnchorPeers:</span></span><br><span class="line">            <span class="comment"># AnchorPeers defines the location of peers which can be used</span></span><br><span class="line">            <span class="comment"># for cross org gossip communication.  Note, this value is only</span></span><br><span class="line">            <span class="comment"># encoded in the genesis block in the Application section context</span></span><br><span class="line"><span class="attr">            - Host:</span> <span class="string">peer0.org2.example.com</span></span><br><span class="line"><span class="attr">              Port:</span> <span class="number">9051</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> <span class="meta">&amp;Org3</span></span><br><span class="line">        <span class="comment"># DefaultOrg defines the organization which is used in the sampleconfig</span></span><br><span class="line">        <span class="comment"># of the fabric.git development environment</span></span><br><span class="line"><span class="attr">        Name:</span> <span class="string">Org3MSP</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ID to load the MSP definition as</span></span><br><span class="line"><span class="attr">        ID:</span> <span class="string">Org3MSP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        MSPDir:</span> <span class="string">crypto-config/peerOrganizations/org3.example.com/msp</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">        <span class="comment"># For organization policies, their canonical path is usually</span></span><br><span class="line">        <span class="comment">#   /Channel/&lt;Application|Orderer&gt;/&lt;OrgName&gt;/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">        Policies:</span></span><br><span class="line"><span class="attr">            Readers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org3MSP.admin', 'Org3MSP.peer', 'Org3MSP.client')"</span></span><br><span class="line"><span class="attr">            Writers:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org3MSP.admin', 'Org2MSP.client')"</span></span><br><span class="line"><span class="attr">            Admins:</span></span><br><span class="line"><span class="attr">                Type:</span> <span class="string">Signature</span></span><br><span class="line"><span class="attr">                Rule:</span> <span class="string">"OR('Org3MSP.admin')"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">        AnchorPeers:</span></span><br><span class="line">            <span class="comment"># AnchorPeers defines the location of peers which can be used</span></span><br><span class="line">            <span class="comment"># for cross org gossip communication.  Note, this value is only</span></span><br><span class="line">            <span class="comment"># encoded in the genesis block in the Application section context</span></span><br><span class="line"><span class="attr">            - Host:</span> <span class="string">peer0.org3.example.com</span></span><br><span class="line"><span class="attr">              Port:</span> <span class="number">13051</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   SECTION: Capabilities</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   - This section defines the capabilities of fabric network. This is a new</span></span><br><span class="line"><span class="comment">#   concept as of v1.1.0 and should not be utilized in mixed networks with</span></span><br><span class="line"><span class="comment">#   v1.0.x peers and orderers.  Capabilities define features which must be</span></span><br><span class="line"><span class="comment">#   present in a fabric binary for that binary to safely participate in the</span></span><br><span class="line"><span class="comment">#   fabric network.  For instance, if a new MSP type is added, newer binaries</span></span><br><span class="line"><span class="comment">#   might recognize and validate the signatures from this type, while older</span></span><br><span class="line"><span class="comment">#   binaries without this support would be unable to validate those</span></span><br><span class="line"><span class="comment">#   transactions.  This could lead to different versions of the fabric binaries</span></span><br><span class="line"><span class="comment">#   having different world states.  Instead, defining a capability for a channel</span></span><br><span class="line"><span class="comment">#   informs those binaries without this capability that they must cease</span></span><br><span class="line"><span class="comment">#   processing transactions until they have been upgraded.  For v1.0.x if any</span></span><br><span class="line"><span class="comment">#   capabilities are defined (including a map with all capabilities turned off)</span></span><br><span class="line"><span class="comment">#   then the v1.0.x peer will deliberately crash.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Capabilities:</span></span><br><span class="line">    <span class="comment"># Channel capabilities apply to both the orderers and the peers and must be</span></span><br><span class="line">    <span class="comment"># supported by both.</span></span><br><span class="line">    <span class="comment"># Set the value of the capability to true to require it.</span></span><br><span class="line"><span class="attr">    Channel:</span> <span class="meta">&amp;ChannelCapabilities</span></span><br><span class="line">        <span class="comment"># V1.4.3 for Channel is a catchall flag for behavior which has been</span></span><br><span class="line">        <span class="comment"># determined to be desired for all orderers and peers running at the v1.4.3</span></span><br><span class="line">        <span class="comment"># level, but which would be incompatible with orderers and peers from</span></span><br><span class="line">        <span class="comment"># prior releases.</span></span><br><span class="line">        <span class="comment"># Prior to enabling V1.4.3 channel capabilities, ensure that all</span></span><br><span class="line">        <span class="comment"># orderers and peers on a channel are at v1.4.3 or later.</span></span><br><span class="line"><span class="attr">        V1_4_3:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># V1.3 for Channel enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.3</span></span><br><span class="line"><span class="attr">        V1_3:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment"># V1.1 for Channel enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.1</span></span><br><span class="line"><span class="attr">        V1_1:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Orderer capabilities apply only to the orderers, and may be safely</span></span><br><span class="line">    <span class="comment"># used with prior release peers.</span></span><br><span class="line">    <span class="comment"># Set the value of the capability to true to require it.</span></span><br><span class="line"><span class="attr">    Orderer:</span> <span class="meta">&amp;OrdererCapabilities</span></span><br><span class="line">        <span class="comment"># V1.4.2 for Orderer is a catchall flag for behavior which has been</span></span><br><span class="line">        <span class="comment"># determined to be desired for all orderers running at the v1.4.2</span></span><br><span class="line">        <span class="comment"># level, but which would be incompatible with orderers from prior releases.</span></span><br><span class="line">        <span class="comment"># Prior to enabling V1.4.2 orderer capabilities, ensure that all</span></span><br><span class="line">        <span class="comment"># orderers on a channel are at v1.4.2 or later.</span></span><br><span class="line"><span class="attr">        V1_4_2:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># V1.1 for Orderer enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.1</span></span><br><span class="line"><span class="attr">        V1_1:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Application capabilities apply only to the peer network, and may be safely</span></span><br><span class="line">    <span class="comment"># used with prior release orderers.</span></span><br><span class="line">    <span class="comment"># Set the value of the capability to true to require it.</span></span><br><span class="line"><span class="attr">    Application:</span> <span class="meta">&amp;ApplicationCapabilities</span></span><br><span class="line">        <span class="comment"># V1.4.2 for Application enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.4.2.</span></span><br><span class="line"><span class="attr">        V1_4_2:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># V1.3 for Application enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.3.</span></span><br><span class="line"><span class="attr">        V1_3:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment"># V1.2 for Application enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.2 (note, this need not be set if</span></span><br><span class="line">        <span class="comment"># later version capabilities are set)</span></span><br><span class="line"><span class="attr">        V1_2:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment"># V1.1 for Application enables the new non-backwards compatible</span></span><br><span class="line">        <span class="comment"># features and fixes of fabric v1.1 (note, this need not be set if</span></span><br><span class="line">        <span class="comment"># later version capabilities are set).</span></span><br><span class="line"><span class="attr">        V1_1:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   SECTION: Application</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   - This section defines the values to encode into a config transaction or</span></span><br><span class="line"><span class="comment">#   genesis block for application related parameters</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Application:</span> <span class="meta">&amp;ApplicationDefaults</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Organizations is the list of orgs which are defined as participants on</span></span><br><span class="line">    <span class="comment"># the application side of the network</span></span><br><span class="line"><span class="attr">    Organizations:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">    <span class="comment"># For Application policies, their canonical path is</span></span><br><span class="line">    <span class="comment">#   /Channel/Application/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">    Policies:</span></span><br><span class="line"><span class="attr">        Readers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Readers"</span></span><br><span class="line"><span class="attr">        Writers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Writers"</span></span><br><span class="line"><span class="attr">        Admins:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"MAJORITY Admins"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    Capabilities:</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ApplicationCapabilities</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   SECTION: Orderer</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   - This section defines the values to encode into a config transaction or</span></span><br><span class="line"><span class="comment">#   genesis block for orderer related parameters</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Orderer:</span> <span class="meta">&amp;OrdererDefaults</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Orderer Type: The orderer implementation to start</span></span><br><span class="line">    <span class="comment"># Available types are "solo" and "kafka"</span></span><br><span class="line"><span class="attr">    OrdererType:</span> <span class="string">kafka</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    Addresses:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer.example.com:7050</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer2.example.com:7050</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">orderer3.example.com:7050</span></span><br><span class="line">    <span class="comment"># Batch Timeout: The amount of time to wait before creating a batch</span></span><br><span class="line"><span class="attr">    BatchTimeout:</span> <span class="number">2</span><span class="string">s</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Batch Size: Controls the number of messages batched into a block</span></span><br><span class="line"><span class="attr">    BatchSize:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Max Message Count: The maximum number of messages to permit in a batch</span></span><br><span class="line"><span class="attr">        MaxMessageCount:</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Absolute Max Bytes: The absolute maximum number of bytes allowed for</span></span><br><span class="line">        <span class="comment"># the serialized messages in a batch.</span></span><br><span class="line"><span class="attr">        AbsoluteMaxBytes:</span> <span class="number">99</span> <span class="string">MB</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Preferred Max Bytes: The preferred maximum number of bytes allowed for</span></span><br><span class="line">        <span class="comment"># the serialized messages in a batch. A message larger than the preferred</span></span><br><span class="line">        <span class="comment"># max bytes will result in a batch larger than preferred max bytes.</span></span><br><span class="line"><span class="attr">        PreferredMaxBytes:</span> <span class="number">512</span> <span class="string">KB</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    Kafka:</span></span><br><span class="line">        <span class="comment"># Brokers: A list of Kafka brokers to which the orderer connects</span></span><br><span class="line">        <span class="comment"># <span class="doctag">NOTE:</span> Use IP:port notation</span></span><br><span class="line"><span class="attr">        Brokers:</span></span><br><span class="line"><span class="attr">            - kafka1:</span><span class="number">9092</span></span><br><span class="line"><span class="attr">            - kafka2:</span><span class="number">9092</span></span><br><span class="line"><span class="attr">            - kafka3:</span><span class="number">9092</span></span><br><span class="line">    <span class="comment"># Organizations is the list of orgs which are defined as participants on</span></span><br><span class="line">    <span class="comment"># the orderer side of the network</span></span><br><span class="line"><span class="attr">    Organizations:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">    <span class="comment"># For Orderer policies, their canonical path is</span></span><br><span class="line">    <span class="comment">#   /Channel/Orderer/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">    Policies:</span></span><br><span class="line"><span class="attr">        Readers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Readers"</span></span><br><span class="line"><span class="attr">        Writers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Writers"</span></span><br><span class="line"><span class="attr">        Admins:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"MAJORITY Admins"</span></span><br><span class="line">        <span class="comment"># BlockValidation specifies what signatures must be included in the block</span></span><br><span class="line">        <span class="comment"># from the orderer for the peer to validate it.</span></span><br><span class="line"><span class="attr">        BlockValidation:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Writers"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   CHANNEL</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   This section defines the values to encode into a config transaction or</span></span><br><span class="line"><span class="comment">#   genesis block for channel related parameters.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Channel:</span> <span class="meta">&amp;ChannelDefaults</span></span><br><span class="line">    <span class="comment"># Policies defines the set of policies at this level of the config tree</span></span><br><span class="line">    <span class="comment"># For Channel policies, their canonical path is</span></span><br><span class="line">    <span class="comment">#   /Channel/&lt;PolicyName&gt;</span></span><br><span class="line"><span class="attr">    Policies:</span></span><br><span class="line">        <span class="comment"># Who may invoke the 'Deliver' API</span></span><br><span class="line"><span class="attr">        Readers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Readers"</span></span><br><span class="line">        <span class="comment"># Who may invoke the 'Broadcast' API</span></span><br><span class="line"><span class="attr">        Writers:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"ANY Writers"</span></span><br><span class="line">        <span class="comment"># By default, who may modify elements at this config level</span></span><br><span class="line"><span class="attr">        Admins:</span></span><br><span class="line"><span class="attr">            Type:</span> <span class="string">ImplicitMeta</span></span><br><span class="line"><span class="attr">            Rule:</span> <span class="string">"MAJORITY Admins"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Capabilities describes the channel level capabilities, see the</span></span><br><span class="line">    <span class="comment"># dedicated Capabilities section elsewhere in this file for a full</span></span><br><span class="line">    <span class="comment"># description</span></span><br><span class="line"><span class="attr">    Capabilities:</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelCapabilities</span></span><br><span class="line"></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   Profile</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   - Different configuration profiles may be encoded here to be specified</span></span><br><span class="line"><span class="comment">#   as parameters to the configtxgen tool</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="attr">Profiles:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    TwoOrgsOrdererGenesis:</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelDefaults</span></span><br><span class="line"><span class="attr">        Orderer:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererDefaults</span></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*OrdererOrg</span></span><br><span class="line"><span class="attr">            Capabilities:</span></span><br><span class="line">                <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererCapabilities</span></span><br><span class="line"><span class="attr">        Consortiums:</span></span><br><span class="line"><span class="attr">            SampleConsortium:</span></span><br><span class="line"><span class="attr">                Organizations:</span></span><br><span class="line"><span class="bullet">                    -</span> <span class="meta">*Org1</span></span><br><span class="line"><span class="bullet">                    -</span> <span class="meta">*Org2</span></span><br><span class="line"><span class="bullet">                    -</span> <span class="meta">*Org3</span></span><br><span class="line"><span class="attr">    TwoOrgsChannel:</span></span><br><span class="line"><span class="attr">        Consortium:</span> <span class="string">SampleConsortium</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelDefaults</span></span><br><span class="line"><span class="attr">        Application:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*ApplicationDefaults</span></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org1</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org2</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org3</span></span><br><span class="line"><span class="attr">            Capabilities:</span></span><br><span class="line">                <span class="string">&lt;&lt;:</span> <span class="meta">*ApplicationCapabilities</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    SampleDevModeKafka:</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelDefaults</span></span><br><span class="line"><span class="attr">        Capabilities:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelCapabilities</span></span><br><span class="line"><span class="attr">        Orderer:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererDefaults</span></span><br><span class="line"><span class="attr">            OrdererType:</span> <span class="string">kafka</span></span><br><span class="line"><span class="attr">            Kafka:</span></span><br><span class="line"><span class="attr">                Brokers:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">kafka.example.com:9092</span></span><br><span class="line"></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="meta">*OrdererOrg</span></span><br><span class="line"><span class="attr">            Capabilities:</span></span><br><span class="line">                <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererCapabilities</span></span><br><span class="line"><span class="attr">        Application:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*ApplicationDefaults</span></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererOrg</span></span><br><span class="line"><span class="attr">        Consortiums:</span></span><br><span class="line"><span class="attr">            SampleConsortium:</span></span><br><span class="line"><span class="attr">                Organizations:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org1</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org2</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org3</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    SampleMultiNodeEtcdRaft:</span></span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelDefaults</span></span><br><span class="line"><span class="attr">        Capabilities:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*ChannelCapabilities</span></span><br><span class="line"><span class="attr">        Orderer:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererDefaults</span></span><br><span class="line"><span class="attr">            OrdererType:</span> <span class="string">etcdraft</span></span><br><span class="line"><span class="attr">            EtcdRaft:</span></span><br><span class="line"><span class="attr">                Consenters:</span></span><br><span class="line"><span class="attr">                - Host:</span> <span class="string">orderer.example.com</span></span><br><span class="line"><span class="attr">                  Port:</span> <span class="number">7050</span></span><br><span class="line"><span class="attr">                  ClientTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                  ServerTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                - Host:</span> <span class="string">orderer2.example.com</span></span><br><span class="line"><span class="attr">                  Port:</span> <span class="number">7050</span></span><br><span class="line"><span class="attr">                  ClientTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                  ServerTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                - Host:</span> <span class="string">orderer3.example.com</span></span><br><span class="line"><span class="attr">                  Port:</span> <span class="number">7050</span></span><br><span class="line"><span class="attr">                  ClientTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                  ServerTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                - Host:</span> <span class="string">orderer4.example.com</span></span><br><span class="line"><span class="attr">                  Port:</span> <span class="number">7050</span></span><br><span class="line"><span class="attr">                  ClientTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer4.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                  ServerTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer4.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                - Host:</span> <span class="string">orderer5.example.com</span></span><br><span class="line"><span class="attr">                  Port:</span> <span class="number">7050</span></span><br><span class="line"><span class="attr">                  ClientTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer5.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">                  ServerTLSCert:</span> <span class="string">crypto-config/ordererOrganizations/example.com/orderers/orderer5.example.com/tls/server.crt</span></span><br><span class="line"><span class="attr">            Addresses:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">orderer.example.com:7050</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">orderer2.example.com:7050</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">orderer3.example.com:7050</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">orderer4.example.com:7050</span></span><br><span class="line"><span class="bullet">                -</span> <span class="string">orderer5.example.com:7050</span></span><br><span class="line"></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="meta">*OrdererOrg</span></span><br><span class="line"><span class="attr">            Capabilities:</span></span><br><span class="line">                <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererCapabilities</span></span><br><span class="line"><span class="attr">        Application:</span></span><br><span class="line">            <span class="string">&lt;&lt;:</span> <span class="meta">*ApplicationDefaults</span></span><br><span class="line"><span class="attr">            Organizations:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">&lt;&lt;:</span> <span class="meta">*OrdererOrg</span></span><br><span class="line"><span class="attr">        Consortiums:</span></span><br><span class="line"><span class="attr">            SampleConsortium:</span></span><br><span class="line"><span class="attr">                Organizations:</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org1</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org2</span></span><br><span class="line"><span class="bullet">                -</span> <span class="meta">*Org3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤4-生成创世块和通道"><a href="#步骤4-生成创世块和通道" class="headerlink" title="步骤4. 生成创世块和通道"></a>步骤4. 生成创世块和通道</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 生成创世区块  首先要确保channel-artifacts文件夹存在，如果不存在需要手动创建，不然会报错</span><br><span class="line">configtxgen -profile TwoOrgsOrdererGenesis  -outputBlock ./channel-artifacts/genesis.block</span><br><span class="line"># 生成通道配置文件  其中通道名mychannel可以修改为自己的</span><br><span class="line">configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/mychannel.tx -channelID mychannel</span><br></pre></td></tr></table></figure>
+
+<h2 id="步骤5-配置docker-compose文件"><a href="#步骤5-配置docker-compose文件" class="headerlink" title="步骤5.配置docker-compose文件"></a>步骤5.配置docker-compose文件</h2><p>docker-compose-orderer.yaml 配置文件包含3个zookeeper服务、3个kafka服务以3个orderer节点配置。</p>
+<p>内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Copyright IBM Corp. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  hello:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  zookeeper1:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-zookeeper</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">quorumListenOnAllIPs=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_MY_ID=1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_SERVERS=server.1=zookeeper1:2888:3888</span> <span class="string">server.2=zookeeper2:2888:3888</span> <span class="string">server.3=zookeeper3:2888:3888</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">12181</span><span class="string">:2181</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">12888</span><span class="string">:2888</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">13888</span><span class="string">:3888</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">  zookeeper2:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-zookeeper</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">quorumListenOnAllIPs=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_MY_ID=2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_SERVERS=server.1=zookeeper1:2888:3888</span> <span class="string">server.2=zookeeper2:2888:3888</span> <span class="string">server.3=zookeeper3:2888:3888</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">22181</span><span class="string">:2181</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">22888</span><span class="string">:2888</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">23888</span><span class="string">:3888</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">  zookeeper3:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-zookeeper</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">quorumListenOnAllIPs=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_MY_ID=3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ZOO_SERVERS=server.1=zookeeper1:2888:3888</span> <span class="string">server.2=zookeeper2:2888:3888</span> <span class="string">server.3=zookeeper3:2888:3888</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">32181</span><span class="string">:2181</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">32888</span><span class="string">:2888</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">33888</span><span class="string">:3888</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">  kafka1:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">kafka1</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-kafka</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MESSAGE_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_REPLICA_FETCH_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_BROKER_ID=1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MIN_INSYNC_REPLICAS=2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_DEFAULT_REPLICATION_FACTOR=3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_ZOOKEEPER_CONNECT=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">19092</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="attr">  kafka2:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">kafka2</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-kafka</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MESSAGE_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_REPLICA_FETCH_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_BROKER_ID=2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MIN_INSYNC_REPLICAS=2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_DEFAULT_REPLICATION_FACTOR=3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_ZOOKEEPER_CONNECT=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">29092</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="attr">  kafka3:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">kafka3</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-kafka</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MESSAGE_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_REPLICA_FETCH_MAX_BYTES=103809024</span> <span class="comment"># 99 * 1024 * 1024 B</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_BROKER_ID=3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_MIN_INSYNC_REPLICAS=2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_DEFAULT_REPLICATION_FACTOR=3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">KAFKA_ZOOKEEPER_CONNECT=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">39092</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"></span><br><span class="line">  <span class="string">orderer.example.com:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">orderer.example.com</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-orderer</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOGLEVEL=debug</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISMETHOD=file</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span></span><br><span class="line">      <span class="comment"># enabled TLS</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]</span></span><br><span class="line">      <span class="comment">#关于kafka的相关配置</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGINTERVAL=10s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGTOTAL=100s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTTOTAL=30s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_VERBOSE=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_BROKERS=[kafka1:9092,kafka2:9092,kafka3:9092]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    working_dir:</span> <span class="string">/opt/gopath/src/github.com/hyperledger/fabric</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">orderer</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">7050</span><span class="string">:7050</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="string">orderer2.example.com:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">orderer2.example.com</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-orderer</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOGLEVEL=debug</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISMETHOD=file</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span></span><br><span class="line">      <span class="comment"># enabled TLS</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]</span></span><br><span class="line">      <span class="comment">#关于kafka的相关配置</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGINTERVAL=10s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGTOTAL=100s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTTOTAL=30s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_VERBOSE=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_BROKERS=[kafka1:9092,kafka2:9092,kafka3:9092]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    working_dir:</span> <span class="string">/opt/gopath/src/github.com/hyperledger/fabric</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">orderer</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/msp:/var/hyperledger/orderer/msp</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/:/var/hyperledger/orderer/tls</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">27050</span><span class="string">:7050</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka3</span></span><br><span class="line"></span><br><span class="line">  <span class="string">orderer3.example.com:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">orderer3.example.com</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/fabric-orderer</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOGLEVEL=debug</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LISTENADDRESS=0.0.0.0</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISMETHOD=file</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPID=OrdererMSP</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp</span></span><br><span class="line">      <span class="comment"># enabled TLS</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ENABLED=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]</span></span><br><span class="line">      <span class="comment">#关于kafka的相关配置</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGINTERVAL=10s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_LONGTOTAL=100s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_RETRY_SHORTTOTAL=30s</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_VERBOSE=true</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">ORDERER_KAFKA_BROKERS=[kafka1:9092,kafka2:9092,kafka3:9092]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    working_dir:</span> <span class="string">/opt/gopath/src/github.com/hyperledger/fabric</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">orderer</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/msp:/var/hyperledger/orderer/msp</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/:/var/hyperledger/orderer/tls</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">37050</span><span class="string">:7050</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">hello</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zookeeper3</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">kafka3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">```</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">## 步骤6. 启动所有节点</span></span><br><span class="line"></span><br><span class="line"><span class="string">```text</span></span><br><span class="line"></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG1_PEER0="docker-compose-org1-peer0.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG1_PEER1="docker-compose-org1-peer1.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG1_PEER2="docker-compose-org1-peer2.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG2_PEER0="docker-compose-org2-peer0.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG2_PEER1="docker-compose-org2-peer1.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG3_PEER0="docker-compose-org3-peer0.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_ORG3_PEER1="docker-compose-org3-peer1.yaml"</span></span><br><span class="line"></span><br><span class="line"><span class="string">COMPOSE_FILE_ORDERER="docker-compose-orderer.yaml"</span></span><br><span class="line"><span class="string">COMPOSE_FILE_CA="docker-compose-ca.yaml"</span></span><br><span class="line"></span><br><span class="line"><span class="string">docker-compose</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG1_PEER0</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG1_PEER1</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG1_PEER2</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG2_PEER0</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG2_PEER1</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG3_PEER0</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORG3_PEER1</span> <span class="bullet">-f</span> <span class="string">$COMPOSE_FILE_ORDERER</span>  <span class="string">up</span> <span class="bullet">-d</span></span><br><span class="line"><span class="comment">#启动CA节点，startCA.sh的内容可参考第七节</span></span><br><span class="line"><span class="string">./startCA.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>至此分布式orderer已经部署完成。</p>
+<h2 id="步骤7-验证"><a href="#步骤7-验证" class="headerlink" title="步骤7. 验证"></a>步骤7. 验证</h2><p>我们通过在第一个orderer节点创建通道，然后在第二个orderer节点实例化链码来测试分布式orderer是否可行。<br><strong><em>首先：进入一个fabric-tool 服务</em></strong></p>
+<pre><code>docker exec -it cli_peer0_org1 bash</code></pre><p><strong><em>采用第一个orderer节点创建通道</em></strong></p>
+<pre><code>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/mychannel.tx --tls --cafile $ORDERER_CA</code></pre><p><strong><em>加入通道</em></strong></p>
+<pre><code>peer channel join -b mychannel.block</code></pre><p><strong><em>将CA切换到第二个orderer</em></strong></p>
+<pre><code>ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer2.example.com/msp/tlscacerts/tlsca.example.com-cert.pem</code></pre><p><strong><em>在第二个通道安装和实例化链码</em></strong></p>
+<pre><code>peer chaincode install -n mycc -p github.com/hyperledger/fabric/helloworld/chaincode/go/helloworld/ -v 1.0
+peer chaincode instantiate -o orderer2.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n mycc -v 1.0 -c &apos;{&quot;Args&quot;:[&quot;a&quot;,&quot;hello&quot;]}&apos; -P &quot;OR (&apos;Org1MSP.peer&apos;,&apos;Org2MSP.peer&apos;,&apos;Org3MSP.peer&apos;)&quot;</code></pre><p><font face="微软雅黑" color="red">这个环节如果执行成功就表示分布式orderer部署没有问题，否则会报找不到channel的错误。</font></p>
+<p><strong><em>执行链码查询</em></strong></p>
+<pre><code>peer chaincode query -C mychannel -n mycc -c &apos;{&quot;function&quot;:&quot;get&quot;,&quot;Args&quot;:[&quot;a&quot;]}&apos;</code></pre>
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/12/blockchain/2019-12-12-EOS-一、简介/">
+            
+                一、EOS 简介
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(七) CA环境集成与应用/">
+            
+                七、Fabric1.4 CA环境集成与应用
+            
+        </a>
+    </span>
+    
+
+</div>
+
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群' || '2019/12/10/blockchain/2019-12-10-Fabric1.4(八) kafka共识的多orderer集群/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+
+    
+
+        
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+
+
+    
+
+
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-排序节点介绍"><span class="toc-text">1.排序节点介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-排序执行过程"><span class="toc-text">1.1.排序执行过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Atomic-Broadcast-Total-Order"><span class="toc-text">1.2.Atomic Broadcast(Total Order):</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-全局排序要求："><span class="toc-text">1.2.1 全局排序要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-Block-Cutting（打包规则）："><span class="toc-text">1.2.2 Block Cutting（打包规则）：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BatchSize-批次大小"><span class="toc-text">BatchSize:批次大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BatchTimeout"><span class="toc-text">BatchTimeout</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-部署基于kafka的排序节点"><span class="toc-text">2.部署基于kafka的排序节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤1-修改crypto-config-yaml，添加OrdererOrgs-的Specs"><span class="toc-text">步骤1. 修改crypto-config.yaml，添加OrdererOrgs  的Specs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤2-执行生成证书文件"><span class="toc-text">步骤2. 执行生成证书文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤3-修改configtx-yaml配置文件"><span class="toc-text">步骤3. 修改configtx.yaml配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤4-生成创世块和通道"><span class="toc-text">步骤4. 生成创世块和通道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤5-配置docker-compose文件"><span class="toc-text">步骤5.配置docker-compose文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤7-验证"><span class="toc-text">步骤7. 验证</span></a></li></ol></li></ol>
+ 
+         
+    </section>
+    
+
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (12)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (14)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

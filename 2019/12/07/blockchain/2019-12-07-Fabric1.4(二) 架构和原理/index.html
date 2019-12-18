@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>二、Fabric1.4 架构和原理 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script>
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/index.html" class="item  ">
+
+                
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/index.html" class="item menu-dropdown ">
+
+                
+                <a  title="教程" class="icon-lab">&nbsp;教程</a>
+                
+
+                
+                    <ul class="submenu hidden">
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/GO" title="GO" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/golang.png"  />
+                                    
+                                    &nbsp;GO
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/区块链/" title="区块链" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/区块链.png"  />
+                                    
+                                    &nbsp;区块链
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Fabric" title="Fabric 联盟链技术" class="">
+                                                &nbsp;Fabric 联盟链技术</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/EOS" title="Eos 公链" class="">
+                                                &nbsp;Eos 公链</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Ipfs" title="Ipfs 星际文件系统" class="">
+                                                &nbsp;Ipfs 星际文件系统</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/Java" title="Java" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/java.png"  />
+                                    
+                                    &nbsp;Java
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/Java/springboot-vue前后端开发" title="springboot-vue前后端开发" class="">
+                                                &nbsp;springboot-vue前后端开发</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/docker/" title="Docker" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/Docker.png"  />
+                                    
+                                    &nbsp;Docker
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/云计算与大数据/" title="云计算与大数据" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/cloud.png"  />
+                                    
+                                    &nbsp;云计算与大数据
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/云计算与大数据/MongoDB" title="MongoDB" class="">
+                                                &nbsp;MongoDB</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/其他/" title="其他" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/其他.png"  />
+                                    
+                                    &nbsp;其他
+                                </a>
+                            
+                            
+                        </li>
+                    
+                    </ul>
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/index.html" class="item  ">
+
+                
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/index.html" class="item  ">
+
+                
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/index.html" class="item  ">
+
+                
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+                
+
+                
+            </li>
+            
+
+
+        </ul>
+
+
+
+
+
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+
+
+$(".menu-dropdown").bind("click",function(){
+
+    var submenu=$(this).children("ul");
+    if(submenu){
+
+        if (submenu.is(':hidden')) {
+            submenu.show();
+
+        } else {
+            submenu.hide();
+        }
+
+    }
+});
+
+
+</script>
+
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+
+        <section class="content">
+
+
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(三) 创建Helloworld区块链/">
+            
+                三、Fabric1.4 创建Helloword区块链
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/">
+            
+                一、Fabric1.4 简介
+            
+        </a>
+    </span>
+    
+
+</div>
+
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>二、Fabric1.4 架构和原理</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-06T16:01:02.000Z">2019-12-07</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+
+    <div class="post-content">
+        <p>#1.Fabric总体架构<br>  Fabric架构主要包括三个模块：会员(Membership)，区块链(Blockchan)和链码(chaincode)。<br>  <img src="https://zone-7.github.io/img/fabric/%E6%9E%B6%E6%9E%84.png" alt="架构图"></p>
+<h2 id="1-1成员服务"><a href="#1-1成员服务" class="headerlink" title="1.1成员服务"></a>1.1成员服务</h2><p>包含下列组件：注册、身份认证管理及审计。</p>
+<p>成员服务通过公钥基础设施(Public Key Infrastructure (PKI))和去中心化的/共识技术使得不带权限的区块链变成带权限的区块链。成员必须被许可才能加入网络，通过实体注册来获得长时间的，可能根据实体类型生成的身份凭证(登记证书enrollment certificates)。在用户使用过程中，这样的证书允许交易证书颁发机构(Transaction Certificate Authority (TCA))颁发匿名证书。交易证书被用来对提交交易授权。交易证书存储在区块链中，并对审计集群授权，否则交易是不可链接的。</p>
+<h2 id="1-2区块链服务"><a href="#1-2区块链服务" class="headerlink" title="1.2区块链服务"></a>1.2区块链服务</h2><p>包含下列组件：共识管理、分布式账本、点对点网络和分类存储</p>
+<p>区块链服务通过HTTP/2上的点对点(peer-to-peer)协议来管理分布式总账。为了提供最高效的哈希算法来维护世界状态的复制，数据结构进行了高度的优化。每个部署中可以插入和配置不同的共识算法(PBFT, Raft, PoW, PoS)。</p>
+<h2 id="1-3链码服务"><a href="#1-3链码服务" class="headerlink" title="1.3链码服务"></a>1.3链码服务</h2><p>包含下列组件：安全容器 、安全注册中心</p>
+<p>Fabric的智能合约smart contract称为链码chaincode，是一段代码，它处理网络成员所同意的业务逻辑。</p>
+<p>链码可采用Go、Java、Node.js语言编写。链码被编译成一个独立的应用程序，fabric用Docker容器来运行chaincode，里面的base镜像都是经过签名验证的安全镜像，包括OS层和开发chaincode的语言、runtime和SDK层。一旦chaincode容器被启动，它就会通过gRPC与启动这个chaincode的Peer节点连接。</p>
+<h2 id="1-4账本"><a href="#1-4账本" class="headerlink" title="1.4账本"></a>1.4账本</h2><p>账本Ledger主要包含两块：blockchain和state。blockchain就是一系列连在一起的block，用来记录历史交易。state对应账本的当前最新状态，它是一个key-value数据库，Fabric默认采用Level DB, 可以替换成其他的Key-value数据库，如Couch DB。</p>
+<h2 id="1-5交易"><a href="#1-5交易" class="headerlink" title="1.5交易"></a>1.5交易</h2><p>Fabric上的transction交易分两种，部署和调用。</p>
+<h3 id="1-5-1部署："><a href="#1-5-1部署：" class="headerlink" title="1.5.1部署："></a>1.5.1部署：</h3><p>把Chaincode部署到peer节点上并准备好被调用，当一个部署交易成功执行时，Chaincode就被部署到各个peer节点上。好比把一个web service或者EJB部署到应用服务器上的不同实例上。</p>
+<h3 id="1-5-2调用："><a href="#1-5-2调用：" class="headerlink" title="1.5.2调用："></a>1.5.2调用：</h3><p>客户端应用程序通过Fabric提供的API调用先前已部署好的某个chaincode的某个函数执行交易，并相应地读取和写入KV数据库，返回是否成功或者失败。</p>
+<h2 id="1-6-APIs-Events-SDKs"><a href="#1-6-APIs-Events-SDKs" class="headerlink" title="1.6 APIs, Events, SDKs"></a>1.6 APIs, Events, SDKs</h2><p>Fabric提供API方便应用开发，对服务端的ChainCode，目前支持用Go、Java或者Node.js开发。对客户端应用，Fabric目前提供Node.js和Java SDK。未来计划提供Python 和Go SDK，Fabric还提供RESTAPI。对于开发者，还可以通过CLI快速去测试chaincode，或者去查询交易状态。在区块链网络里，节点和chaincode会发送events来触发一些监听动作，方便与其他外部系统的集成。  </p>
+<h1 id="2-Fabric应用开发流程"><a href="#2-Fabric应用开发流程" class="headerlink" title="2.Fabric应用开发流程"></a>2.Fabric应用开发流程</h1><p>开发者创建客户端应用和智能合约（chaincode），Chaincode被部署到区块链网络的Peer节点上面。通过chaincode来操作账本，当你调用一个交易transaction时，你实际上是在调用Chaincode中的一个函数方法，它实现业务逻辑，并对账本进行get, put, delete操作。客户端应用提供用户交互界面，并提交交易到区块链网络上。<br><img src="https://zone-7.github.io/img/fabric/%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.png" alt="开发流程"></p>
+<h1 id="3-Fabric网络"><a href="#3-Fabric网络" class="headerlink" title="3.Fabric网络"></a>3.Fabric网络</h1><p>节点是区块链的通信实体，节点是一个逻辑概念，不同类型的节点可以运行在同一台物理服务器上。这些节点可能部署在云上面或者本地。可能来自不同的公司或者组织。在区块链网络中有两种类型的节点：Peer节点和Orderer节点，如下图所示。<br><img src="https://zone-7.github.io/img/fabric/%E7%BD%91%E7%BB%9C.png" alt="网络"><br>Peer节点：chaincode部署在Peer节点上，它对账本进行读写操作。一个Peer节点可以充当多种角色，如背书者endorser,提交者committer。一个区块链网络中会有多个Peer节点。</p>
+<p>Orderer节点：对交易进行排序，批量打包，生成区块，发给Peer节点。一个区块链网络中会有多个Orderer节点，它们共同提供排序服务。排序服务可以别实现为多种不同的方式，从一个中心化的服务（被用于开发和测试，如Solo）,到分布式协议（如Kafka）。</p>
+<p>排序服务提供了通向客户端和Peer节点的共享通信通道。提供了包含交易的消息广播服务（broadcast和deliver）。客户端可以通过这个通道向所有的节点广播（broadcast）消息。通道可以向连接到该通道的节点投递(deliver)消息。</p>
+<p>排序服务支持多通道，类似于发布/订阅消息系统中的主题topic。客户端和Peer节点可以连接到一个给点的通道，并通过给定的通道发送和接收消息。多通道使得Peer节点可以基于应用访问控制策略来订阅任意数量的通道;也就是说，应用程序在指定Peer节点的子集中架设通道。这些peer组成提交到该通道交易的相关者集合，而且只有这些peer可以接收包含相关交易的区块，与其他交易完全隔离，实现数据隔离和保密。</p>
+<p>此外，peers的子集将这些私有块提交到不同的账本上，允许它们保护这些私有交易，与其他peers子集的账本隔离开来。应用程序根据业务逻辑决定将交易发送到1个或多个通道。</p>
+<p><img src="https://zone-7.github.io/img/fabric/%E9%80%9A%E9%81%93.png" alt="通道"> </p>
+<p>例如，如上图所示，peer 1,2和N订阅红色通道，并共同维护红色账本; peer 1和N订阅蓝色通道并维护蓝色账本;类似地，peer 2和peer N在黑色通道上并维护黑色账本。</p>
+<p>在这个例子中，peer N在订阅了所有通道，我们看到每个通道都有一个相关的账本。一般来说，我们称不涉及所有peer的账本为子账本，另一种是系统账本，即全账本。</p>
+<h1 id="4-Fabric交易流程"><a href="#4-Fabric交易流程" class="headerlink" title="4.Fabric交易流程"></a>4.Fabric交易流程</h1><p><img src="https://zone-7.github.io/img/fabric/%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B1.png" alt="交易"> </p>
+<ul>
+<li>第一步，客户端Client构造交易提案</li>
+</ul>
+<p>client利用SDK（Node.js\java..）构造一个交易提案propose，该propose包含调用智能合约功能函数请求，用来确认哪些数据可以读取或者写入账本，client将交易提案propose发送给一个或多个peer节点，交易提案包含本次交易要调用的合约标识、合约方法和参数信息以及客户端签名等。</p>
+<p>SDK将交易提案打包为可识别的格式（如gRPC上的protocolbuffer），并使用用户的加密凭证为该交易提案生成唯一的签名。</p>
+<ul>
+<li>第二步，背书节点模拟执行交易</li>
+</ul>
+<p>背书节点endorser收到交易提案后，验证签名并确定提交者是否有权执行操作。背书节点将交易提案的参数作为输入，在当前状态KV数据库上执行交易，生成包含执行返回值、读操作集合和写操作集合的交易结果（此时不会更新账本），这些值的集合、背书节点的签名和背书结果（YES / NO）作为提案的结果返回给客户端SDK，SDK解析这些信息判断是否应用于后续的交易。</p>
+<ul>
+<li>第三步，客户端把交易发送到共识服务节点</li>
+</ul>
+<p>应用程序（SDK）验证背书节点签名，并比较各节点返回的提案结果，判断提案结果是否一致以及是否参照指定的背书策略执行。客户端收到各个背书节点的应答后，打包到一起组成一个交易并签名，发送给Orderers。</p>
+<ul>
+<li>第四步，orderer节点共识排序，生成新区块，提交交易</li>
+</ul>
+<p>Orderers对接收到的交易进行共识排序，然后按照区块生成策略，将一批交易打包到一起，生成新的区块，调用deliver API投递消息，发送给提交节点。</p>
+<p>提交节点收到区块后，会对区块中的每笔交易进行校验，检查交易依赖的输入输出是否符合当前区块链的状态，完成后将区块追加到本地的区块链，并修改K-V状态数据库。</p>
+
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(三) 创建Helloworld区块链/">
+            
+                三、Fabric1.4 创建Helloword区块链
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/">
+            
+                一、Fabric1.4 简介
+            
+        </a>
+    </span>
+    
+
+</div>
+
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'blockchain/2019-12-07-Fabric1.4(二) 架构和原理' || '2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+
+    
+
+        
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+
+
+    
+
+
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1成员服务"><span class="toc-text">1.1成员服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2区块链服务"><span class="toc-text">1.2区块链服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3链码服务"><span class="toc-text">1.3链码服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4账本"><span class="toc-text">1.4账本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5交易"><span class="toc-text">1.5交易</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-1部署："><span class="toc-text">1.5.1部署：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-2调用："><span class="toc-text">1.5.2调用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-APIs-Events-SDKs"><span class="toc-text">1.6 APIs, Events, SDKs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Fabric应用开发流程"><span class="toc-text">2.Fabric应用开发流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Fabric网络"><span class="toc-text">3.Fabric网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Fabric交易流程"><span class="toc-text">4.Fabric交易流程</span></a>
+ 
+         
+    </section>
+    
+
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (12)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (14)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2019
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

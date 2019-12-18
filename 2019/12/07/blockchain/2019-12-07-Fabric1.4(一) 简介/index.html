@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>ca-server和ca-client的TLS连接配置 | 第七区</title>
+    <title>一、Fabric1.4 简介 | 第七区</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
     <meta name="description" content="zone7的分享">
@@ -86,7 +86,7 @@
             
             
 
-            <li rel="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/index.html" class="item  ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/index.html" class="item  ">
 
                 
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
@@ -101,7 +101,7 @@
             
             
 
-            <li rel="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/index.html" class="item menu-dropdown ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/index.html" class="item menu-dropdown ">
 
                 
                 <a  title="教程" class="icon-lab">&nbsp;教程</a>
@@ -290,7 +290,7 @@
             
             
 
-            <li rel="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/index.html" class="item  ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/index.html" class="item  ">
 
                 
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
@@ -303,7 +303,7 @@
             
             
 
-            <li rel="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/index.html" class="item  ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/index.html" class="item  ">
 
                 
                 <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
@@ -316,7 +316,7 @@
             
             
 
-            <li rel="/2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/index.html" class="item  ">
+            <li rel="/2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/index.html" class="item  ">
 
                 
                 <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
@@ -405,9 +405,9 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/12/07/blockchain/2019-12-07-一、Fabric1.4 简介/">
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/">
             
-                一、Fabric1.4 简介
+                二、Fabric1.4 架构和原理
             
         </a>
     </span>
@@ -417,9 +417,9 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/">
+        <a href="/2019/11/28/blockchain/2019-11-28-Fabric1.4(十二) ca-server和ca-client的TLS连接配置/">
             
-                Fabric peer 参数说明
+                十二、ca-server和ca-client的TLS连接配置
             
         </a>
     </span>
@@ -430,12 +430,12 @@ $(".menu-dropdown").bind("click",function(){
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h2 class="post-title"><span>ca-server和ca-client的TLS连接配置</span></h2>
+        <h2 class="post-title"><span>一、Fabric1.4 简介</span></h2>
     </header>
 
     <p class="post-meta text-center">
         zone-7 发表于
-        <time datetime="2019-11-27T16:00:00.000Z">2019-11-28</time>
+        <time datetime="2019-12-06T16:01:01.000Z">2019-12-07</time>
     </p>
     <p class="post-meta text-center">
         
@@ -456,36 +456,31 @@ $(".menu-dropdown").bind("click",function(){
 
 
     <div class="post-content">
-        <p>如何配置fabric-ca-server和fabric-ca-client之间的TLS连接。</p>
-<h1 id="配置fabric-ca-server端"><a href="#配置fabric-ca-server端" class="headerlink" title="配置fabric-ca-server端"></a>配置fabric-ca-server端</h1><p>fabric-ca-server-config.yaml文件里面配置TLS。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="comment">#  TLS section for the server's listening port</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  The following types are supported for client authentication: NoClientCert,</span></span><br><span class="line"><span class="comment">#  RequestClientCert, RequireAnyClientCert, VerfiyClientCertIfGiven,</span></span><br><span class="line"><span class="comment">#  and RequireAndVerifyClientCert.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  Certfiles is a list of root certificate authorities that the server uses</span></span><br><span class="line"><span class="comment">#  when verifying client certificates.</span></span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="attr">tls:</span></span><br><span class="line">  <span class="comment"># Enable TLS (default: false)</span></span><br><span class="line"><span class="attr">  enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># TLS for the server's listening port</span></span><br><span class="line"><span class="attr">  certfile:</span> <span class="string">ca-cert.pem</span></span><br><span class="line"><span class="attr">  keyfile:</span> <span class="string">ca-key.pem</span></span><br><span class="line"><span class="attr">  clientauth:</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">noclientcert</span></span><br><span class="line"><span class="attr">    certfiles:</span></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>enabled: true必须配置成true</li>
-<li>配置certfile/keyfile；就这个地方，这份证书必须从别的CA签出来。</li>
-<li>clientauth如果选择noclientcert，表示server不验证client，也就是通常所说的单向验证，即client端验证server端，而server端不验证client的；其他选项是双向验证，即server端和client端相互验证。</li>
-<li>单向验证：server端提供证书(cert和key)，不需要配置certfiles即CA根证书，而在客户端必须提供CA根证书，用来验证server端的证书是否有效。另外client端也不需要自己的证书，因为它不需要想server端提供验证。</li>
-<li>双向验证：server端提供证书(cert和key)，还必须配置cerfiles即CA根证书，因为需要验证client端提供的证书。另外client也端必须提供一样的内容，即client端的证书(cert/key)以供server端验证，并且提供CA根证书验证server端提供的证书。</li>
+        <h1 id="Fabric简介"><a href="#Fabric简介" class="headerlink" title="Fabric简介"></a>Fabric简介</h1><p>Linux基金会2015年成立了超级账本项目（Hyperledger）来推动跨行业区块链技术。并非声明一个单一的区块链标准，它鼓励通过社区来合作开发区块链技术，鼓励开源知识产权，采用随时间演进的关键标准。</p>
+<p>Hyperledger Fabric是Hyperledger区块链项目中的一员。像其他区块链技术一样，它有一个账本，使用智能合约，是一个由参与者共同管理他们的交易的系统。</p>
+<p>Hyperledger Fabric和其他区块链系统不同之处在于它是私有的和有准入资格授权的。并非一个公开的无授权的允许不明身份参与者进入网络（需要工作量证明之类的协议认证交易和保证网络安全）的系统，Hyperledger Fabric的成员要在会员服务提供商（MSP）注册。</p>
+<p>Hyperledger Fabric也提供一些可插拔的选项。账本数据能够以多种格式存储，一致性机制可以引入也可以退出，并且支持不同的多个MSP。</p>
+<p>Hyperledger Fabric还提供创建通道(channel)的能力,允许一组参与者建立一个单独的交易账本。这对于参与者可能是竞争对手的网络是一个特别重要的选项，比如参与者之间针对不同交易对象设定不同价格，他们就不希望每一别交易被每一个参与者知道。在一个通道里的两个参与者，有这个通道账本的全部副本，通道之外的其他人没有。（可以把一个通道理解为一个隔离的账本）</p>
+<h2 id="共享账本"><a href="#共享账本" class="headerlink" title="共享账本"></a>共享账本</h2><p>Hyperledger Fabric有一个账本子系统包含两个组件：世界状态和交易日志。每一个参与者有一份他们参与的每个Hyperledger Fabric网络的账本的副本。</p>
+<p>世界状态组件描述了一个给点时间点的账本状态。它是账本的数据库。交易日志组件记录所有导致世界状态当前值的交易。它是世界状态的更新历史。这样，账本就是世界状态数据库和交易日志历史的组合体。</p>
+<p>账本有可替换的世界状态数据库。默认是LevelDB键值存储数据库。交易日志不需要是可插拔的。它只是简单的记录账本数据库被区块链网络使用之前和之后的值。</p>
+<h2 id="智能合约"><a href="#智能合约" class="headerlink" title="智能合约"></a>智能合约</h2><p>Hyperledger Fabric智能合约写在链码（chaincode）里并在区块链外部应用程序要和账本发生交易的时候被外部应用程序调用。在大多数情况下，链码只和账本的数据库组件（世界状态）交互，而不和交易日志交互。</p>
+<p>链码可以用多种编程语言实现。目前支持的链码编写语言包括Go、Java、Python等，未来还会支持更多。</p>
+<h2 id="隐私"><a href="#隐私" class="headerlink" title="隐私"></a>隐私</h2><p>出于对网络的需要，B2B网络的参与者可能对于他们分享的信息范围极端敏感。对于其他网络而言，隐私不会成为首要问题。</p>
+<p>Hyperledger Fabric支持把隐私（使用通道）作为关键操作要求的同时又比较开放的网络</p>
+<h2 id="共识"><a href="#共识" class="headerlink" title="共识"></a>共识</h2><p>网络中不通参与者之间的交易必须按照发生的顺序被写进账本里。为了实现这一点，必须建立交易顺序，并且设置一个拒绝由于误操作或者（恶意）插入账本的错误（恶意）交易的方法。<br>这是一个经过深入研究的计算机科学领域，有很多方法可以实现它，每种都有不同的权衡。比如PBFT（实践拜占庭容错）可以为文件副本提供通过与其他节点沟通来保持一致性的一种机制，即使发生腐败的情况。另外，在比特币里，排序通过一个称为挖矿的由计算机竞赛解一道加密难题的流程来保证。<br>Hyperledger Fabric设计为允许网络在初始时选择一种能够最好地代表现存参与者之间关系的共识机制。与隐私一样，还有一系列的要求；从高度结构化的网络到更加对等的网络。</p>
+<h1 id="联盟链要求"><a href="#联盟链要求" class="headerlink" title="联盟链要求"></a>联盟链要求</h1><ul>
+<li>准入机制</li>
+<li>高吞吐量</li>
+<li>低延迟</li>
+<li>交易保证隐私与机密</li>
+<li>高可扩展<h1 id="Fabric-特点"><a href="#Fabric-特点" class="headerlink" title="Fabric 特点"></a>Fabric 特点</h1></li>
+<li>高度模块化的设计，使得Fabric平台可以适用于各行各业：供应链、银行、金融、保险、医疗、人力资源、社会保障等。</li>
+<li>支持通用编程语言编写智能合约：Java，Go，javascript</li>
+<li>网络要求是permissioned</li>
+<li>共识协议可插拔，可以适用不同的环境</li>
+<li>没有token，减少被攻击的风险，不需要挖矿可以降低成本</li>
 </ul>
-<h1 id="配置fabric-ca-client端"><a href="#配置fabric-ca-client端" class="headerlink" title="配置fabric-ca-client端"></a>配置fabric-ca-client端</h1><p>fabric-ca-client-config.yaml</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="comment">#    TLS section for secure socket connection</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  certfiles - PEM-encoded list of trusted root certificate files</span></span><br><span class="line"><span class="comment">#  client:</span></span><br><span class="line"><span class="comment">#    certfile - PEM-encoded certificate file for when client authentication</span></span><br><span class="line"><span class="comment">#    is enabled on server</span></span><br><span class="line"><span class="comment">#    keyfile - PEM-encoded key file for when client authentication</span></span><br><span class="line"><span class="comment">#    is enabled on server</span></span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="attr">tls:</span></span><br><span class="line">  <span class="comment"># TLS section for secure socket connection</span></span><br><span class="line"><span class="attr">  certfiles:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    certfile:</span></span><br><span class="line"><span class="attr">    keyfile:</span></span><br></pre></td></tr></table></figure>
-
-
-<p>包含</p>
-<ul>
-<li>CA根证书 </li>
-<li>client自己的证书(cert和key)，如果启动双向认证。</li>
-<li>命令行方式配置<br>除了使用yaml文件配置，server和client也可以在命令行配置TLS信息：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Server：</span><br><span class="line"></span><br><span class="line">--tls.certfile string                       PEM-encoded TLS certificate file for server&apos;s listening port (default &quot;tls-cert.pem&quot;)</span><br><span class="line">--tls.clientauth.certfiles stringSlice      A list of comma-separated PEM-encoded trusted certificate files (e.g. root1.pem,root2.pem)</span><br><span class="line">--tls.clientauth.type string                Policy the server will follow for TLS Client Authentication. (default &quot;noclientcert&quot;)</span><br><span class="line">--tls.enabled                               Enable TLS on the listening port</span><br><span class="line">--tls.keyfile string                        PEM-encoded TLS key for server&apos;s listening port</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<pre><code class="text">Client:
-
---tls.certfiles stringSlice      A list of comma-separated PEM-encoded trusted certificate files (e.g. root1.pem,root2.pem)
---tls.client.certfile string     PEM-encoded certificate file when mutual authenticate is enabled
---tls.client.keyfile string      PEM-encoded key file when mutual authentication is enabled
-</code></pre>
 
     </div>
 
@@ -542,9 +537,9 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/2019/12/07/blockchain/2019-12-07-一、Fabric1.4 简介/">
+        <a href="/2019/12/07/blockchain/2019-12-07-Fabric1.4(二) 架构和原理/">
             
-                一、Fabric1.4 简介
+                二、Fabric1.4 架构和原理
             
         </a>
     </span>
@@ -554,9 +549,9 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="next fr">
         下一篇<br >
-        <a href="/2019/11/27/blockchain/2019-11-27-Fabric peer 参数说明/">
+        <a href="/2019/11/28/blockchain/2019-11-28-Fabric1.4(十二) ca-server和ca-client的TLS连接配置/">
             
-                Fabric peer 参数说明
+                十二、ca-server和ca-client的TLS连接配置
             
         </a>
     </span>
@@ -574,7 +569,7 @@ $(".menu-dropdown").bind("click",function(){
   <script>
   ZONE7.Comment({
     container: 'comments',
-    label: 'blockchain/2019-11-28-ca-server和ca-client的TLS连接配置' || '2019/11/28/blockchain/2019-11-28-ca-server和ca-client的TLS连接配置/',
+    label: 'blockchain/2019-12-07-Fabric1.4(一) 简介' || '2019/12/07/blockchain/2019-12-07-Fabric1.4(一) 简介/',
     owner: 'zone-7',
     repo: 'zone-7.github.io',
     clientId: '564f71fbf0c5e6e879f2',
@@ -606,7 +601,7 @@ $(".menu-dropdown").bind("click",function(){
         <h3 class="widget-hd"><strong>目录</strong></h3>
           
              
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置fabric-ca-server端"><span class="toc-text">配置fabric-ca-server端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置fabric-ca-client端"><span class="toc-text">配置fabric-ca-client端</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Fabric简介"><span class="toc-text">Fabric简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#共享账本"><span class="toc-text">共享账本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能合约"><span class="toc-text">智能合约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐私"><span class="toc-text">隐私</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#共识"><span class="toc-text">共识</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#联盟链要求"><span class="toc-text">联盟链要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fabric-特点"><span class="toc-text">Fabric 特点</span></a></li></ol>
  
          
     </section>
@@ -619,21 +614,25 @@ $(".menu-dropdown").bind("click",function(){
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (12)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (14)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
     <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
   
     <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
   
     <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
   
-    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (11)</a>
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
   
-    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (13)</a>
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
   
-    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
-  
-    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
-  
-    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
   
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
@@ -641,17 +640,13 @@ $(".menu-dropdown").bind("click",function(){
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
   
-    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
   
     <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
   
     <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
-    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
   
     <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
   
