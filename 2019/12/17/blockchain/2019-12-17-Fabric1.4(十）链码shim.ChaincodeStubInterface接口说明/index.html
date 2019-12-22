@@ -405,7 +405,11 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="prev fl">
         上一篇<br >
-        <a href="javascript: void(0);">没有上一篇了</a>
+        <a href="/2019/12/18/blockchain/2019-12-18-Fabric1.4(十三）hyperledger-explorer/">
+            
+                十三、Hyperledger Explorer
+            
+        </a>
     </span>
     
 
@@ -473,6 +477,8 @@ $(".menu-dropdown").bind("click",function(){
 
 <p>根据需要查询区间的开始键与结束键（开始键与结束键按字典顺序排序）获得区间查询的结果（结果包含开始键、不包括结束键的半闭半开区间）。<br>例如：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *SimpleChaincode)</span> <span class="title">rangeQuery</span><span class="params">(stub shim.ChaincodeStubInterface, args []<span class="keyword">string</span>)</span> <span class="title">pb</span>.<span class="title">Response</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    resultsIterator, err := stub.GetStateByRange(<span class="string">"Car:001"</span>, <span class="string">"Car:003"</span>) </span><br><span class="line">    <span class="comment">//这里应为传入参数，开始键与结束键按字典顺序排序</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> shim.Error(<span class="string">"Query by Range failed"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> resultsIterator.Close() <span class="comment">//释放迭代器</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line">    bArrayMemberAlreadyWritten := <span class="literal">false</span></span><br><span class="line">    buffer.WriteString(<span class="string">`&#123;"result":[`</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> resultsIterator.HasNext() &#123;</span><br><span class="line">        queryResponse, err := resultsIterator.Next() <span class="comment">//获取迭代器中的每一个值</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> shim.Error(<span class="string">"Fail"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> bArrayMemberAlreadyWritten == <span class="literal">true</span> &#123;</span><br><span class="line">            buffer.WriteString(<span class="string">","</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        buffer.WriteString(<span class="keyword">string</span>(queryResponse.Value)) <span class="comment">//将查询结果放入Buffer中</span></span><br><span class="line">        bArrayMemberAlreadyWritten = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    buffer.WriteString(<span class="string">`]&#125;`</span>)</span><br><span class="line">    fmt.Print(<span class="string">"Query result: %s"</span>, buffer.String())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> shim.Success(buffer.Bytes())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
 
@@ -528,7 +534,11 @@ $(".menu-dropdown").bind("click",function(){
     
     <span class="prev fl">
         上一篇<br >
-        <a href="javascript: void(0);">没有上一篇了</a>
+        <a href="/2019/12/18/blockchain/2019-12-18-Fabric1.4(十三）hyperledger-explorer/">
+            
+                十三、Hyperledger Explorer
+            
+        </a>
     </span>
     
 
@@ -601,9 +611,9 @@ $(".menu-dropdown").bind("click",function(){
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (12)</a>
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (13)</a>
   
-    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (14)</a>
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (15)</a>
   
     <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
   
@@ -611,21 +621,15 @@ $(".menu-dropdown").bind("click",function(){
   
     <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
   
-    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
-  
-    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
   
     <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
   
@@ -635,11 +639,17 @@ $(".menu-dropdown").bind("click",function(){
   
     <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
   
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
     <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
   
-    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
-  
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
   

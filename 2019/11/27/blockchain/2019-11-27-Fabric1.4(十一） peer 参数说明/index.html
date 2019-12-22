@@ -493,6 +493,8 @@ Flags:
 <h3 id="2-1-4-chaincode相关的配置"><a href="#2-1-4-chaincode相关的配置" class="headerlink" title="2.1.4 chaincode相关的配置"></a>2.1.4 chaincode相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">chaincode:</span></span><br><span class="line">    <span class="comment">#chaincode中peer服务器地址</span></span><br><span class="line"><span class="attr">    peerAddress:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    id:</span></span><br><span class="line"><span class="attr">        path:</span></span><br><span class="line"><span class="attr">        name:</span></span><br><span class="line">    <span class="comment">#本地编译环境为docker镜像</span></span><br><span class="line"><span class="attr">    builder:</span> <span class="string">$(DOCKER_NS)/fabric-ccenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line">    <span class="comment">#go语言版本的chaincode的基础镜像</span></span><br><span class="line"><span class="attr">    golang:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line">    <span class="comment">#car格式的chaincode生成镜像文件时的基础镜像</span></span><br><span class="line"><span class="attr">    car:</span></span><br><span class="line"><span class="attr">        runtime:</span> <span class="string">$(BASE_DOCKER_NS)/fabric-baseos:$(ARCH)-$(BASE_VERSION)</span></span><br><span class="line">    <span class="comment">#java版本的chaincode基础镜像</span></span><br><span class="line"><span class="attr">    java:</span></span><br><span class="line"><span class="attr">        Dockerfile:</span>  <span class="string">|</span></span><br><span class="line"><span class="string">            from $(DOCKER_NS)/fabric-javaenv:$(ARCH)-$(PROJECT_VERSION)</span></span><br><span class="line"><span class="string">    #启动chaincode容器时的超时时间，超过这个时间认为启动失败</span></span><br><span class="line"><span class="string"></span><span class="attr">    startuptimeout:</span> <span class="number">300</span><span class="string">s</span></span><br><span class="line">    <span class="comment">#执行Invoke和Init方法时的超时时间，超过这个时间认定执行失败</span></span><br><span class="line"><span class="attr">    executetimeout:</span> <span class="number">30</span><span class="string">s</span></span><br><span class="line">    <span class="comment">#chaincode运行模式，net为网络模式，dev为开发模式，dev模式下，可以在容器外运行chaincode</span></span><br><span class="line"><span class="attr">    mode:</span> <span class="string">net</span></span><br><span class="line">    <span class="comment">#peer节点和chaincode节点的心跳时间的保持时间，如果这个之小于等于0，相当于关闭心跳保持</span></span><br><span class="line"><span class="attr">    keepalive:</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#系统chaincode的开关</span></span><br><span class="line"><span class="attr">    system:</span></span><br><span class="line"><span class="attr">        cscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        lscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        escc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        vscc:</span> <span class="string">enable</span></span><br><span class="line"><span class="attr">        qscc:</span> <span class="string">enable</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#chaincode的模块日志级别和日志格式</span></span><br><span class="line"><span class="attr">    logging:</span></span><br><span class="line"><span class="attr">      level:</span>  <span class="string">info</span></span><br><span class="line"><span class="attr">      shim:</span>   <span class="string">warning</span></span><br><span class="line"></span><br><span class="line"><span class="attr">      format:</span> <span class="string">'<span class="template-variable">%&#123;color&#125;</span><span class="template-variable">%&#123;time:2006-01-02 15:04:05.000 MST&#125;</span> [<span class="template-variable">%&#123;module&#125;</span>] <span class="template-variable">%&#123;shortfunc&#125;</span> -&gt; <span class="template-variable">%&#123;level:.4s&#125;</span> <span class="template-variable">%&#123;id:03x&#125;</span><span class="template-variable">%&#123;color:reset&#125;</span> <span class="template-variable">%&#123;message&#125;</span>'</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-1-5-ledger相关的配置"><a href="#2-1-5-ledger相关的配置" class="headerlink" title="2.1.5 ledger相关的配置"></a>2.1.5 ledger相关的配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">ledger:</span></span><br><span class="line"><span class="attr">  blockchain:</span></span><br><span class="line"><span class="attr">  state:</span></span><br><span class="line">    <span class="comment">#数据库类型，目前支持golevedb和CouchDB</span></span><br><span class="line"><span class="attr">    stateDatabase:</span> <span class="string">goleveldb</span></span><br><span class="line">    <span class="comment">#如果上面配置了CouchDB，则下面couchDB相关的配置生效</span></span><br><span class="line"><span class="attr">    couchDBConfig:</span></span><br><span class="line"><span class="attr">       couchDBAddress:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:5984</span></span><br><span class="line"><span class="attr">       username:</span></span><br><span class="line"><span class="attr">       password:</span></span><br><span class="line"><span class="attr">       maxRetries:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">       maxRetriesOnStartup:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">       requestTimeout:</span> <span class="number">35</span><span class="string">s</span></span><br><span class="line"><span class="attr">       queryLimit:</span> <span class="number">10000</span></span><br><span class="line">    </span><br><span class="line">  <span class="comment">#是否使能历史状态数据库</span></span><br><span class="line"><span class="attr">  history:</span></span><br><span class="line"><span class="attr">    enableHistoryDatabase:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
     </div>
 
 
@@ -625,9 +627,9 @@ Flags:
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (12)</a>
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (13)</a>
   
-    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (14)</a>
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (15)</a>
   
     <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (1)</a>
   
@@ -635,21 +637,15 @@ Flags:
   
     <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
   
-    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
-  
-    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
-  
-    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
-  
-    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
-  
     <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
   
     <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
   
     <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
   
     <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
   
@@ -659,11 +655,17 @@ Flags:
   
     <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
   
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
     <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
   
-    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
-  
     <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
   
     <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
   
