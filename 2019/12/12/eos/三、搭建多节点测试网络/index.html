@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>一、EOS 简介 | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script>
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            
+            
+            
+
+            <li rel="/2019/12/12/eos/三、搭建多节点测试网络/index.html" class="item  ">
+
+                
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+            
+            
+
+            <li rel="/2019/12/12/eos/三、搭建多节点测试网络/index.html" class="item menu-dropdown ">
+
+                
+                <a  title="教程" class="icon-lab">&nbsp;教程</a>
+                
+
+                
+                    <ul class="submenu hidden">
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/GO" title="GO" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/golang.png"  />
+                                    
+                                    &nbsp;GO
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/区块链/" title="区块链" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/区块链.png"  />
+                                    
+                                    &nbsp;区块链
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Fabric" title="Fabric 联盟链技术" class="">
+                                                &nbsp;Fabric 联盟链技术</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/EOS" title="Eos 公链" class="">
+                                                &nbsp;Eos 公链</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Ipfs" title="Ipfs 星际文件系统" class="">
+                                                &nbsp;Ipfs 星际文件系统</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/Java" title="Java" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/java.png"  />
+                                    
+                                    &nbsp;Java
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/Java/springboot-vue前后端开发" title="springboot-vue前后端开发" class="">
+                                                &nbsp;springboot-vue前后端开发</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/docker/" title="Docker" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/Docker.png"  />
+                                    
+                                    &nbsp;Docker
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/云计算与大数据/" title="云计算与大数据" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/cloud.png"  />
+                                    
+                                    &nbsp;云计算与大数据
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/云计算与大数据/MongoDB" title="MongoDB" class="">
+                                                &nbsp;MongoDB</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/其他/" title="其他" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/其他.png"  />
+                                    
+                                    &nbsp;其他
+                                </a>
+                            
+                            
+                        </li>
+                    
+                    </ul>
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/12/eos/三、搭建多节点测试网络/index.html" class="item  ">
+
+                
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/12/eos/三、搭建多节点测试网络/index.html" class="item  ">
+
+                
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/12/eos/三、搭建多节点测试网络/index.html" class="item  ">
+
+                
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+                
+
+                
+            </li>
+            
+
+
+        </ul>
+
+
+
+
+
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+
+
+$(".menu-dropdown").bind("click",function(){
+
+    var submenu=$(this).children("ul");
+    if(submenu){
+
+        if (submenu.is(':hidden')) {
+            submenu.show();
+
+        } else {
+            submenu.hide();
+        }
+
+    }
+});
+
+
+</script>
+
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+
+        <section class="content">
+
+
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/12/fabric/2019-12-12-IPFS-一、简介/">
+            
+                一、Ipfs 简介
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/12/eos/二、使用docker 搭建测试网络/">
+            
+                一、EOS 简介
+            
+        </a>
+    </span>
+    
+
+</div>
+
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>一、EOS 简介</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-11T16:00:00.000Z">2019-12-12</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/EOS/">EOS</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a> / 
+    
+        <a href="/tags/EOS/" title="EOS">EOS</a>
+    
+
+            </span> 
+    </p>
+
+
+    <div class="post-content">
+        <h2 id="node1"><a href="#node1" class="headerlink" title="node1"></a>node1</h2><p>config.ini </p>
+<pre><code class="text">
+
+blocks-dir = &quot;blocks&quot; 
+http-server-address = 0.0.0.0:8888
+p2p-listen-endpoint = 0.0.0.0:9876
+p2p-server-address = localhost:9876
+allowed-connection = any
+signature-provider = EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+producer-name = eosio
+
+enable-stale-production = true
+
+access-control-allow-origin = *  
+http-validate-host = false 
+filter-on = *
+chain-state-db-size-mb = 2048  
+abi-serializer-max-time-ms = 3000
+
+plugin = eosio::producer_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::history_plugin
+plugin = eosio::history_api_plugin
+plugin = eosio::http_plugin
+plugin = eosio::mongo_db_plugin 
+mongodb-uri = mongodb://admin:123456@mongodb:27017/eos1 
+mongodb-queue-size = 2048
+mongodb-abi-cache-size = 2048
+</code></pre>
+<p>##启动keosd、nodeos</p>
+<p>##编译合约<br>eosio.contracts/build.sh</p>
+<p>##创建钱包<br>cleos wallet create  –to-console</p>
+<p>##导入eosio密钥<br>cleos wallet import  –private-key  5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3<br>##导入其他新创建的密钥<br>cleos wallet import  –private-key  5KUUc1wsZuDiZSKjhVRH3iMz82A2bg58v2stzzyYzZWWeFhKp2H<br>cleos wallet import  –private-key  5J3CA2Y57zkU6U4UPWgKJfgwA4eMs7gvGrLz8nxk5U7xtpFXb9a</p>
+<p>发布合约</p>
+<p>cleos set contract eosio  /eosio.contracts/contracts/eosio.token/src eosio.token.wasm eosio.token.abi -p eosio </p>
+<p>然后再创建account1、account2两个账户：<br>cleos create account eosio account1 EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio account2 EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</p>
+<h2 id="创建九个系统账户"><a href="#创建九个系统账户" class="headerlink" title="创建九个系统账户"></a>创建九个系统账户</h2><pre><code>这九个系统用户的名称及其作用如下说明：
+
+eosio.bpay:矿工获取出块奖励的临时代管账户，增发EOS的1%的25%会先转到这个账户;
+
+eosio.msig:多重签名管理的账户;
+
+eosio.names:靓号账户拍卖管理的账户;
+
+eosio.ram:内存买卖管理的账户;
+
+eosio.ramfee:内存买卖收取手续费的账户，按照每笔交易千分之5的费率收取手续费;
+
+eosio.saving:增发EOS临时存放账户，增发总量 5%，其中80%放在此账户，另外 20%再分成25%和75%，分别给eosio.bpay和eosio.vpay;
+
+eosio.stake:管理EOS抵押的账户;
+
+eosio.token:发行和管理token的账户;
+
+eosio.vpay:矿工按照获得投票多少比例获取奖励的临时代管账户，增发EOS的1%的75%会先转到这个账户.</code></pre><p>cleos create account eosio eosio.bpay   EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.msig   EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.names  EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.ram    EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.ramfee EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.saving EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.stake  EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.token  EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV<br>cleos create account eosio eosio.vpay   EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</p>
+<h2 id="加载四大合约，发行代币"><a href="#加载四大合约，发行代币" class="headerlink" title="加载四大合约，发行代币"></a>加载四大合约，发行代币</h2><p>cleos set contract eosio.token /eosio.contracts/contracts/eosio.token<br>cleos set contract eosio.msig  /eosio.contracts/contracts/eosio.msig<br>cleos push action eosio.token create ‘[“eosio”, “1000000000.0000 SYS”]’ -p eosio.token<br>cleos push action eosio.token issue ‘[“eosio”, “1000000000.0000 SYS”, “memo”]’ -p eosio</p>
+<p>cleos set contract eosio /eosio.contracts/contracts/eosio.system<br>cleos push action eosio setpriv ‘[“eosio.msig”, 1]’ -p eosio@active</p>
+<p>四大智能合约</p>
+<ul>
+<li><p>eosio.bios<br>基本操作，设置帐户和全局操作限制、权限、生产者以及建立授权级别。</p>
+</li>
+<li><p>eosio.token<br>提供基本货币管理功能。包括创建货币、发行货币、转移货币。</p>
+</li>
+<li><p>eosio.msig<br>进行所需授权级别的多个签名。</p>
+</li>
+<li><p>eosio.system<br>让用户可以使用token，对生产者和工作人员进行配置和投票提案，可以经济且有效地建立和管理区块链。</p>
+</li>
+</ul>
+<p>加载系统智能合约并发币：<br>加载系统合约的时候有可能会有一个报错: ……too long. 可以在命令行最后面加上 -x 3000 的选项，3000是一个大概的数字，自行调整这个数据到正确运行为止；<br>智能合约的文件路径必须是全路径，尽量不要使用相对路径；<br>代币发行的大小是用的uint32_t类型，所以代币发行不能超过这个类型的数字，否则会报错；<br>系统合约加载不成功，检查一下九个系统用户是否正确创建，其它三个合约是否正确加载；</p>
+<p>完成以后，在eosio用户里有10亿 SYS 代币，</p>
+<h2 id="创建普通用户"><a href="#创建普通用户" class="headerlink" title="创建普通用户"></a>创建普通用户</h2><p>   加载了eosio.system之后就不能使用create account命令了，只能用system newaccount创建账户</p>
+<p>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system newaccount –transfer eosio zero EOS5nquErGx97QiN6m5DspwLU8wNLmVAm78ccpzV6Ht4nfcJhepyj –stake-net “100000000.0000 SYS” –stake-cpu “100000000.0000 SYS” –buy-ram “20000.0000 SYS”<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> transfer eosio zero “20000.0000 SYS”<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system newaccount –transfer eosio two EOS5VmHFnwVyiFurmFLw387xRpgXEnyF1yxqZs6JLtVwU1hv9gaEb –stake-net “100000000.0000 SYS” –stake-cpu “100000000.0000 SYS” –buy-ram “20000.0000 SYS”<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> transfer eosio two “20000.0000 SYS”<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system newaccount –transfer eosio four EOS8UXVwDadaS8pLDjQ2vRa6Jaqy5k1rqpMHUNCFqzeDF4KfoguJe –stake-net “100000000.0000 SYS” –stake-cpu “100000000.0000 SYS” –buy-ram “20000.0000 SYS”<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> transfer eosio four “20000.0000 SYS”</p>
+<h2 id="注册节点候选人"><a href="#注册节点候选人" class="headerlink" title="注册节点候选人"></a>注册节点候选人</h2><p>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a>  system regproducer zero EOS5nquErGx97QiN6m5DspwLU8wNLmVAm78ccpzV6Ht4nfcJhepyj<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a>  system regproducer two EOS5VmHFnwVyiFurmFLw387xRpgXEnyF1yxqZs6JLtVwU1hv9gaEb<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a>  system regproducer four EOS8UXVwDadaS8pLDjQ2vRa6Jaqy5k1rqpMHUNCFqzeDF4KfoguJe<br>        可以用下列命令查看节点候选人：</p>
+<pre><code>cleos --wallet-url http://127.0.0.1:8900 --url http://192.168.154.157:8888 system listproducers</code></pre><h2 id="给创建的账户转账"><a href="#给创建的账户转账" class="headerlink" title="给创建的账户转账"></a>给创建的账户转账</h2><p>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> push action eosio.token transfer ‘[“eosio”, “zero”,”1000.0000 SYS”,”vote”]’ -p eosio<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> push action eosio.token transfer ‘[“eosio”, “two”,”1000.0000 SYS”,”vote”]’ -p eosio<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> push action eosio.token transfer ‘[“eosio”, “four”,”1000.0000 SYS”,”vote”]’ -p eosio</p>
+<h2 id="使用命令进行投票（自己给自己投票）"><a href="#使用命令进行投票（自己给自己投票）" class="headerlink" title="使用命令进行投票（自己给自己投票）"></a>使用命令进行投票（自己给自己投票）</h2><p>所有代币的15%进行投票后eosio会停止出块，主网会自动启动。在这里我们的代币数据数量总共是10亿，那么我们的主网启动需要1.5亿质押的代币进行投票后才能启动，质押的代币计算方式：staked = cpu + net：</p>
+<p>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system voteproducer prods zero zero<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system voteproducer prods two two<br>cleos –wallet-url <a href="http://127.0.0.1:8900" target="_blank" rel="noopener">http://127.0.0.1:8900</a> –url <a href="http://192.168.154.157:8888" target="_blank" rel="noopener">http://192.168.154.157:8888</a> system voteproducer prods four four</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>过一段时间后就能看到节点轮流产块，创世节点只需同步块，如下所示</p>
+<p>本文是在学习了q_776355102的博客后做的简单总结，有诸多详细命令请参考原文：</p>
+<p><a href="https://blog.csdn.net/weixin_39842528/article/details/81034018" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39842528/article/details/81034018</a></p>
+<h2 id="更改节点出块数目"><a href="#更改节点出块数目" class="headerlink" title="更改节点出块数目"></a>更改节点出块数目</h2><p>按上面的步骤可以让节点轮流出块了，但是每个节点出块个数是12，而不是像官网白皮书说的那样是6个，修改下相关代码就可以让节点出块个数变为6。</p>
+<p>执行指令：vi libraries/chain/include/eosio/chain/config.hpp +99</p>
+<p>//const static int producer_repetitions = 12;<br>const static int producer_repetitions = 6;<br>保存退出之后编译下源码，在按照上面的步骤再来一遍就可以看到如下界面：</p>
+
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/EOS/">EOS</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a> / 
+    
+        <a href="/tags/EOS/" title="EOS">EOS</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/12/fabric/2019-12-12-IPFS-一、简介/">
+            
+                一、Ipfs 简介
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/12/eos/二、使用docker 搭建测试网络/">
+            
+                一、EOS 简介
+            
+        </a>
+    </span>
+    
+
+</div>
+
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'eos/三、搭建多节点测试网络' || '2019/12/12/eos/三、搭建多节点测试网络/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+
+    
+
+        
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+
+
+    
+
+
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#node1"><span class="toc-text">node1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建九个系统账户"><span class="toc-text">创建九个系统账户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载四大合约，发行代币"><span class="toc-text">加载四大合约，发行代币</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建普通用户"><span class="toc-text">创建普通用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册节点候选人"><span class="toc-text">注册节点候选人</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#给创建的账户转账"><span class="toc-text">给创建的账户转账</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用命令进行投票（自己给自己投票）"><span class="toc-text">使用命令进行投票（自己给自己投票）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结尾"><span class="toc-text">结尾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更改节点出块数目"><span class="toc-text">更改节点出块数目</span></a></li></ol>
+ 
+         
+    </section>
+    
+
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (13)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (17)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (3)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2020
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

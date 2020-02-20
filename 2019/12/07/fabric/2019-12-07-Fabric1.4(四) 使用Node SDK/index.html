@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>四、Fabric1.4 使用Node SDK | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script>
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/index.html" class="item  ">
+
+                
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/index.html" class="item menu-dropdown ">
+
+                
+                <a  title="教程" class="icon-lab">&nbsp;教程</a>
+                
+
+                
+                    <ul class="submenu hidden">
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/GO" title="GO" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/golang.png"  />
+                                    
+                                    &nbsp;GO
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/区块链/" title="区块链" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/区块链.png"  />
+                                    
+                                    &nbsp;区块链
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Fabric" title="Fabric 联盟链技术" class="">
+                                                &nbsp;Fabric 联盟链技术</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/EOS" title="Eos 公链" class="">
+                                                &nbsp;Eos 公链</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Ipfs" title="Ipfs 星际文件系统" class="">
+                                                &nbsp;Ipfs 星际文件系统</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/Java" title="Java" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/java.png"  />
+                                    
+                                    &nbsp;Java
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/Java/springboot-vue前后端开发" title="springboot-vue前后端开发" class="">
+                                                &nbsp;springboot-vue前后端开发</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/docker/" title="Docker" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/Docker.png"  />
+                                    
+                                    &nbsp;Docker
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/云计算与大数据/" title="云计算与大数据" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/cloud.png"  />
+                                    
+                                    &nbsp;云计算与大数据
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/云计算与大数据/MongoDB" title="MongoDB" class="">
+                                                &nbsp;MongoDB</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/其他/" title="其他" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/其他.png"  />
+                                    
+                                    &nbsp;其他
+                                </a>
+                            
+                            
+                        </li>
+                    
+                    </ul>
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/index.html" class="item  ">
+
+                
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/index.html" class="item  ">
+
+                
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/index.html" class="item  ">
+
+                
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+                
+
+                
+            </li>
+            
+
+
+        </ul>
+
+
+
+
+
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+
+
+$(".menu-dropdown").bind("click",function(){
+
+    var submenu=$(this).children("ul");
+    if(submenu){
+
+        if (submenu.is(':hidden')) {
+            submenu.show();
+
+        } else {
+            submenu.hide();
+        }
+
+    }
+});
+
+
+</script>
+
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+
+        <section class="content">
+
+
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/fabric/2019-12-07-Fabric1.4(五) 动态添加节点/">
+            
+                五、Fabric1.4 动态添加节点
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/fabric/2019-12-07-Fabric1.4(三) 创建Helloworld区块链/">
+            
+                三、Fabric1.4 创建Helloword区块链
+            
+        </a>
+    </span>
+    
+
+</div>
+
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>四、Fabric1.4 使用Node SDK</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-06T16:01:04.000Z">2019-12-07</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+
+    <div class="post-content">
+        <p>本文基于hellowrold区块链环境，使用fabric-sdk-node 开发客户端应用。 </p>
+<h1 id="1-新建连接文件"><a href="#1-新建连接文件" class="headerlink" title="1.新建连接文件"></a>1.新建连接文件</h1><p><strong><em>connection-org1.yaml</em></strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">helloworld</span></span><br><span class="line"><span class="attr">version:</span> <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line"><span class="attr">client:</span></span><br><span class="line"><span class="attr">  organization:</span> <span class="string">Org1</span></span><br><span class="line"><span class="attr">  connection:</span></span><br><span class="line"><span class="attr">    timeout:</span></span><br><span class="line"><span class="attr">      peer:</span></span><br><span class="line"><span class="attr">        endorser:</span> <span class="string">'300'</span></span><br><span class="line"><span class="attr">organizations:</span></span><br><span class="line"><span class="attr">  Org1:</span></span><br><span class="line"><span class="attr">    mspid:</span> <span class="string">Org1MSP</span></span><br><span class="line"><span class="attr">    peers:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">peer0.org1.example.com</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">peer1.org1.example.com</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">peer2.org1.example.com</span></span><br><span class="line"><span class="attr">    certificateAuthorities:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ca.org1.example.com</span></span><br><span class="line"><span class="attr">peers:</span></span><br><span class="line">  <span class="string">peer0.org1.example.com:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">grpcs://localhost:7051</span></span><br><span class="line"><span class="attr">    tlsCACerts:</span></span><br><span class="line"><span class="attr">      pem:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        -----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">        MIICVzCCAf2gAwIBAgIQPpRrjZvaloVkj2FDjvjdHTAKBggqhkjOPQQDAjB2MQsw</span></span><br><span class="line"><span class="string">        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span></span><br><span class="line"><span class="string">        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz</span></span><br><span class="line"><span class="string">        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0xOTEyMDYwNzE4MDBaFw0yOTEyMDMwNzE4</span></span><br><span class="line"><span class="string">        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH</span></span><br><span class="line"><span class="string">        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD</span></span><br><span class="line"><span class="string">        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D</span></span><br><span class="line"><span class="string">        AQcDQgAEm6zQPRtevUHiMlaEfYaAK7Uu3yCbr7s/aoWtm6HqeSP0iKBb/VCXvV0j</span></span><br><span class="line"><span class="string">        LDgDLb1kK6obJBl8TA4SIX94xkQ+QaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud</span></span><br><span class="line"><span class="string">        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud</span></span><br><span class="line"><span class="string">        DgQiBCCaMWO9GF+XwAh3KmV1pJ8zmzqazuahyjDqymQPY79+YTAKBggqhkjOPQQD</span></span><br><span class="line"><span class="string">        AgNIADBFAiEAnpxtX/dFdqSZ34s6lETiMpNOg2Xus4z2X7MMHirNDvkCIHgmaZ54</span></span><br><span class="line"><span class="string">        B+c5lYRNqeiO9LSawwid4jfdbZvcNQ9QZQQH</span></span><br><span class="line"><span class="string">        -----END CERTIFICATE-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">    grpcOptions:</span></span><br><span class="line"><span class="attr">      ssl-target-name-override:</span> <span class="string">peer0.org1.example.com</span></span><br><span class="line"><span class="attr">      hostnameOverride:</span> <span class="string">peer0.org1.example.com</span></span><br><span class="line">  <span class="string">peer1.org1.example.com:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">grpcs://localhost:8051</span></span><br><span class="line"><span class="attr">    tlsCACerts:</span></span><br><span class="line"><span class="attr">      pem:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        -----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">        MIICVzCCAf2gAwIBAgIQPpRrjZvaloVkj2FDjvjdHTAKBggqhkjOPQQDAjB2MQsw</span></span><br><span class="line"><span class="string">        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span></span><br><span class="line"><span class="string">        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz</span></span><br><span class="line"><span class="string">        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0xOTEyMDYwNzE4MDBaFw0yOTEyMDMwNzE4</span></span><br><span class="line"><span class="string">        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH</span></span><br><span class="line"><span class="string">        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD</span></span><br><span class="line"><span class="string">        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D</span></span><br><span class="line"><span class="string">        AQcDQgAEm6zQPRtevUHiMlaEfYaAK7Uu3yCbr7s/aoWtm6HqeSP0iKBb/VCXvV0j</span></span><br><span class="line"><span class="string">        LDgDLb1kK6obJBl8TA4SIX94xkQ+QaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud</span></span><br><span class="line"><span class="string">        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud</span></span><br><span class="line"><span class="string">        DgQiBCCaMWO9GF+XwAh3KmV1pJ8zmzqazuahyjDqymQPY79+YTAKBggqhkjOPQQD</span></span><br><span class="line"><span class="string">        AgNIADBFAiEAnpxtX/dFdqSZ34s6lETiMpNOg2Xus4z2X7MMHirNDvkCIHgmaZ54</span></span><br><span class="line"><span class="string">        B+c5lYRNqeiO9LSawwid4jfdbZvcNQ9QZQQH</span></span><br><span class="line"><span class="string">        -----END CERTIFICATE-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">    grpcOptions:</span></span><br><span class="line"><span class="attr">      ssl-target-name-override:</span> <span class="string">peer1.org1.example.com</span></span><br><span class="line"><span class="attr">      hostnameOverride:</span> <span class="string">peer1.org1.example.com</span></span><br><span class="line">  <span class="string">peer2.org1.example.com:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">grpcs://localhost:7251</span></span><br><span class="line"><span class="attr">    tlsCACerts:</span></span><br><span class="line"><span class="attr">      pem:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        -----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">        MIICVzCCAf2gAwIBAgIQPpRrjZvaloVkj2FDjvjdHTAKBggqhkjOPQQDAjB2MQsw</span></span><br><span class="line"><span class="string">        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span></span><br><span class="line"><span class="string">        YW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz</span></span><br><span class="line"><span class="string">        Y2Eub3JnMS5leGFtcGxlLmNvbTAeFw0xOTEyMDYwNzE4MDBaFw0yOTEyMDMwNzE4</span></span><br><span class="line"><span class="string">        MDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH</span></span><br><span class="line"><span class="string">        Ew1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD</span></span><br><span class="line"><span class="string">        VQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D</span></span><br><span class="line"><span class="string">        AQcDQgAEm6zQPRtevUHiMlaEfYaAK7Uu3yCbr7s/aoWtm6HqeSP0iKBb/VCXvV0j</span></span><br><span class="line"><span class="string">        LDgDLb1kK6obJBl8TA4SIX94xkQ+QaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud</span></span><br><span class="line"><span class="string">        JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud</span></span><br><span class="line"><span class="string">        DgQiBCCaMWO9GF+XwAh3KmV1pJ8zmzqazuahyjDqymQPY79+YTAKBggqhkjOPQQD</span></span><br><span class="line"><span class="string">        AgNIADBFAiEAnpxtX/dFdqSZ34s6lETiMpNOg2Xus4z2X7MMHirNDvkCIHgmaZ54</span></span><br><span class="line"><span class="string">        B+c5lYRNqeiO9LSawwid4jfdbZvcNQ9QZQQH</span></span><br><span class="line"><span class="string">        -----END CERTIFICATE-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">    grpcOptions:</span></span><br><span class="line"><span class="attr">      ssl-target-name-override:</span> <span class="string">peer2.org1.example.com</span></span><br><span class="line"><span class="attr">      hostnameOverride:</span> <span class="string">peer2.org1.example.com</span></span><br><span class="line"></span><br><span class="line"><span class="attr">certificateAuthorities:</span></span><br><span class="line">  <span class="string">ca.org1.example.com:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">https://localhost:7054</span></span><br><span class="line"><span class="attr">    caName:</span> <span class="string">ca-org1</span></span><br><span class="line"><span class="attr">    tlsCACerts:</span></span><br><span class="line"><span class="attr">      pem:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        -----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">        MIICUjCCAfigAwIBAgIRAMU4/9+dq0VuPKEjSFipx/AwCgYIKoZIzj0EAwIwczEL</span></span><br><span class="line"><span class="string">        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG</span></span><br><span class="line"><span class="string">        cmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHDAaBgNVBAMTE2Nh</span></span><br><span class="line"><span class="string">        Lm9yZzEuZXhhbXBsZS5jb20wHhcNMTkxMjA2MDcxODAwWhcNMjkxMjAzMDcxODAw</span></span><br><span class="line"><span class="string">        WjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMN</span></span><br><span class="line"><span class="string">        U2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEcMBoGA1UE</span></span><br><span class="line"><span class="string">        AxMTY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA</span></span><br><span class="line"><span class="string">        BHkedN9y3BKwEyYKqcWM+AkWO5/xwnmybQ+eT4US8MZWNRqPpbxj04QaIb38WLaZ</span></span><br><span class="line"><span class="string">        EEHWpwCZ5ibI7pMBL6pQt7qjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAU</span></span><br><span class="line"><span class="string">        BggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQg</span></span><br><span class="line"><span class="string">        KmZ7N0Vi4BkkiDL1YbHbv8hdIH4v1feKEDrrPbxEORswCgYIKoZIzj0EAwIDSAAw</span></span><br><span class="line"><span class="string">        RQIhAIdEP0JbQI8LqW4XJ6fI/jmS9gqQPtGcwJxtof6pEieCAiAHxiG/VINKnQkT</span></span><br><span class="line"><span class="string">        18juN4fAU6fKQKbRad4/WA5wA4Z6Jw==</span></span><br><span class="line"><span class="string">        -----END CERTIFICATE-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">    httpOptions:</span></span><br><span class="line"><span class="attr">      verify:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-nodejs-脚本"><a href="#2-nodejs-脚本" class="headerlink" title="2.nodejs 脚本"></a>2.nodejs 脚本</h1><p>在helloworld下创建script目录，用于放js文件</p>
+<h2 id="2-1-enrollAdmin-js"><a href="#2-1-enrollAdmin-js" class="headerlink" title="2.1 enrollAdmin.js"></a>2.1 enrollAdmin.js</h2><p>用于从 CA服务中获取 admin 用户注册信息 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FabricCAServices = <span class="built_in">require</span>(<span class="string">'fabric-ca-client'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; FileSystemWallet, X509WalletMixin &#125; = <span class="built_in">require</span>(<span class="string">'fabric-network'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ccpPath = path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'..'</span>,  <span class="string">'connection-org1.yaml'</span>);</span><br><span class="line"><span class="keyword">const</span> ccpJSON = fs.readFileSync(ccpPath, <span class="string">'utf8'</span>);</span><br><span class="line"><span class="keyword">const</span> ccp = <span class="built_in">JSON</span>.parse(ccpJSON);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new CA client for interacting with the CA.</span></span><br><span class="line">        <span class="keyword">const</span> caInfo = ccp.certificateAuthorities[<span class="string">'ca.org1.example.com'</span>];</span><br><span class="line">        <span class="keyword">const</span> caTLSCACerts = caInfo.tlsCACerts.pem;</span><br><span class="line">        <span class="keyword">const</span> ca = <span class="keyword">new</span> FabricCAServices(caInfo.url, &#123; <span class="attr">trustedRoots</span>: caTLSCACerts, <span class="attr">verify</span>: <span class="literal">false</span> &#125;, caInfo.caName);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new file system based wallet for managing identities.</span></span><br><span class="line">        <span class="keyword">const</span> walletPath = path.join(process.cwd(), <span class="string">'wallet'</span>);</span><br><span class="line">        <span class="keyword">const</span> wallet = <span class="keyword">new</span> FileSystemWallet(walletPath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Wallet path: <span class="subst">$&#123;walletPath&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check to see if we've already enrolled the admin user.</span></span><br><span class="line">        <span class="keyword">const</span> adminExists = <span class="keyword">await</span> wallet.exists(<span class="string">'admin'</span>);</span><br><span class="line">        <span class="keyword">if</span> (adminExists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'An identity for the admin user "admin" already exists in the wallet'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Enroll the admin user, and import the new identity into the wallet.</span></span><br><span class="line">        <span class="keyword">const</span> enrollment = <span class="keyword">await</span> ca.enroll(&#123; <span class="attr">enrollmentID</span>: <span class="string">'admin'</span>, <span class="attr">enrollmentSecret</span>: <span class="string">'adminpw'</span> &#125;);</span><br><span class="line">        <span class="keyword">const</span> identity = X509WalletMixin.createIdentity(<span class="string">'Org1MSP'</span>, enrollment.certificate, enrollment.key.toBytes());</span><br><span class="line">        <span class="keyword">await</span> wallet.import(<span class="string">'admin'</span>, identity);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Successfully enrolled admin user "admin" and imported it into the wallet'</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`Failed to enroll admin user "admin": <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-registerUser-js"><a href="#2-2-registerUser-js" class="headerlink" title="2.2 registerUser.js"></a>2.2 registerUser.js</h2><p>用于注册用户user1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; FileSystemWallet, Gateway, X509WalletMixin &#125; = <span class="built_in">require</span>(<span class="string">'fabric-network'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ccpPath = path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'..'</span>,  <span class="string">'connection-org1.yaml'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new file system based wallet for managing identities.</span></span><br><span class="line">        <span class="keyword">const</span> walletPath = path.join(process.cwd(), <span class="string">'wallet'</span>);</span><br><span class="line">        <span class="keyword">const</span> wallet = <span class="keyword">new</span> FileSystemWallet(walletPath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Wallet path: <span class="subst">$&#123;walletPath&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check to see if we've already enrolled the user.</span></span><br><span class="line">        <span class="keyword">const</span> userExists = <span class="keyword">await</span> wallet.exists(<span class="string">'user1'</span>);</span><br><span class="line">        <span class="keyword">if</span> (userExists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'An identity for the user "user1" already exists in the wallet'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check to see if we've already enrolled the admin user.</span></span><br><span class="line">        <span class="keyword">const</span> adminExists = <span class="keyword">await</span> wallet.exists(<span class="string">'admin'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!adminExists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'An identity for the admin user "admin" does not exist in the wallet'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Run the enrollAdmin.js application before retrying'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new gateway for connecting to our peer node.</span></span><br><span class="line">        <span class="keyword">const</span> gateway = <span class="keyword">new</span> Gateway();</span><br><span class="line">        <span class="keyword">await</span> gateway.connect(ccpPath, &#123; wallet, <span class="attr">identity</span>: <span class="string">'admin'</span>, <span class="attr">discovery</span>: &#123; <span class="attr">enabled</span>: <span class="literal">true</span>, <span class="attr">asLocalhost</span>: <span class="literal">true</span> &#125; &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the CA client object from the gateway for interacting with the CA.</span></span><br><span class="line">        <span class="keyword">const</span> ca = gateway.getClient().getCertificateAuthority();</span><br><span class="line">        <span class="keyword">const</span> adminIdentity = gateway.getCurrentIdentity();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Register the user, enroll the user, and import the new identity into the wallet.</span></span><br><span class="line">        <span class="keyword">const</span> secret = <span class="keyword">await</span> ca.register(&#123; <span class="attr">affiliation</span>: <span class="string">'org1.department1'</span>, <span class="attr">enrollmentID</span>: <span class="string">'user1'</span>, <span class="attr">role</span>: <span class="string">'client'</span> &#125;, adminIdentity);</span><br><span class="line">        <span class="keyword">const</span> enrollment = <span class="keyword">await</span> ca.enroll(&#123; <span class="attr">enrollmentID</span>: <span class="string">'user1'</span>, <span class="attr">enrollmentSecret</span>: secret &#125;);</span><br><span class="line">        <span class="keyword">const</span> userIdentity = X509WalletMixin.createIdentity(<span class="string">'Org1MSP'</span>, enrollment.certificate, enrollment.key.toBytes());</span><br><span class="line">        <span class="keyword">await</span> wallet.import(<span class="string">'user1'</span>, userIdentity);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Successfully registered and enrolled admin user "user1" and imported it into the wallet'</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`Failed to register user "user1": <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-query-js"><a href="#2-3-query-js" class="headerlink" title="2.3 query.js"></a>2.3 query.js</h2><p>链码查询</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; FileSystemWallet, Gateway &#125; = <span class="built_in">require</span>(<span class="string">'fabric-network'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ccpPath = path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'..'</span>, <span class="string">'connection-org1.yaml'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new file system based wallet for managing identities.</span></span><br><span class="line">        <span class="keyword">const</span> walletPath = path.join(process.cwd(), <span class="string">'wallet'</span>);</span><br><span class="line">        <span class="keyword">const</span> wallet = <span class="keyword">new</span> FileSystemWallet(walletPath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Wallet path: <span class="subst">$&#123;walletPath&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check to see if we've already enrolled the user.</span></span><br><span class="line">        <span class="keyword">const</span> userExists = <span class="keyword">await</span> wallet.exists(<span class="string">'admin'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!userExists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'An identity for the user "user1" does not exist in the wallet'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Run the registerUser.js application before retrying'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new gateway for connecting to our peer node.</span></span><br><span class="line">        <span class="keyword">const</span> gateway = <span class="keyword">new</span> Gateway();</span><br><span class="line">        <span class="keyword">await</span> gateway.connect(ccpPath, &#123; wallet, <span class="attr">identity</span>: <span class="string">'admin'</span>, <span class="attr">discovery</span>: &#123; <span class="attr">enabled</span>: <span class="literal">true</span>, <span class="attr">asLocalhost</span>: <span class="literal">true</span> &#125; &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'11111'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the network (channel) our contract is deployed to.</span></span><br><span class="line">        <span class="keyword">const</span> network = <span class="keyword">await</span> gateway.getNetwork(<span class="string">'mychannel'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'22222'</span>)</span><br><span class="line">        <span class="comment">// Get the contract from the network.</span></span><br><span class="line">        <span class="keyword">const</span> contract = network.getContract(<span class="string">'mycc'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'3333'</span>)</span><br><span class="line">        <span class="comment">// Evaluate the specified transaction.</span></span><br><span class="line">        <span class="comment">// queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')</span></span><br><span class="line">        <span class="comment">// queryAllCars transaction - requires no arguments, ex: ('queryAllCars')</span></span><br><span class="line">        <span class="keyword">const</span> result = <span class="keyword">await</span> contract.evaluateTransaction(<span class="string">'get'</span>,<span class="string">'a'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Transaction has been evaluated, result is: <span class="subst">$&#123;result.toString()&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`Failed to evaluate transaction: <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-invoke-js"><a href="#2-4-invoke-js" class="headerlink" title="2.4 invoke.js"></a>2.4 invoke.js</h2><p>执行链码方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; FileSystemWallet, Gateway &#125; = <span class="built_in">require</span>(<span class="string">'fabric-network'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ccpPath = path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'..'</span>,  <span class="string">'connection-org1.yaml'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new file system based wallet for managing identities.</span></span><br><span class="line">        <span class="keyword">const</span> walletPath = path.join(process.cwd(), <span class="string">'wallet'</span>);</span><br><span class="line">        <span class="keyword">const</span> wallet = <span class="keyword">new</span> FileSystemWallet(walletPath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Wallet path: <span class="subst">$&#123;walletPath&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check to see if we've already enrolled the user.</span></span><br><span class="line">        <span class="keyword">const</span> userExists = <span class="keyword">await</span> wallet.exists(<span class="string">'user1'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!userExists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'An identity for the user "user1" does not exist in the wallet'</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Run the registerUser.js application before retrying'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create a new gateway for connecting to our peer node.</span></span><br><span class="line">        <span class="keyword">const</span> gateway = <span class="keyword">new</span> Gateway();</span><br><span class="line">        <span class="keyword">await</span> gateway.connect(ccpPath, &#123; wallet, <span class="attr">identity</span>: <span class="string">'user1'</span>, <span class="attr">discovery</span>: &#123; <span class="attr">enabled</span>: <span class="literal">true</span>, <span class="attr">asLocalhost</span>: <span class="literal">true</span> &#125; &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the network (channel) our contract is deployed to.</span></span><br><span class="line">        <span class="keyword">const</span> network = <span class="keyword">await</span> gateway.getNetwork(<span class="string">'mychannel'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the contract from the network.</span></span><br><span class="line">        <span class="keyword">const</span> contract = network.getContract(<span class="string">'mycc'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Submit the specified transaction.</span></span><br><span class="line">        <span class="comment">// createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')</span></span><br><span class="line">        <span class="comment">// changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')</span></span><br><span class="line">        <span class="keyword">await</span> contract.submitTransaction(<span class="string">'set'</span>, <span class="string">'a'</span>, <span class="string">'hello china'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Transaction has been submitted'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Disconnect from the gateway.</span></span><br><span class="line">        <span class="keyword">await</span> gateway.disconnect();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`Failed to submit transaction: <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-安装Node依赖"><a href="#2-5-安装Node依赖" class="headerlink" title="2.5 安装Node依赖"></a>2.5 安装Node依赖</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#进入script目录</span><br><span class="line">node install</span><br></pre></td></tr></table></figure>
+
+<p>##2.6执行调用链码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#获取admin用户证书</span><br><span class="line">node enrollAdmin.js</span><br><span class="line">#注册用户user1</span><br><span class="line">node registerUser.js</span><br><span class="line"></span><br><span class="line">#查询链码</span><br><span class="line">node query.js</span><br><span class="line">#执行链码set</span><br><span class="line">node invoke.js</span><br><span class="line"></span><br><span class="line">#查看调用set后的结果</span><br><span class="line">node query.js</span><br></pre></td></tr></table></figure>
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/12/07/fabric/2019-12-07-Fabric1.4(五) 动态添加节点/">
+            
+                五、Fabric1.4 动态添加节点
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/07/fabric/2019-12-07-Fabric1.4(三) 创建Helloworld区块链/">
+            
+                三、Fabric1.4 创建Helloword区块链
+            
+        </a>
+    </span>
+    
+
+</div>
+
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'fabric/2019-12-07-Fabric1.4(四) 使用Node SDK' || '2019/12/07/fabric/2019-12-07-Fabric1.4(四) 使用Node SDK/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+
+    
+
+        
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+
+
+    
+
+
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-新建连接文件"><span class="toc-text">1.新建连接文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-nodejs-脚本"><span class="toc-text">2.nodejs 脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-enrollAdmin-js"><span class="toc-text">2.1 enrollAdmin.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-registerUser-js"><span class="toc-text">2.2 registerUser.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-query-js"><span class="toc-text">2.3 query.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-invoke-js"><span class="toc-text">2.4 invoke.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-安装Node依赖"><span class="toc-text">2.5 安装Node依赖</span></a></li></ol></li></ol>
+ 
+         
+    </section>
+    
+
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (13)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (17)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (3)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2020
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>十三、Hyperledger Explorer | 第七区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="zone7, Springboot，vue，前端, Web, python, 机器学习">
+    <meta name="description" content="zone7的分享">
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script>
+
+    
+    <link rel="alternative" href="/atom.xml" title="第七区" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5d5d0927f168800ce24e8077a377966d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+            
+
+
+ 
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5545880981635043",
+        enable_page_level_ads: true
+    });
+    </script> 
+
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+
+
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                          
+                    <span class="name"> 
+                        第七区
+                    </span>
+                    <span class="name2"> 
+                        Zone-7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dropnav icon-paragraph-justify" id="ZONE7__btnDropNav"></div>
+
+        <ul class="menu hidden" id="ZONE7__menu">
+            
+            
+            
+            
+
+            <li rel="/2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/index.html" class="item  ">
+
+                
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+            
+            
+
+            <li rel="/2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/index.html" class="item menu-dropdown ">
+
+                
+                <a  title="教程" class="icon-lab">&nbsp;教程</a>
+                
+
+                
+                    <ul class="submenu hidden">
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/GO" title="GO" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/golang.png"  />
+                                    
+                                    &nbsp;GO
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/区块链/" title="区块链" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/区块链.png"  />
+                                    
+                                    &nbsp;区块链
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Fabric" title="Fabric 联盟链技术" class="">
+                                                &nbsp;Fabric 联盟链技术</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/EOS" title="Eos 公链" class="">
+                                                &nbsp;Eos 公链</a>
+                                            
+                                        </li>
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/区块链/Ipfs" title="Ipfs 星际文件系统" class="">
+                                                &nbsp;Ipfs 星际文件系统</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/Java" title="Java" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/java.png"  />
+                                    
+                                    &nbsp;Java
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/Java/springboot-vue前后端开发" title="springboot-vue前后端开发" class="">
+                                                &nbsp;springboot-vue前后端开发</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/docker/" title="Docker" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/Docker.png"  />
+                                    
+                                    &nbsp;Docker
+                                </a>
+                            
+                            
+                        </li>
+                    
+                        
+                        
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/云计算与大数据/" title="云计算与大数据" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/cloud.png"  />
+                                    
+                                    &nbsp;云计算与大数据
+                                </a>
+                            
+                            
+                                <ul class="submenu2 hidden">
+                                    
+
+                                        
+                                        
+                                        
+                                        <li class="subitem2 ">
+                                            
+                                            <a href="/categories/云计算与大数据/MongoDB" title="MongoDB" class="">
+                                                &nbsp;MongoDB</a>
+                                            
+                                        </li>
+                                    
+
+                                </ul>
+                            
+                        </li>
+                    
+                        
+                        
+                        
+
+                        <li class="subitem  ">
+                            
+                                <a href="/categories/其他/" title="其他" class="">
+                                    
+                                    <img class="menu-logo" src="/img/blocks/其他.png"  />
+                                    
+                                    &nbsp;其他
+                                </a>
+                            
+                            
+                        </li>
+                    
+                    </ul>
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/index.html" class="item  ">
+
+                
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/index.html" class="item  ">
+
+                
+                <a href="/comment/" title="大家说" class="icon-comment">&nbsp;大家说</a>
+                
+
+                
+            </li>
+            
+            
+            
+            
+
+            <li rel="/2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/index.html" class="item  ">
+
+                
+                <a href="/support/" title="赞赏" class="icon-office">&nbsp;赞赏</a>
+                
+
+                
+            </li>
+            
+
+
+        </ul>
+
+
+
+
+
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/zone-7" target="_blank">Github</a>
+                        
+                    
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        我的微信
+                        <span class="popover">
+                            <img src="/img/wechat_zone7.png" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                    <a href="mailto:502782757@qq.com" target="_blank">
+                            <b>■</b>
+                            我的邮箱：502782757@qq.com
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/zone7.png" alt="avatar" title="zone7" >
+            </div>
+        </div>
+    </section>
+</header>
+<script>
+
+
+$(".menu-dropdown").bind("click",function(){
+
+    var submenu=$(this).children("ul");
+    if(submenu){
+
+        if (submenu.is(':hidden')) {
+            submenu.show();
+
+        } else {
+            submenu.hide();
+        }
+
+    }
+});
+
+
+</script>
+
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+
+        <section class="content">
+
+
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2020/02/14/eos/一、简介/">
+            
+                一、使用Docker 搭建测试网络
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/17/fabric/2019-12-17-Fabric1.4(十）链码shim.ChaincodeStubInterface接口说明/">
+            
+                Fabric 链码shim.ChaincodeStubInterface接口说明
+            
+        </a>
+    </span>
+    
+
+</div>
+
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h2 class="post-title"><span>十三、Hyperledger Explorer</span></h2>
+    </header>
+
+    <p class="post-meta text-center">
+        zone-7 发表于
+        <time datetime="2019-12-17T16:00:00.000Z">2019-12-18</time>
+    </p>
+    <p class="post-meta text-center">
+        
+            <span class="post-cat">分类：
+                <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+            </span>
+            <span class="post-tags">
+                标签：
+                
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+            </span> 
+    </p>
+
+
+    <div class="post-content">
+        <h1 id="1、docker安装Hyperledger-explorer"><a href="#1、docker安装Hyperledger-explorer" class="headerlink" title="1、docker安装Hyperledger explorer"></a>1、docker安装Hyperledger explorer</h1><p><strong><em>步骤一、下载</em></strong><br>git clone <a href="https://github.com/hyperledger/blockchain-explorer.git" target="_blank" rel="noopener">https://github.com/hyperledger/blockchain-explorer.git</a></p>
+<p><strong><em>步骤二、拷贝证书文件</em></strong></p>
+<p>拷贝fabric的crypto-config目录下的两个文件夹（ordererOrganizations、peerOrganizations）到blockchain-explorer/examples/net1/crypto 目录下</p>
+<p>  <img src="https://zone-7.github.io/img/fabric/explorer2.png" alt="配置文件"></p>
+<p><strong><em>步骤三、修改连接配置文件config.json</em></strong></p>
+<p>修改examples 目录下的config.json<br>  <img src="https://zone-7.github.io/img/fabric/explorer1.png" alt="配置文件"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"network-configs"</span>: &#123;</span><br><span class="line">		<span class="attr">"hello"</span>: &#123;</span><br><span class="line">			<span class="attr">"name"</span>: <span class="string">"helloworld"</span>,</span><br><span class="line">			<span class="attr">"profile"</span>: <span class="string">"./connection-profile/hello.json"</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"license"</span>: <span class="string">"Apache-2.0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中profile为fabric连接文件。</p>
+<p><strong><em>步骤四、添加Fabric连接文件</em></strong><br>将连接文件放到examples/net1/connection-profile目录下,连接文件hello.json的内容为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attr">"name"</span>: <span class="string">"hello"</span>,</span><br><span class="line">	<span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">	<span class="attr">"license"</span>: <span class="string">"Apache-2.0"</span>,</span><br><span class="line">	<span class="attr">"client"</span>: &#123;</span><br><span class="line">		<span class="attr">"tlsEnable"</span>: <span class="literal">true</span>,</span><br><span class="line">		<span class="attr">"adminUser"</span>: <span class="string">"admin"</span>,</span><br><span class="line">		<span class="attr">"adminPassword"</span>: <span class="string">"adminpw"</span>,</span><br><span class="line">		<span class="attr">"enableAuthentication"</span>: <span class="literal">false</span>,</span><br><span class="line">		<span class="attr">"organization"</span>: <span class="string">"Org1"</span>,</span><br><span class="line">		<span class="attr">"connection"</span>: &#123;</span><br><span class="line">			<span class="attr">"timeout"</span>: &#123;</span><br><span class="line">				<span class="attr">"peer"</span>: &#123;</span><br><span class="line">					<span class="attr">"endorser"</span>: <span class="string">"300"</span></span><br><span class="line">				&#125;,</span><br><span class="line">				<span class="attr">"orderer"</span>: <span class="string">"300"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"channels"</span>: &#123;</span><br><span class="line">		<span class="attr">"mychannel"</span>: &#123;</span><br><span class="line">			<span class="attr">"peers"</span>: &#123;</span><br><span class="line">				<span class="attr">"peer0.org1.example.com"</span>: &#123;&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">"connection"</span>: &#123;</span><br><span class="line">				<span class="attr">"timeout"</span>: &#123;</span><br><span class="line">					<span class="attr">"peer"</span>: &#123;</span><br><span class="line">						<span class="attr">"endorser"</span>: <span class="string">"6000"</span>,</span><br><span class="line">						<span class="attr">"eventHub"</span>: <span class="string">"6000"</span>,</span><br><span class="line">						<span class="attr">"eventReg"</span>: <span class="string">"6000"</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"organizations"</span>: &#123;</span><br><span class="line">		<span class="attr">"Org1MSP"</span>: &#123;</span><br><span class="line">			<span class="attr">"mspid"</span>: <span class="string">"Org1MSP"</span>,</span><br><span class="line">			<span class="attr">"fullpath"</span>: <span class="literal">true</span>,</span><br><span class="line">			<span class="attr">"adminPrivateKey"</span>: &#123;</span><br><span class="line">				<span class="attr">"path"</span>: <span class="string">"/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/f5f0ce356534b957f56daf2880688c02982ae234af215bd4ee732cd6d548845e_sk"</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">"signedCert"</span>: &#123;</span><br><span class="line">				<span class="attr">"path"</span>: <span class="string">"/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem"</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">"peers"</span>: [</span><br><span class="line">          <span class="string">"peer0.org1.example.com"</span>,</span><br><span class="line">          <span class="string">"peer1.org1.example.com"</span>,</span><br><span class="line">          <span class="string">"peer2.org1.example.com"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"certificateAuthorities"</span>: [</span><br><span class="line">          <span class="string">"ca.org1.example.com"</span></span><br><span class="line">      ]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"peers"</span>: &#123;</span><br><span class="line">		<span class="attr">"peer0.org1.example.com"</span>: &#123;</span><br><span class="line">			<span class="attr">"tlsCACerts"</span>: &#123;</span><br><span class="line">				<span class="attr">"path"</span>: <span class="string">"/tmp/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">"url"</span>: <span class="string">"grpcs://peer0.org1.example.com:7051"</span>,</span><br><span class="line">			<span class="attr">"eventUrl"</span>: <span class="string">"grpcs://peer0.org1.example.com:7053"</span>,</span><br><span class="line">			<span class="attr">"grpcOptions"</span>: &#123;</span><br><span class="line">				<span class="attr">"ssl-target-name-override"</span>: <span class="string">"peer0.org1.example.com"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>***步骤五、修改docker-compose配置文件<br>通过docker启动explorer可以避免一些安装污染宿主机已有的环境，docker-compose.yaml主要包含了postgresql数据库和explorer工程node运行环境。</p>
+<p> 修改docker-compose.yaml docker服务配置文件<br> 主要修改几个内容：</p>
+<ul>
+<li><p>networks 改成与区块链同个网络便于访问区块链</p>
+</li>
+<li><p>配置explorerdb.mynetwork.com<br> 添加端口和网络</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ports:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">5432</span><span class="string">:5432</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">mynetwork.com</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置explorer.mynetwork.com<br>添加端口和网络</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ports:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="number">8090</span><span class="string">:8080</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">mynetwork.com</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p> 整体配置文件如下：</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: Apache-2.0</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">'2.1'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">  pgdata:</span></span><br><span class="line"><span class="attr">  walletstore:</span></span><br><span class="line"><span class="attr">  grafana-storage:</span></span><br><span class="line"><span class="attr">  prometheus-storage:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="string">mynetwork.com:</span></span><br><span class="line"><span class="attr">    external:</span></span><br><span class="line"><span class="attr">      name:</span> <span class="string">helloworld_hello</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line">  <span class="string">explorerdb.mynetwork.com:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/explorer-db:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">explorerdb.mynetwork.com</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">explorerdb.mynetwork.com</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_DATABASE=fabricexplorer</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_USERNAME=hppoc</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_PASSWORD=password</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./app/persistence/fabric/postgreSQL/db/createdb.sh:/docker-entrypoint-initdb.d/createdb.sh</span></span><br><span class="line"><span class="attr">      - pgdata:</span><span class="string">/var/lib/postgresql/data</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">5432</span><span class="string">:5432</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mynetwork.com</span></span><br><span class="line"></span><br><span class="line">  <span class="string">explorer.mynetwork.com:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">hyperledger/explorer:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">explorer.mynetwork.com</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">explorer.mynetwork.com</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_HOST=explorerdb.mynetwork.com</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_USERNAME=hppoc</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DATABASE_PASSWD=password</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DISCOVERY_AS_LOCALHOST=false</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./examples/net1/config.json:/opt/explorer/app/platform/fabric/config.json</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./examples/net1/connection-profile:/opt/explorer/app/platform/fabric/connection-profile</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./examples/net1/crypto:/tmp/crypto</span></span><br><span class="line"><span class="attr">      - walletstore:</span><span class="string">/opt/wallet</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">sh</span> <span class="bullet">-c</span> <span class="string">"sleep 16&amp;&amp; node /opt/explorer/main.js &amp;&amp; tail -f /dev/null"</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">8090</span><span class="string">:8080</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mynetwork.com</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  proms:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">proms</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">prom/prometheus:latest</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./app/platform/fabric/artifacts/operations/balance-transfer/prometheus.yml:/etc/prometheus/prometheus.yml</span></span><br><span class="line"><span class="attr">      - prometheus-storage:</span><span class="string">/prometheus</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'9090:9090'</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mynetwork.com</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  grafana:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">grafana</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">grafana/grafana:latest</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./app/platform/fabric/artifacts/operations/balance-transfer/balance-transfer-grafana-dashboard.json:/var/lib/grafana/dashboards/mydashboard.json</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./app/platform/fabric/artifacts/operations/grafana_conf/provisioning:/etc/grafana/provisioning</span></span><br><span class="line"><span class="attr">      - grafana-storage:</span><span class="string">/var/lib/grafana</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'3000:3000'</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mynetwork.com</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2、运行docker-compose"><a href="#2、运行docker-compose" class="headerlink" title="2、运行docker-compose"></a>2、运行docker-compose</h1><p>在blockchain-explorer目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>如果出现错误一般情况下是Fabric连接文件或证书文件有错。</p>
+<p>运行后在浏览器打开<a href="http://localhost:8090/,如下图所示：" target="_blank" rel="noopener">http://localhost:8090/,如下图所示：</a></p>
+<p> <img src="https://zone-7.github.io/img/fabric/explorer3.png" alt="explorer"></p>
+
+    </div>
+
+
+
+    <p class="post-meta">
+        
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/区块链/">区块链</a>|<a class="cat-link" href="/categories/区块链/Fabric/">Fabric</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Fabric/" title="Fabric">Fabric</a> / 
+    
+        <a href="/tags/Blockchain/" title="Blockchain">Blockchain</a>
+    
+
+        </span> 
+    </p>
+
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-5545880981635043"
+            data-ad-slot="8160532256"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Zone7博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2020/02/14/eos/一、简介/">
+            
+                一、使用Docker 搭建测试网络
+            
+        </a>
+    </span>
+    
+
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/12/17/fabric/2019-12-17-Fabric1.4(十）链码shim.ChaincodeStubInterface接口说明/">
+            
+                Fabric 链码shim.ChaincodeStubInterface接口说明
+            
+        </a>
+    </span>
+    
+
+</div>
+
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    
+  </div>
+  <script>
+  ZONE7.Comment({
+    container: 'comments',
+    label: 'fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer' || '2019/12/18/fabric/2019-12-18-Fabric1.4(十三）hyperledger-explorer/',
+    owner: 'zone-7',
+    repo: 'zone-7.github.io',
+    clientId: '564f71fbf0c5e6e879f2',
+    clientSecret: '1e8948889f096ae0a7fd06094538522bab991a19'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+
+    
+
+        
+    <span class="local-search local-search-google local-search-plugin" style="">
+        <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+    </span>
+
+
+    
+
+
+    
+    <section class="widget"> 
+        <h3 class="widget-hd"><strong>目录</strong></h3>
+          
+             
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、docker安装Hyperledger-explorer"><span class="toc-text">1、docker安装Hyperledger explorer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、运行docker-compose"><span class="toc-text">2、运行docker-compose</span></a></li></ol>
+ 
+         
+    </section>
+    
+
+
+    
+    <section class="widget">
+        <h3 class="widget-hd2"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/tags/NoSQL/" title="NoSQL">NoSQL (2)</a>
+  
+    <a class="tag-item" href="/tags/CouchDB/" title="CouchDB">CouchDB (1)</a>
+  
+    <a class="tag-item" href="/tags/Fabric/" title="Fabric">Fabric (13)</a>
+  
+    <a class="tag-item" href="/tags/Blockchain/" title="Blockchain">Blockchain (17)</a>
+  
+    <a class="tag-item" href="/tags/GO/" title="GO">GO (1)</a>
+  
+    <a class="tag-item" href="/tags/ipfs/" title="ipfs">ipfs (1)</a>
+  
+    <a class="tag-item" href="/tags/EOS/" title="EOS">EOS (3)</a>
+  
+    <a class="tag-item" href="/tags/DevOps/" title="DevOps">DevOps (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (1)</a>
+  
+    <a class="tag-item" href="/tags/docker/" title="docker">docker (3)</a>
+  
+    <a class="tag-item" href="/tags/H5/" title="H5">H5 (1)</a>
+  
+    <a class="tag-item" href="/tags/javascript/" title="javascript">javascript (1)</a>
+  
+    <a class="tag-item" href="/tags/人脸识别/" title="人脸识别">人脸识别 (2)</a>
+  
+    <a class="tag-item" href="/tags/Python/" title="Python">Python (1)</a>
+  
+    <a class="tag-item" href="/tags/微信/" title="微信">微信 (1)</a>
+  
+    <a class="tag-item" href="/tags/C/" title="C++">C++ (1)</a>
+  
+    <a class="tag-item" href="/tags/工作流/" title="工作流">工作流 (1)</a>
+  
+    <a class="tag-item" href="/tags/Springboot/" title="Springboot">Springboot (18)</a>
+  
+    <a class="tag-item" href="/tags/VUE/" title="VUE">VUE (18)</a>
+  
+    <a class="tag-item" href="/tags/redis/" title="redis">redis (1)</a>
+  
+    <a class="tag-item" href="/tags/mongodb/" title="mongodb">mongodb (1)</a>
+  
+    <a class="tag-item" href="/tags/rabbit/" title="rabbit">rabbit (1)</a>
+  
+    <a class="tag-item" href="/tags/mybatis/" title="mybatis">mybatis (1)</a>
+  
+    <a class="tag-item" href="/tags/oauth/" title="oauth">oauth (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+
+    
+        <section class="widget">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右侧栏1 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="5518057044"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>    
+         
+            <!-- 右侧栏2 -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle"
+                style="display:block;height:200px"
+                data-ad-client="ca-pub-5545880981635043"
+                data-ad-slot="2683068199"
+                data-ad-format="auto"
+                
+                data-full-width-responsive="true"></ins>
+
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            
+        </section> 
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2018-2020
+    
+
+    <a href="/">Zone7</a>
+</footer>
+<div class="back-to-top" id="ZONE7__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+<script src="/js/load.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>
